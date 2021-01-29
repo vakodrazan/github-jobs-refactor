@@ -22,5 +22,17 @@
   "bugs": {
     "url": "https://github.com/vakodrazan/github-jobs-refactor/issues"
   },
-  "homepage": "https://github.com/vakodrazan/github-jobs-refactor#readme"
+  "homepage": "https://github.com/vakodrazan/github-jobs-refactor#readme",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

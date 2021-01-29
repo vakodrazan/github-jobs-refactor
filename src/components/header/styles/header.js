@@ -49,7 +49,7 @@ export const Frame = styled.form`
     padding-bottom: 4px;
     padding-right: 4px;
     width: 75%;
-    background-image: url('/images/private-line.svg');
+    background-image: url('/images/work_outline-24px.svg');
     background-repeat: no-repeat;
     background-position: 10px 50%;
 
@@ -64,6 +64,12 @@ export const Input = styled.input`
     border: none;
     background: transparent;
     width: 60%;
+
+    &:focus {
+        border: 1px solid #1e86ff;
+        outline: none;
+        box-shadow: 0 0 4px rgb(30 134 255 / 58%);
+    }
 `;
 
 export const Button = styled.button`
@@ -73,4 +79,12 @@ export const Button = styled.button`
     padding: 0 12px;
     border: none;
     border-radius: 4px;
+
+    &:hover {
+        opacity: .8;
+    }
+
+    &:focus {
+        outline: none;
+    }
 `;
