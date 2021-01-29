@@ -32494,7 +32494,51 @@ function Content({
 }) {
   return /*#__PURE__*/_react.default.createElement(_index.Container, restProps, /*#__PURE__*/_react.default.createElement(_jobs.default, null));
 }
-},{"react":"node_modules/react/index.js","../../container/jobs":"src/container/jobs.js","./styles/index":"src/components/jobContent/styles/index.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../../container/jobs":"src/container/jobs.js","./styles/index":"src/components/jobContent/styles/index.js"}],"src/components/loading/styles/loading.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Content = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Content = _styledComponents.default.p`
+    font-size: 20px;
+    font-weight: 500;
+`;
+exports.Content = Content;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/loading/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Loading;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _GlobalContext = require("../../context/GlobalContext");
+
+var _loading = require("./styles/loading");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function Loading() {
+  const {
+    state
+  } = (0, _react.useContext)(_GlobalContext.GlobalContext);
+  const {
+    loading
+  } = state;
+  return loading && /*#__PURE__*/_react.default.createElement(_loading.Content, null, children);
+}
+},{"react":"node_modules/react/index.js","../../context/GlobalContext":"src/context/GlobalContext.js","./styles/loading":"src/components/loading/styles/loading.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32518,6 +32562,12 @@ Object.defineProperty(exports, "Content", {
     return _jobContent.default;
   }
 });
+Object.defineProperty(exports, "Loading", {
+  enumerable: true,
+  get: function () {
+    return _loading.default;
+  }
+});
 
 var _header = _interopRequireDefault(require("./header"));
 
@@ -32525,8 +32575,10 @@ var _card = _interopRequireDefault(require("./card"));
 
 var _jobContent = _interopRequireDefault(require("./jobContent"));
 
+var _loading = _interopRequireDefault(require("./loading"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./header":"src/components/header/index.js","./card":"src/components/card/index.js","./jobContent":"src/components/jobContent/index.js"}],"src/context/Context.js":[function(require,module,exports) {
+},{"./header":"src/components/header/index.js","./card":"src/components/card/index.js","./jobContent":"src/components/jobContent/index.js","./loading":"src/components/loading/index.js"}],"src/context/Context.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
