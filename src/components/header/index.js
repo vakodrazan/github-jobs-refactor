@@ -5,7 +5,8 @@ import {
     Title,
     Frame,
     Input,
-    Button
+    Button,
+    Content
 } from "./styles/header"
 
 export default function Header({ children, ...restProps}) {
@@ -16,6 +17,10 @@ export default function Header({ children, ...restProps}) {
 
 Header.Title = function HeaderTitle({ children, ...restProps }) {
     return <Title {...restProps}>{children}</Title>
+}
+
+Header.Content = function HeaderContent({children, ...restProps}) {
+    return <Content {...restProps}>{children}</Content>
 }
 
 Header.Frame = function HeaderFrame({children, ...restProps}) {

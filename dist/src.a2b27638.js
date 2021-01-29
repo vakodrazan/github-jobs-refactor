@@ -32052,14 +32052,24 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Button = exports.Input = exports.Frame = exports.Title = exports.Container = void 0;
+exports.Button = exports.Input = exports.Frame = exports.Title = exports.Content = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject6() {
+  var data = _taggedTemplateLiteral(["\n    color: #fff;\n    background-color: #1E86FF;\n    height: 32px;\n    padding: 0 12px;\n    border: none;\n    border-radius: 4px;\n"]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject5() {
-  var data = _taggedTemplateLiteral([""]);
+  var data = _taggedTemplateLiteral(["\n    max-width: 60%;\n    height: 32px;\n    border: none;\n    background: transparent;\n    width: 60%;\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -32069,7 +32079,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral([""]);
+  var data = _taggedTemplateLiteral(["\n    background: #FFFFFF;\n    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);\n    border-radius: 4px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 10px;\n    padding-left: 42px;\n    padding-top: 4px;\n    padding-bottom: 4px;\n    padding-right: 4px;\n    width: 75%;\n    background-image: url('/images/private-line.svg');\n    background-repeat: no-repeat;\n    background-position: 10px 50%;\n\n    @media (min-width: 1440px) {\n        max-width: 70%;\n    }\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -32079,7 +32089,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral([""]);
+  var data = _taggedTemplateLiteral(["\n    font-style: normal;\n    font-weight: bold;\n    font-size: 24px;\n    line-height: 36px;\n    color: #282538;\n\n    span {\n        font-weight: normal;\n    }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -32089,7 +32099,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n    font-style: normal;\n    font-weight: bold;\n    font-size: 24px;\n    line-height: 36px;\n    color: #282538;\n\n    span {\n        font-weight: normal;\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    background: url(\"/images/backgroundImg.png\");\n    background-position: 50%;\n    background-size: cover;\n    -webkit-border-radius: 8px;\n    -moz-border-radius: 8px;\n    border-radius: 8px;;\n    background-repeat: no-repeat;\n    height: 138px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -32099,7 +32109,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral([""]);
+  var data = _taggedTemplateLiteral(["\n    padding: 12px;\n\n    @media (min-width: 1440px) {\n        max-width: 1440px;\n        margin: auto;\n    }\n\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -32114,19 +32124,23 @@ var Container = _styledComponents.default.div(_templateObject());
 
 exports.Container = Container;
 
-var Title = _styledComponents.default.h1(_templateObject2());
+var Content = _styledComponents.default.section(_templateObject2());
+
+exports.Content = Content;
+
+var Title = _styledComponents.default.h1(_templateObject3());
 
 exports.Title = Title;
 
-var Frame = _styledComponents.default.form(_templateObject3());
+var Frame = _styledComponents.default.form(_templateObject4());
 
 exports.Frame = Frame;
 
-var Input = _styledComponents.default.input(_templateObject4());
+var Input = _styledComponents.default.input(_templateObject5());
 
 exports.Input = Input;
 
-var Button = _styledComponents.default.button(_templateObject5());
+var Button = _styledComponents.default.button(_templateObject6());
 
 exports.Button = Button;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/header/index.js":[function(require,module,exports) {
@@ -32161,21 +32175,28 @@ Header.Title = function HeaderTitle(_ref2) {
   return /*#__PURE__*/_react.default.createElement(_header.Title, restProps, children);
 };
 
-Header.Frame = function HeaderFrame(_ref3) {
+Header.Content = function HeaderContent(_ref3) {
   var children = _ref3.children,
       restProps = _objectWithoutProperties(_ref3, ["children"]);
+
+  return /*#__PURE__*/_react.default.createElement(_header.Content, restProps, children);
+};
+
+Header.Frame = function HeaderFrame(_ref4) {
+  var children = _ref4.children,
+      restProps = _objectWithoutProperties(_ref4, ["children"]);
 
   return /*#__PURE__*/_react.default.createElement(_header.Frame, restProps, children);
 };
 
-Header.Input = function HeaderInput(_ref4) {
-  var restProps = Object.assign({}, _ref4);
+Header.Input = function HeaderInput(_ref5) {
+  var restProps = Object.assign({}, _ref5);
   return /*#__PURE__*/_react.default.createElement(_header.Input, restProps);
 };
 
-Header.Button = function HeaderButton(_ref5) {
-  var children = _ref5.children,
-      restProps = _objectWithoutProperties(_ref5, ["children"]);
+Header.Button = function HeaderButton(_ref6) {
+  var children = _ref6.children,
+      restProps = _objectWithoutProperties(_ref6, ["children"]);
 
   return /*#__PURE__*/_react.default.createElement(_header.Button, restProps, children);
 };
@@ -32210,7 +32231,11 @@ var _components = require("../components");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function HeaderContainer() {
-  return /*#__PURE__*/_react.default.createElement(_components.Header, null, /*#__PURE__*/_react.default.createElement(_components.Header.Title, null, "Github ", /*#__PURE__*/_react.default.createElement("span", null, "Jobs")));
+  return /*#__PURE__*/_react.default.createElement(_components.Header, null, /*#__PURE__*/_react.default.createElement(_components.Header.Title, null, "Github ", /*#__PURE__*/_react.default.createElement("span", null, "Jobs")), /*#__PURE__*/_react.default.createElement(_components.Header.Content, null, /*#__PURE__*/_react.default.createElement(_components.Header.Frame, null, /*#__PURE__*/_react.default.createElement(_components.Header.Input, {
+    placeholder: "Title, companies, expertise or benefits" // value=""
+    // onChange={() => }
+
+  }), /*#__PURE__*/_react.default.createElement(_components.Header.Button, null, "Search"))));
 }
 },{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/pages/home.js":[function(require,module,exports) {
 "use strict";
@@ -32286,7 +32311,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52414" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57700" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
