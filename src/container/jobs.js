@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Card } from '../components'
+import { Card, Loading } from '../components'
 import { GlobalContext } from '../context/GlobalContext'
 
 export default function JobContainer() {
@@ -7,6 +7,7 @@ export default function JobContainer() {
     const { jobs } = state;
     return (
         <>
+            <Loading>Loading...</Loading>
             {jobs && 
                 <Card>
                     {jobs.map((job) => {

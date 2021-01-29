@@ -32438,7 +32438,7 @@ function JobContainer() {
   const {
     jobs
   } = state;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, jobs && /*#__PURE__*/_react.default.createElement(_components.Card, null, jobs.map(job => {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_components.Loading, null, "Loading..."), jobs && /*#__PURE__*/_react.default.createElement(_components.Card, null, jobs.map(job => {
     const options = {
       year: "numeric",
       month: "numeric",
@@ -32507,7 +32507,7 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const Content = _styledComponents.default.p`
-    font-size: 20px;
+    font-size: 32px;
     font-weight: 500;
 `;
 exports.Content = Content;
@@ -32529,14 +32529,17 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function Loading() {
+function Loading({
+  children,
+  ...restProps
+}) {
   const {
     state
   } = (0, _react.useContext)(_GlobalContext.GlobalContext);
   const {
     loading
   } = state;
-  return loading && /*#__PURE__*/_react.default.createElement(_loading.Content, null, children);
+  return loading && /*#__PURE__*/_react.default.createElement(_loading.Content, restProps, children);
 }
 },{"react":"node_modules/react/index.js","../../context/GlobalContext":"src/context/GlobalContext.js","./styles/loading":"src/components/loading/styles/loading.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
