@@ -32150,23 +32150,201 @@ Header.Button = function HeaderButton({
 }) {
   return /*#__PURE__*/_react.default.createElement(_header.Button, restProps, children);
 };
-},{"react":"node_modules/react/index.js","./styles/header":"src/components/header/styles/header.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./styles/header":"src/components/header/styles/header.js"}],"src/components/card/styles/card.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "Header", {
-  enumerable: true,
-  get: function () {
-    return _header.default;
-  }
-});
+exports.Date = exports.Location = exports.Meta = exports.CustomLabel = exports.Subtitile = exports.Title = exports.Feature = exports.LogoNotFound = exports.Logo = exports.Item = exports.Container = void 0;
 
-var _header = _interopRequireDefault(require("./header"));
+var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./header":"src/components/header/index.js"}],"src/context/GlobalContext.js":[function(require,module,exports) {
+
+const Container = _styledComponents.default.div`
+    display: grid;
+    gap: 32px;
+`;
+exports.Container = Container;
+const Item = _styledComponents.default.section`
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+
+    &:hover {
+        -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+        box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    }
+`;
+exports.Item = Item;
+const Logo = _styledComponents.default.img`
+    width: 90px;
+    height: 90px;
+    border-radius: 4px;
+    background: #F2F2F2;
+`;
+exports.Logo = Logo;
+const LogoNotFound = _styledComponents.default.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F2F2F2;
+    border-radius: 4px;
+    width: 90px;
+    height: 90px;
+    font-weight: 500;
+    font-size: 12px;
+    color: #BDBDBD;
+`;
+exports.LogoNotFound = LogoNotFound;
+const Feature = _styledComponents.default.div`
+    color: #334680;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+`;
+exports.Feature = Feature;
+const Title = _styledComponents.default.h2`
+    font-size: 18px;
+    line-height: 21px;
+    margin: 0;
+    padding-bottom: 12px;
+`;
+exports.Title = Title;
+const Subtitile = _styledComponents.default.p`
+    margin: 0;
+    padding-bottom: 8px;
+`;
+exports.Subtitile = Subtitile;
+const CustomLabel = _styledComponents.default.p`
+    color: #334680;
+    border: 1px solid #334680;
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 63px;
+    height: 26px;
+    margin: 0;
+`;
+exports.CustomLabel = CustomLabel;
+const Meta = _styledComponents.default.footer`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    font-weight: 500;
+    font-size: 12px;
+    color: #B9BDCF;
+`;
+exports.Meta = Meta;
+const Location = _styledComponents.default.address`
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-style: normal;
+`;
+exports.Location = Location;
+const Date = _styledComponents.default.time`
+    display: flex;
+    align-items: center;
+    gap: 5px;
+`;
+exports.Date = Date;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/card/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Card;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _card = require("./styles/card");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Card({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_card.Container, restProps, children);
+}
+
+Card.Item = function CardItem({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_card.Item, restProps, children);
+};
+
+Card.Logo = function CardLogo({ ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_card.Logo, restProps);
+};
+
+Card.LogoNotFound = function CardLogoNotFound({ ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_card.LogoNotFound, restProps);
+};
+
+Card.Feature = function CardFeature({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_card.Feature, restProps, children);
+};
+
+Card.Title = function CardTitle({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_card.Title, restProps, children);
+};
+
+Card.Subtitile = function CardSubtitile({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_card.Subtitile, restProps, children);
+};
+
+Card.CustomLabel = function CardCustomLabel({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_card.CustomLabel, restProps, children);
+};
+
+Card.Meta = function CardMeta({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_card.Meta, restProps, children);
+};
+
+Card.Location = function CardLocation({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_card.Location, restProps, children);
+};
+
+Card.Date = function CardDate({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_card.Date, restProps, children);
+};
+},{"react":"node_modules/react/index.js","./styles/card":"src/components/card/styles/card.js"}],"src/context/GlobalContext.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32235,7 +32413,120 @@ function GlobalContextProvider({
     }
   }, children);
 }
-},{"react":"node_modules/react/index.js"}],"src/context/Context.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"src/container/jobs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = JobContainer;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _components = require("../components");
+
+var _GlobalContext = require("../context/GlobalContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function JobContainer() {
+  const {
+    state
+  } = (0, _react.useContext)(_GlobalContext.GlobalContext);
+  const {
+    jobs
+  } = state;
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, jobs && /*#__PURE__*/_react.default.createElement(_components.Card, null, jobs.map(job => {
+    const options = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric"
+    };
+    const today = new Date().toLocaleString("en-US", options);
+    const createdAt = new Date(job.created_at).toLocaleString("en-US", options);
+    const totalDate = new Date(today) - new Date(createdAt);
+    const daysAgo = Math.floor(totalDate / (1000 * 3600 * 24));
+    return /*#__PURE__*/_react.default.createElement(_components.Card.Item, {
+      key: job.id
+    }, job.company_logo === null ? /*#__PURE__*/_react.default.createElement(_components.Card.LogoNotFound, null, "not found") : /*#__PURE__*/_react.default.createElement(_components.Card.Logo, {
+      src: job.company_logo,
+      alt: `${job.title} at ${job.company}`
+    }), /*#__PURE__*/_react.default.createElement(_components.Card.Feature, null, /*#__PURE__*/_react.default.createElement(_components.Card.Subtitile, null, job.company), /*#__PURE__*/_react.default.createElement(_components.Card.Title, null, job.title), job.type && /*#__PURE__*/_react.default.createElement(_components.Card.CustomLabel, null, job.type), /*#__PURE__*/_react.default.createElement(_components.Card.Meta, null, /*#__PURE__*/_react.default.createElement(_components.Card.Location, null, /*#__PURE__*/_react.default.createElement("span", null, job.location)), /*#__PURE__*/_react.default.createElement(_components.Card.Date, {
+      dateTime: job.created_at
+    }, daysAgo, " ", daysAgo > 1 ? "days" : "day"))));
+  })));
+}
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js","../context/GlobalContext":"src/context/GlobalContext.js"}],"src/components/jobContent/styles/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Container = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Container = _styledComponents.default.main``;
+exports.Container = Container;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/jobContent/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Content;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _jobs = _interopRequireDefault(require("../../container/jobs"));
+
+var _index = require("./styles/index");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Content({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_index.Container, restProps, /*#__PURE__*/_react.default.createElement(_jobs.default, null));
+}
+},{"react":"node_modules/react/index.js","../../container/jobs":"src/container/jobs.js","./styles/index":"src/components/jobContent/styles/index.js"}],"src/components/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "Header", {
+  enumerable: true,
+  get: function () {
+    return _header.default;
+  }
+});
+Object.defineProperty(exports, "Card", {
+  enumerable: true,
+  get: function () {
+    return _card.default;
+  }
+});
+Object.defineProperty(exports, "Content", {
+  enumerable: true,
+  get: function () {
+    return _jobContent.default;
+  }
+});
+
+var _header = _interopRequireDefault(require("./header"));
+
+var _card = _interopRequireDefault(require("./card"));
+
+var _jobContent = _interopRequireDefault(require("./jobContent"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./header":"src/components/header/index.js","./card":"src/components/card/index.js","./jobContent":"src/components/jobContent/index.js"}],"src/context/Context.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32329,14 +32620,16 @@ exports.default = Home;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _components = require("../components");
+
 var _header = _interopRequireDefault(require("../container/header"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Home() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_header.default, null));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_header.default, null), /*#__PURE__*/_react.default.createElement(_components.Content, null));
 }
-},{"react":"node_modules/react/index.js","../container/header":"src/container/header.js"}],"src/app.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js","../container/header":"src/container/header.js"}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32397,7 +32690,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50133" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50510" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
