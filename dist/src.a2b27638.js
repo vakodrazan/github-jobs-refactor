@@ -50656,7 +50656,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Content;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
+
+var _ = require("..");
 
 var _jobs = _interopRequireDefault(require("../../container/jobs"));
 
@@ -50664,13 +50666,37 @@ var _index = require("./styles/index");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 function Content({
   children,
   ...restProps
 }) {
-  return /*#__PURE__*/_react.default.createElement(_index.Container, restProps, /*#__PURE__*/_react.default.createElement(_jobs.default, null));
+  const cities = [{
+    id: 1,
+    name: "New York"
+  }, {
+    id: 2,
+    name: "San Francisco"
+  }, {
+    id: 3,
+    name: "Berlin"
+  }, {
+    id: 4,
+    name: "London"
+  }];
+  return /*#__PURE__*/_react.default.createElement(_index.Container, restProps, /*#__PURE__*/_react.default.createElement(_.Filters, null, /*#__PURE__*/_react.default.createElement(_.Filters.Frame, null, /*#__PURE__*/_react.default.createElement(_.Filters.Input, null), /*#__PURE__*/_react.default.createElement(_.Filters.Label, null, "Full time")), /*#__PURE__*/_react.default.createElement(_.Filters.LocationSearch, null, /*#__PURE__*/_react.default.createElement(_.Filters.Label, null, "Location"), /*#__PURE__*/_react.default.createElement(_.Filters.Input, null)), cities.map(city => /*#__PURE__*/_react.default.createElement(_.Filters.Frame, {
+    key: city.id
+  }, /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
+    type: "radio",
+    id: city.id
+  }), /*#__PURE__*/_react.default.createElement(_.Filters.Label, {
+    htmlFor: city.id
+  }, city.name)))), /*#__PURE__*/_react.default.createElement(_jobs.default, null));
 }
-},{"react":"node_modules/react/index.js","../../container/jobs":"src/container/jobs.js","./styles/index":"src/components/jobContent/styles/index.js"}],"src/components/loading/styles/loading.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","..":"src/components/index.js","../../container/jobs":"src/container/jobs.js","./styles/index":"src/components/jobContent/styles/index.js"}],"src/components/loading/styles/loading.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -50717,7 +50743,75 @@ function Loading({
   } = state;
   return loading && /*#__PURE__*/_react.default.createElement(_loading.Content, restProps, children);
 }
-},{"react":"node_modules/react/index.js","../../context/GlobalContext":"src/context/GlobalContext.js","./styles/loading":"src/components/loading/styles/loading.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../../context/GlobalContext":"src/context/GlobalContext.js","./styles/loading":"src/components/loading/styles/loading.js"}],"src/components/filters/styles/filters.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LocationSearch = exports.Label = exports.Input = exports.Frame = exports.Container = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Container = _styledComponents.default.section``;
+exports.Container = Container;
+const Frame = _styledComponents.default.div``;
+exports.Frame = Frame;
+const Input = _styledComponents.default.input``;
+exports.Input = Input;
+const Label = _styledComponents.default.label``;
+exports.Label = Label;
+const LocationSearch = _styledComponents.default.div``;
+exports.LocationSearch = LocationSearch;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/filters/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Filters;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _filters = require("./styles/filters");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Filters({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_filters.Container, null, children);
+}
+
+Filters.Frame = function FiltersFrame({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_filters.Frame, restProps, children);
+};
+
+Filters.Input = function FiltersInput({ ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_filters.Input, restProps);
+};
+
+Filters.Label = function FiltersLabel({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_filters.Label, restProps, children);
+};
+
+Filters.LocationSearch = function FiltersLocationSearch({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_filters.LocationSearch, restProps, children);
+};
+},{"react":"node_modules/react/index.js","./styles/filters":"src/components/filters/styles/filters.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -50747,6 +50841,12 @@ Object.defineProperty(exports, "Loading", {
     return _loading.default;
   }
 });
+Object.defineProperty(exports, "Filters", {
+  enumerable: true,
+  get: function () {
+    return _filters.default;
+  }
+});
 
 var _header = _interopRequireDefault(require("./header"));
 
@@ -50756,8 +50856,10 @@ var _jobContent = _interopRequireDefault(require("./jobContent"));
 
 var _loading = _interopRequireDefault(require("./loading"));
 
+var _filters = _interopRequireDefault(require("./filters"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./header":"src/components/header/index.js","./card":"src/components/card/index.js","./jobContent":"src/components/jobContent/index.js","./loading":"src/components/loading/index.js"}],"src/context/Context.js":[function(require,module,exports) {
+},{"./header":"src/components/header/index.js","./card":"src/components/card/index.js","./jobContent":"src/components/jobContent/index.js","./loading":"src/components/loading/index.js","./filters":"src/components/filters/index.js"}],"src/context/Context.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
