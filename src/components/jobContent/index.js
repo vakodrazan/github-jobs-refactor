@@ -7,16 +7,13 @@ import { Container } from "./styles/index";
 
 
 export default function Content({ children, ...restProps}) {
-    const { 
-        fullTime, 
-        setFullTime,
-        description,
-        setDescription,
-        location,
-        setLocation
-    } = useContext(Context)
+    const [ fullTime, setFullTime ] = useState(false);
+    const [ location, setLocation ] = useState("");
 
     const [selectCity, setSelectCity] = useState(null);
+
+    const { filterJob } = useContext(Context)
+
 
     const cities = [
         { id: 1, name: "New York" },
@@ -28,10 +25,17 @@ export default function Content({ children, ...restProps}) {
     const handleCity = (city) => {
         if (selectCity && city.id === selectCity.id) {
           setSelectCity(null);
-          setLocation("")
+          filterJob({ type: "LOCATION", value: "" })
         } else {
           setSelectCity(city);
-          setLocation(city.name)
+          filterJob({ type: "LOCATION", value: city.name })
+        }
+    };
+
+    const handleKeyLocation = (e) => {
+        if (e.key === "Enter") {
+          setSelectCity(null);
+          filterJob({ type: "LOCATION", value: location });
         }
     };
 
@@ -57,8 +61,10 @@ export default function Content({ children, ...restProps}) {
                     <Filters.Input 
                         id="description"
                         type="text"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        onKeyDown={handleKeyLocation}
+                        placeholder="City, state, zip code or country"
                     />
                 </Filters.LocationSearch>
 

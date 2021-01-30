@@ -50634,13 +50634,8 @@ function ContextProvider({
 }) {
   const CORS_URL = "https://cors-anywhere.herokuapp.com/";
   const {
-    state,
     dispatch
   } = (0, _react.useContext)(_GlobalContext.GlobalContext);
-  const {
-    jobs
-  } = state;
-  const [query, setQuery] = (0, _react.useState)('');
   const [fullTime, setFullTime] = (0, _react.useState)(false);
   const [description, setDescription] = (0, _react.useState)("");
   const [location, setLocation] = (0, _react.useState)("New York");
@@ -50655,14 +50650,20 @@ function ContextProvider({
     });
   }
 
-  const handleFormSubmit = e => {
-    e.preventDefault();
-    const newJobList = jobs.filter(job => job.title.toLowerCase().includes(query) || job.company.toLowerCase().includes(query));
-    dispatch({
-      type: "UPDATE_LIST",
-      newJobList
-    });
-    console.log(newJobList);
+  const filterJob = filter => {
+    switch (filter.type) {
+      case "LOCATION":
+        setLocation(filter.value);
+        break;
+
+      case "FULL_TIME":
+        setFullTime(filter.value);
+        break;
+
+      case "DESCRIPTION":
+        setDescription(filter.value);
+        break;
+    }
   };
 
   (0, _react.useEffect)(() => {
@@ -50670,15 +50671,7 @@ function ContextProvider({
   }, [location, description, fullTime]);
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
-      query,
-      setQuery,
-      handleFormSubmit,
-      fullTime,
-      setFullTime,
-      description,
-      setDescription,
-      location,
-      setLocation
+      filterJob
     }
   }, children);
 }
@@ -50735,15 +50728,12 @@ function Content({
   children,
   ...restProps
 }) {
-  const {
-    fullTime,
-    setFullTime,
-    description,
-    setDescription,
-    location,
-    setLocation
-  } = (0, _react.useContext)(_Context.Context);
+  const [fullTime, setFullTime] = (0, _react.useState)(false);
+  const [location, setLocation] = (0, _react.useState)("");
   const [selectCity, setSelectCity] = (0, _react.useState)(null);
+  const {
+    filterJob
+  } = (0, _react.useContext)(_Context.Context);
   const cities = [{
     id: 1,
     name: "New York"
@@ -50761,10 +50751,26 @@ function Content({
   const handleCity = city => {
     if (selectCity && city.id === selectCity.id) {
       setSelectCity(null);
-      setLocation("");
+      filterJob({
+        type: "LOCATION",
+        value: ""
+      });
     } else {
       setSelectCity(city);
-      setLocation(city.name);
+      filterJob({
+        type: "LOCATION",
+        value: city.name
+      });
+    }
+  };
+
+  const handleKeyLocation = e => {
+    if (e.key === "Enter") {
+      setSelectCity(null);
+      filterJob({
+        type: "LOCATION",
+        value: location
+      });
     }
   };
 
@@ -50783,8 +50789,10 @@ function Content({
   }, "Location"), /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
     id: "description",
     type: "text",
-    value: description,
-    onChange: e => setDescription(e.target.value)
+    value: location,
+    onChange: e => setLocation(e.target.value),
+    onKeyDown: handleKeyLocation,
+    placeholder: "City, state, zip code or country"
   })), cities.map(city => /*#__PURE__*/_react.default.createElement(_.Filters.Frame, {
     key: city.id
   }, /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
@@ -50978,11 +50986,19 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function HeaderContainer() {
+  const [query, setQuery] = (0, _react.useState)('');
   const {
-    query,
-    setQuery,
-    handleFormSubmit
+    filterJob
   } = (0, _react.useContext)(_Context.Context);
+
+  const handleFormSubmit = e => {
+    e.preventDefault();
+    filterJob({
+      type: "DESCRIPTION",
+      value: query
+    });
+  };
+
   return /*#__PURE__*/_react.default.createElement(_components.Header, null, /*#__PURE__*/_react.default.createElement(_components.Header.Title, null, "Github ", /*#__PURE__*/_react.default.createElement("span", null, "Jobs")), /*#__PURE__*/_react.default.createElement(_components.Header.Content, null, /*#__PURE__*/_react.default.createElement(_components.Header.Frame, {
     onSubmit: handleFormSubmit
   }, /*#__PURE__*/_react.default.createElement(_components.Header.Input, {

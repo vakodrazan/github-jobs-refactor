@@ -1,9 +1,17 @@
 import React, { useContext, useState } from 'react'
-import { Header } from '../components'
+import { Header } from '../components';
 import { Context } from '../context/Context';
 
 export default function HeaderContainer() {
-const { query, setQuery, handleFormSubmit } = useContext(Context)
+    const [ query, setQuery ] = useState('');
+    const { filterJob } = useContext(Context)
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        filterJob({ type: "DESCRIPTION", value: query });
+    }
+
+
 
     return (
         <Header>

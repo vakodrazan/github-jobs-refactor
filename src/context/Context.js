@@ -5,10 +5,8 @@ const Context = createContext();
 
 function ContextProvider({ children }) {
     const CORS_URL = "https://cors-anywhere.herokuapp.com/"
-    const { state, dispatch } = useContext(GlobalContext);
-    const { jobs } = state;
-    
-    const [ query, setQuery ] = useState('');
+    const { dispatch } = useContext(GlobalContext);
+
     const [ fullTime, setFullTime ] = useState(false);
     const [ description, setDescription ] = useState("");
     const [ location, setLocation ] = useState("New York");
@@ -20,33 +18,27 @@ function ContextProvider({ children }) {
         dispatch({ type: "JOB_TITLE", jobs: data })
     }
 
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
+    const filterJob = (filter) => {
+        switch (filter.type) {
+          case "LOCATION":
+            setLocation(filter.value);
+            break;
+          case "FULL_TIME":
+            setFullTime(filter.value);
+            break;
+          case "DESCRIPTION":
+            setDescription(filter.value);
+            break;
+        }
+      };
 
-        const newJobList = jobs.filter(job => (
-            job.title.toLowerCase().includes(query) || job.company.toLowerCase().includes(query)
-        ));
-
-        dispatch({ type: "UPDATE_LIST", newJobList })
-        console.log(newJobList);
-    }
 
     useEffect(() => {
         getJobs(description, location, fullTime);
     }, [location, description, fullTime]);
 
     return (
-        <Context.Provider value={{
-            query, 
-            setQuery, 
-            handleFormSubmit, 
-            fullTime, 
-            setFullTime ,
-            description,
-            setDescription,
-            location,
-            setLocation
-        }}>
+        <Context.Provider value={{filterJob}}>
             {children}
         </Context.Provider>
     )
