@@ -19,14 +19,52 @@ function GlobalContextProvider({ children }) {
                     jobs: action.newJobList,
                 }
             }
+            case "LOCATION": {
+                return {
+                    ...state,
+                    location: value,
+                }
+            }
+            case "FULL_TIME": {
+                return {
+                    ...state,
+                    fullTime: value,
+                }
+            }
+            case "DESCRIPTION": {
+                return {
+                    ...state,
+                    description: value,
+                }
+            }
             default: {
                 return state
             }
         }
     }, {
         jobs: [],
-        loading: true
+        loading: true,
+        fullTime: false.valueOf,
+        description: "",
+        location: "New York"
     });
+
+    const CORS_URL = "https://cors-anywhere.herokuapp.com/";
+
+    const { description, location, fullTime } = state;
+
+    async function getJobs() {
+        const API_URL = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}`
+        const res = await fetch(CORS_URL + API_URL);
+        const data = await res.json();
+        dispatch({ type: "JOB_TITLE", jobs: data })
+    }
+
+    
+
+    useEffect(() => {
+        getJobs(description, location, fullTime);
+    }, [location, description, fullTime]);
 
     return (
         <GlobalContext.Provider value={{state, dispatch}}>

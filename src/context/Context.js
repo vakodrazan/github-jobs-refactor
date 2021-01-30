@@ -4,41 +4,54 @@ import { GlobalContext } from './GlobalContext';
 const Context = createContext();
 
 function ContextProvider({ children }) {
-    const CORS_URL = "https://cors-anywhere.herokuapp.com/"
-    const { dispatch } = useContext(GlobalContext);
+  const [ fullTime, setFullTime ] = useState(false);
+  const [ location, setLocation ] = useState("");
 
-    const [ fullTime, setFullTime ] = useState(false);
-    const [ description, setDescription ] = useState("");
-    const [ location, setLocation ] = useState("New York");
+  const [selectCity, setSelectCity] = useState(null);
 
-    async function getJobs() {
-        const API_URL = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}`
-        const res = await fetch(CORS_URL + API_URL);
-        const data = await res.json();
-        dispatch({ type: "JOB_TITLE", jobs: data })
+  const { dispatch } = useContext(GlobalContext)
+
+
+  const cities = [
+      { id: 1, name: "New York" },
+      { id: 2, name: "San Francisco" },
+      { id: 3, name: "Berlin" },
+      { id: 4, name: "London" }
+  ];
+
+  const handleCity = (city) => {
+    if (selectCity && city.id === selectCity.id) {
+      setSelectCity(null);
+      dispatch({ type: "LOCATION", value: "" })
+    } else {
+      setSelectCity(city);
+      dispatch({ type: "LOCATION", value: city.name })
     }
+  };
 
-    const filterJob = (filter) => {
-        switch (filter.type) {
-          case "LOCATION":
-            setLocation(filter.value);
-            break;
-          case "FULL_TIME":
-            setFullTime(filter.value);
-            break;
-          case "DESCRIPTION":
-            setDescription(filter.value);
-            break;
-        }
-      };
+  const handleKeyLocation = (e) => {
+      if (e.key === "Enter") {
+        setSelectCity(null);
+        dispatch({ type: "LOCATION", value: location });
+      }
+  };
 
-
-    useEffect(() => {
-        getJobs(description, location, fullTime);
-    }, [location, description, fullTime]);
+  useEffect(() => {
+      setSelectCity(cities[0]);
+  }, []);
 
     return (
-        <Context.Provider value={{filterJob}}>
+        <Context.Provider value={{ 
+          fullTime, 
+          setFullTime, 
+          location, 
+          setLocation,
+          selectCity, 
+          setSelectCity,
+          handleCity,
+          handleKeyLocation,
+          cities
+          }} >
             {children}
         </Context.Provider>
     )

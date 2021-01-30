@@ -50552,6 +50552,27 @@ function GlobalContextProvider({
           };
         }
 
+      case "LOCATION":
+        {
+          return { ...state,
+            location: value
+          };
+        }
+
+      case "FULL_TIME":
+        {
+          return { ...state,
+            fullTime: value
+          };
+        }
+
+      case "DESCRIPTION":
+        {
+          return { ...state,
+            description: value
+          };
+        }
+
       default:
         {
           return state;
@@ -50559,8 +50580,31 @@ function GlobalContextProvider({
     }
   }, {
     jobs: [],
-    loading: true
+    loading: true,
+    fullTime: false.valueOf,
+    description: "",
+    location: "New York"
   });
+  const CORS_URL = "https://cors-anywhere.herokuapp.com/";
+  const {
+    description,
+    location,
+    fullTime
+  } = state;
+
+  async function getJobs() {
+    const API_URL = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}`;
+    const res = await fetch(CORS_URL + API_URL);
+    const data = await res.json();
+    dispatch({
+      type: "JOB_TITLE",
+      jobs: data
+    });
+  }
+
+  (0, _react.useEffect)(() => {
+    getJobs(description, location, fullTime);
+  }, [location, description, fullTime]);
   return /*#__PURE__*/_react.default.createElement(GlobalContext.Provider, {
     value: {
       state,
@@ -50632,46 +50676,66 @@ exports.Context = Context;
 function ContextProvider({
   children
 }) {
-  const CORS_URL = "https://cors-anywhere.herokuapp.com/";
+  const [fullTime, setFullTime] = (0, _react.useState)(false);
+  const [location, setLocation] = (0, _react.useState)("");
+  const [selectCity, setSelectCity] = (0, _react.useState)(null);
   const {
     dispatch
   } = (0, _react.useContext)(_GlobalContext.GlobalContext);
-  const [fullTime, setFullTime] = (0, _react.useState)(false);
-  const [description, setDescription] = (0, _react.useState)("");
-  const [location, setLocation] = (0, _react.useState)("New York");
+  const cities = [{
+    id: 1,
+    name: "New York"
+  }, {
+    id: 2,
+    name: "San Francisco"
+  }, {
+    id: 3,
+    name: "Berlin"
+  }, {
+    id: 4,
+    name: "London"
+  }];
 
-  async function getJobs() {
-    const API_URL = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}`;
-    const res = await fetch(CORS_URL + API_URL);
-    const data = await res.json();
-    dispatch({
-      type: "JOB_TITLE",
-      jobs: data
-    });
-  }
+  const handleCity = city => {
+    if (selectCity && city.id === selectCity.id) {
+      setSelectCity(null);
+      dispatch({
+        type: "LOCATION",
+        value: ""
+      });
+    } else {
+      setSelectCity(city);
+      dispatch({
+        type: "LOCATION",
+        value: city.name
+      });
+    }
+  };
 
-  const filterJob = filter => {
-    switch (filter.type) {
-      case "LOCATION":
-        setLocation(filter.value);
-        break;
-
-      case "FULL_TIME":
-        setFullTime(filter.value);
-        break;
-
-      case "DESCRIPTION":
-        setDescription(filter.value);
-        break;
+  const handleKeyLocation = e => {
+    if (e.key === "Enter") {
+      setSelectCity(null);
+      dispatch({
+        type: "LOCATION",
+        value: location
+      });
     }
   };
 
   (0, _react.useEffect)(() => {
-    getJobs(description, location, fullTime);
-  }, [location, description, fullTime]);
+    setSelectCity(cities[0]);
+  }, []);
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
-      filterJob
+      fullTime,
+      setFullTime,
+      location,
+      setLocation,
+      selectCity,
+      setSelectCity,
+      handleCity,
+      handleKeyLocation,
+      cities
     }
   }, children);
 }
@@ -50728,55 +50792,16 @@ function Content({
   children,
   ...restProps
 }) {
-  const [fullTime, setFullTime] = (0, _react.useState)(false);
-  const [location, setLocation] = (0, _react.useState)("");
-  const [selectCity, setSelectCity] = (0, _react.useState)(null);
   const {
-    filterJob
+    fullTime,
+    setFullTime,
+    location,
+    setLocation,
+    selectCity,
+    handleCity,
+    handleKeyLocation,
+    cities
   } = (0, _react.useContext)(_Context.Context);
-  const cities = [{
-    id: 1,
-    name: "New York"
-  }, {
-    id: 2,
-    name: "San Francisco"
-  }, {
-    id: 3,
-    name: "Berlin"
-  }, {
-    id: 4,
-    name: "London"
-  }];
-
-  const handleCity = city => {
-    if (selectCity && city.id === selectCity.id) {
-      setSelectCity(null);
-      filterJob({
-        type: "LOCATION",
-        value: ""
-      });
-    } else {
-      setSelectCity(city);
-      filterJob({
-        type: "LOCATION",
-        value: city.name
-      });
-    }
-  };
-
-  const handleKeyLocation = e => {
-    if (e.key === "Enter") {
-      setSelectCity(null);
-      filterJob({
-        type: "LOCATION",
-        value: location
-      });
-    }
-  };
-
-  (0, _react.useEffect)(() => {
-    setSelectCity(cities[0]);
-  }, []);
   return /*#__PURE__*/_react.default.createElement(_index.Container, restProps, /*#__PURE__*/_react.default.createElement(_.Filters, null, /*#__PURE__*/_react.default.createElement(_.Filters.Frame, null, /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
     type: "checkbox",
     id: "full-time",
@@ -50786,14 +50811,25 @@ function Content({
     htmlFor: "full-time"
   }, "Full time")), /*#__PURE__*/_react.default.createElement(_.Filters.LocationSearch, null, /*#__PURE__*/_react.default.createElement(_.Filters.Label, {
     htmlFor: "description"
-  }, "Location"), /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
+  }, "Location"), /*#__PURE__*/_react.default.createElement(_.Filters.Frame, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/_react.default.createElement("path", {
+    fill: "currentColor",
+    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+  }))), /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
     id: "description",
     type: "text",
     value: location,
     onChange: e => setLocation(e.target.value),
     onKeyDown: handleKeyLocation,
     placeholder: "City, state, zip code or country"
-  })), cities.map(city => /*#__PURE__*/_react.default.createElement(_.Filters.Frame, {
+  }))), cities.map(city => /*#__PURE__*/_react.default.createElement(_.Filters.Frame, {
     key: city.id
   }, /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
     type: "radio",
@@ -50863,15 +50899,62 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const Container = _styledComponents.default.section``;
+const Container = _styledComponents.default.section`
+    padding-top: 2rem;
+    font-weight: 500;
+`;
 exports.Container = Container;
-const Frame = _styledComponents.default.div``;
+const Frame = _styledComponents.default.fieldset`
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    border: none;
+    margin: 0;
+    padding: 0;
+`;
 exports.Frame = Frame;
-const Input = _styledComponents.default.input``;
+const Input = _styledComponents.default.input`
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+`;
 exports.Input = Input;
-const Label = _styledComponents.default.label``;
+const Label = _styledComponents.default.label`
+    font-size: 14px;
+    font-weight: 500;
+`;
 exports.Label = Label;
-const LocationSearch = _styledComponents.default.div``;
+const LocationSearch = _styledComponents.default.div`
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 32px;
+    padding-bottom: 27px;
+    color: #B9BDCF;
+
+
+    Frame {
+        background-color: #FFFFFF;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+        border-radius: 4px;
+    }
+
+    Label {
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    Input {
+        height: 48px;
+        width: 60%;
+        border: none;
+
+        &:focus {
+            border: 1px solid #1e86ff;
+            outline: none;
+            box-shadow: 0 0 4px rgb(30 134 255 / 58%);
+        }
+    }
+`;
 exports.LocationSearch = LocationSearch;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/filters/index.js":[function(require,module,exports) {
 "use strict";
