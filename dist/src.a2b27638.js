@@ -50811,7 +50811,7 @@ function Content({
     htmlFor: "full-time"
   }, "Full time")), /*#__PURE__*/_react.default.createElement(_.Filters.LocationSearch, null, /*#__PURE__*/_react.default.createElement(_.Filters.Label, {
     htmlFor: "description"
-  }, "Location"), /*#__PURE__*/_react.default.createElement(_.Filters.Frame, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("svg", {
+  }, "Location"), /*#__PURE__*/_react.default.createElement(_.Filters.FieldsetLocation, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "24",
     viewBox: "0 0 24 24",
@@ -50893,7 +50893,7 @@ function Loading({
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LocationSearch = exports.Label = exports.Input = exports.Frame = exports.Container = void 0;
+exports.LocationSearch = exports.FieldsetLocation = exports.Label = exports.Input = exports.Frame = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -50923,6 +50923,36 @@ const Label = _styledComponents.default.label`
     font-weight: 500;
 `;
 exports.Label = Label;
+const FieldsetLocation = _styledComponents.default.fieldset`
+    background-color: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    border: none;
+    margin: 0;
+    padding: 14px;
+    height: 48px;
+
+    @media (min-width: 1440px) {
+        max-width: 80%;
+    }
+
+    Input {
+        height: 48px;
+        width: 70%;
+        border: none;
+
+        &:focus {
+            border: 1px solid #1e86ff;
+            outline: none;
+            box-shadow: 0 0 4px rgb(30 134 255 / 58%);
+        }
+    }
+`;
+exports.FieldsetLocation = FieldsetLocation;
 const LocationSearch = _styledComponents.default.div`
     display: flex;
     flex-direction: column;
@@ -50931,28 +50961,9 @@ const LocationSearch = _styledComponents.default.div`
     padding-bottom: 27px;
     color: #B9BDCF;
 
-
-    Frame {
-        background-color: #FFFFFF;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
-        border-radius: 4px;
-    }
-
     Label {
         text-transform: uppercase;
         font-weight: 700;
-    }
-
-    Input {
-        height: 48px;
-        width: 60%;
-        border: none;
-
-        &:focus {
-            border: 1px solid #1e86ff;
-            outline: none;
-            box-shadow: 0 0 4px rgb(30 134 255 / 58%);
-        }
     }
 `;
 exports.LocationSearch = LocationSearch;
@@ -51001,6 +51012,13 @@ Filters.LocationSearch = function FiltersLocationSearch({
   ...restProps
 }) {
   return /*#__PURE__*/_react.default.createElement(_filters.LocationSearch, restProps, children);
+};
+
+Filters.FieldsetLocation = function FiltersFieldsetLocation({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_filters.FieldsetLocation, restProps, children);
 };
 },{"react":"node_modules/react/index.js","./styles/filters":"src/components/filters/styles/filters.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";

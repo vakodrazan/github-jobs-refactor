@@ -6,6 +6,7 @@ import {
     Input,
     Label,
     LocationSearch,
+    FieldsetLocation
 } from "./styles/filters";
 
 export default function Filters({ children, ...restProps}) {
@@ -31,4 +32,8 @@ Filters.Label = function FiltersLabel({ children, ...restProps }) {
 
 Filters.LocationSearch = function FiltersLocationSearch({ children, ...restProps }) {
     return <LocationSearch {...restProps}>{children}</LocationSearch>
+}
+
+Filters.FieldsetLocation = function FiltersFieldsetLocation({ children, ...restProps }) {
+    return <FieldsetLocation {...restProps}>{children}</FieldsetLocation>
 }
