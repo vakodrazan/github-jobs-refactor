@@ -16,12 +16,24 @@ export default function Content({ children, ...restProps}) {
         setLocation
     } = useContext(Context)
 
+    const [selectCity, setSelectCity] = useState(null);
+
     const cities = [
         { id: 1, name: "New York" },
         { id: 2, name: "San Francisco" },
         { id: 3, name: "Berlin" },
         { id: 4, name: "London" }
     ];
+
+    const handleCity = (city) => {
+        if (selectCity && city.id === selectCity.id) {
+          setSelectCity(null);
+          setLocation("")
+        } else {
+          setSelectCity(city);
+          setLocation(city.name)
+        }
+    };
 
     return (
         <Container {...restProps}>
@@ -51,6 +63,8 @@ export default function Content({ children, ...restProps}) {
                         <Filters.Input
                             type="radio"
                             id={city.id}
+                            checked={selectCity ? city.id === selectCity.id : false}
+                            onChange={() => handleCity(city)}
                         />
                         <Filters.Label htmlFor={city.id}>{city.name}</Filters.Label>
                     </Filters.Frame>

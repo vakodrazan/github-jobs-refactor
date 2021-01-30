@@ -50743,6 +50743,7 @@ function Content({
     location,
     setLocation
   } = (0, _react.useContext)(_Context.Context);
+  const [selectCity, setSelectCity] = (0, _react.useState)(null);
   const cities = [{
     id: 1,
     name: "New York"
@@ -50756,6 +50757,17 @@ function Content({
     id: 4,
     name: "London"
   }];
+
+  const handleCity = city => {
+    if (selectCity && city.id === selectCity.id) {
+      setSelectCity(null);
+      setLocation("");
+    } else {
+      setSelectCity(city);
+      setLocation(city.name);
+    }
+  };
+
   return /*#__PURE__*/_react.default.createElement(_index.Container, restProps, /*#__PURE__*/_react.default.createElement(_.Filters, null, /*#__PURE__*/_react.default.createElement(_.Filters.Frame, null, /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
     type: "checkbox",
     id: "full-time",
@@ -50774,7 +50786,9 @@ function Content({
     key: city.id
   }, /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
     type: "radio",
-    id: city.id
+    id: city.id,
+    checked: selectCity ? city.id === selectCity.id : false,
+    onChange: () => handleCity(city)
   }), /*#__PURE__*/_react.default.createElement(_.Filters.Label, {
     htmlFor: city.id
   }, city.name)))), /*#__PURE__*/_react.default.createElement(_jobs.default, null));
