@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Filters } from '..';
 import JobContainer from '../../container/jobs';
 import { Context } from '../../context/Context';
@@ -35,6 +35,10 @@ export default function Content({ children, ...restProps}) {
         }
     };
 
+    useEffect(() => {
+        setSelectCity(cities[0]);
+    }, []);
+
     return (
         <Container {...restProps}>
             <Filters>
@@ -62,8 +66,8 @@ export default function Content({ children, ...restProps}) {
                     <Filters.Frame key={city.id}>
                         <Filters.Input
                             type="radio"
-                            id={city.id}
                             checked={selectCity ? city.id === selectCity.id : false}
+                            id={city.id}
                             onChange={() => handleCity(city)}
                         />
                         <Filters.Label htmlFor={city.id}>{city.name}</Filters.Label>

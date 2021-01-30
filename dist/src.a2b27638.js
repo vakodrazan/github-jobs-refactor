@@ -50768,6 +50768,9 @@ function Content({
     }
   };
 
+  (0, _react.useEffect)(() => {
+    setSelectCity(cities[0]);
+  }, []);
   return /*#__PURE__*/_react.default.createElement(_index.Container, restProps, /*#__PURE__*/_react.default.createElement(_.Filters, null, /*#__PURE__*/_react.default.createElement(_.Filters.Frame, null, /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
     type: "checkbox",
     id: "full-time",
@@ -50786,8 +50789,8 @@ function Content({
     key: city.id
   }, /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
     type: "radio",
-    id: city.id,
     checked: selectCity ? city.id === selectCity.id : false,
+    id: city.id,
     onChange: () => handleCity(city)
   }), /*#__PURE__*/_react.default.createElement(_.Filters.Label, {
     htmlFor: city.id
