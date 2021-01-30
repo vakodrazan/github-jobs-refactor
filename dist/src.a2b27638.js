@@ -32701,7 +32701,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function App() {
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_home.default, null));
 }
-},{"react":"node_modules/react/index.js","./pages/home":"src/pages/home.js"}],"src/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./pages/home":"src/pages/home.js"}],"src/global-style.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _styledComponents = require("styled-components");
+
+const GlobalStyle = (0, _styledComponents.createGlobalStyle)`
+    html, body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #F6F7FB;
+        color: #334680;
+        font-size: 16px;
+        margin: 0;
+    }
+`;
+var _default = GlobalStyle;
+exports.default = _default;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -32714,10 +32735,12 @@ var _Context = require("./context/Context");
 
 var _GlobalContext = require("./context/GlobalContext");
 
+var _globalStyle = _interopRequireDefault(require("./global-style"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom.default.render( /*#__PURE__*/_react.default.createElement(_GlobalContext.GlobalContextProvider, null, /*#__PURE__*/_react.default.createElement(_Context.ContextProvider, null, /*#__PURE__*/_react.default.createElement(_app.default, null))), document.getElementById('root'));
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./app":"src/app.js","./context/Context":"src/context/Context.js","./context/GlobalContext":"src/context/GlobalContext.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+_reactDom.default.render( /*#__PURE__*/_react.default.createElement(_GlobalContext.GlobalContextProvider, null, /*#__PURE__*/_react.default.createElement(_Context.ContextProvider, null, /*#__PURE__*/_react.default.createElement(_globalStyle.default, null), /*#__PURE__*/_react.default.createElement(_app.default, null))), document.getElementById('root'));
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./app":"src/app.js","./context/Context":"src/context/Context.js","./context/GlobalContext":"src/context/GlobalContext.js","./global-style":"src/global-style.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -32745,7 +32768,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50510" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57143" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
