@@ -1,16 +1,13 @@
 import React, { useContext } from 'react'
-import { formatDistance } from 'date-fns';
 
 import { Card, Loading } from '../components'
 import { GlobalContext } from '../context/GlobalContext'
+import { Context } from '../context/Context';
 
 export default function JobContainer() {
     const { state } = useContext(GlobalContext);
     const { jobs } = state;
-
-    const formattedDate = date => {
-        return formatDistance(new Date(date), new Date());
-    };
+    const { formattedDate } = useContext(Context)
     
     return (
         <>

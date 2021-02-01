@@ -15,6 +15,7 @@ import {
     Logo,
     Address,
     Information,
+    Time
 } from "./styles/details"
 
 export default function Details({ children, ...resProps}) {
@@ -69,5 +70,9 @@ Details.Address = function DetailsAddress({ children, ...resProps}) {
 }
 
 Details.Information = function DetailsInformation({ children, ...resProps}) {
+    return <Information {...resProps}>{children}</Information>
+}
+
+Details.Time = function DetailsInformation({ children, ...resProps}) {
     return <Information {...resProps}>{children}</Information>
 }

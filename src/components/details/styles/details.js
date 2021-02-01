@@ -28,3 +28,5 @@ export const Logo = styled.img``;
 export const Address = styled.div``;
 
 export const Information = styled.div``;
+
+export const Time = styled.time``;

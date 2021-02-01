@@ -36126,7 +36126,106 @@ Card.Date = function CardDate({
 }) {
   return /*#__PURE__*/_react.default.createElement(_card.Date, restProps, children);
 };
-},{"react":"node_modules/react/index.js","./styles/card":"src/components/card/styles/card.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./styles/card":"src/components/card/styles/card.js"}],"src/context/GlobalContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GlobalContextProvider = GlobalContextProvider;
+exports.GlobalContext = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const GlobalContext = (0, _react.createContext)();
+exports.GlobalContext = GlobalContext;
+
+function GlobalContextProvider({
+  children
+}) {
+  const [state, dispatch] = (0, _react.useReducer)((state, action) => {
+    switch (action.type) {
+      case "JOB_TITLE":
+        {
+          return { ...state,
+            loading: false,
+            jobs: action.jobs
+          };
+        }
+
+      case "UPDATE_LIST":
+        {
+          return { ...state,
+            loading: false,
+            jobs: action.newJobList
+          };
+        }
+
+      case "LOCATION":
+        {
+          return { ...state,
+            location: action.value
+          };
+        }
+
+      case "FULL_TIME":
+        {
+          return { ...state,
+            fullTime: action.value
+          };
+        }
+
+      case "DESCRIPTION":
+        {
+          return { ...state,
+            description: action.value
+          };
+        }
+
+      default:
+        {
+          return state;
+        }
+    }
+  }, {
+    jobs: [],
+    loading: true,
+    fullTime: false.valueOf,
+    description: "",
+    location: "New York"
+  });
+  const CORS_URL = "https://cors-anywhere.herokuapp.com/";
+  const {
+    description,
+    location,
+    fullTime
+  } = state;
+
+  async function getJobs() {
+    const API_URL = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}`;
+    const res = await fetch(CORS_URL + API_URL);
+    const data = await res.json();
+    dispatch({
+      type: "JOB_TITLE",
+      jobs: data
+    });
+  }
+
+  (0, _react.useEffect)(() => {
+    getJobs(description, location, fullTime);
+  }, [location, description, fullTime]);
+  return /*#__PURE__*/_react.default.createElement(GlobalContext.Provider, {
+    value: {
+      state,
+      dispatch
+    }
+  }, children);
+}
+},{"react":"node_modules/react/index.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54295,148 +54394,7 @@ Object.keys(_index197).forEach(function (key) {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./add/index.js":"node_modules/date-fns/esm/add/index.js","./addBusinessDays/index.js":"node_modules/date-fns/esm/addBusinessDays/index.js","./addDays/index.js":"node_modules/date-fns/esm/addDays/index.js","./addHours/index.js":"node_modules/date-fns/esm/addHours/index.js","./addISOWeekYears/index.js":"node_modules/date-fns/esm/addISOWeekYears/index.js","./addMilliseconds/index.js":"node_modules/date-fns/esm/addMilliseconds/index.js","./addMinutes/index.js":"node_modules/date-fns/esm/addMinutes/index.js","./addMonths/index.js":"node_modules/date-fns/esm/addMonths/index.js","./addQuarters/index.js":"node_modules/date-fns/esm/addQuarters/index.js","./addSeconds/index.js":"node_modules/date-fns/esm/addSeconds/index.js","./addWeeks/index.js":"node_modules/date-fns/esm/addWeeks/index.js","./addYears/index.js":"node_modules/date-fns/esm/addYears/index.js","./areIntervalsOverlapping/index.js":"node_modules/date-fns/esm/areIntervalsOverlapping/index.js","./closestIndexTo/index.js":"node_modules/date-fns/esm/closestIndexTo/index.js","./closestTo/index.js":"node_modules/date-fns/esm/closestTo/index.js","./compareAsc/index.js":"node_modules/date-fns/esm/compareAsc/index.js","./compareDesc/index.js":"node_modules/date-fns/esm/compareDesc/index.js","./differenceInBusinessDays/index.js":"node_modules/date-fns/esm/differenceInBusinessDays/index.js","./differenceInCalendarDays/index.js":"node_modules/date-fns/esm/differenceInCalendarDays/index.js","./differenceInCalendarISOWeekYears/index.js":"node_modules/date-fns/esm/differenceInCalendarISOWeekYears/index.js","./differenceInCalendarISOWeeks/index.js":"node_modules/date-fns/esm/differenceInCalendarISOWeeks/index.js","./differenceInCalendarMonths/index.js":"node_modules/date-fns/esm/differenceInCalendarMonths/index.js","./differenceInCalendarQuarters/index.js":"node_modules/date-fns/esm/differenceInCalendarQuarters/index.js","./differenceInCalendarWeeks/index.js":"node_modules/date-fns/esm/differenceInCalendarWeeks/index.js","./differenceInCalendarYears/index.js":"node_modules/date-fns/esm/differenceInCalendarYears/index.js","./differenceInDays/index.js":"node_modules/date-fns/esm/differenceInDays/index.js","./differenceInHours/index.js":"node_modules/date-fns/esm/differenceInHours/index.js","./differenceInISOWeekYears/index.js":"node_modules/date-fns/esm/differenceInISOWeekYears/index.js","./differenceInMilliseconds/index.js":"node_modules/date-fns/esm/differenceInMilliseconds/index.js","./differenceInMinutes/index.js":"node_modules/date-fns/esm/differenceInMinutes/index.js","./differenceInMonths/index.js":"node_modules/date-fns/esm/differenceInMonths/index.js","./differenceInQuarters/index.js":"node_modules/date-fns/esm/differenceInQuarters/index.js","./differenceInSeconds/index.js":"node_modules/date-fns/esm/differenceInSeconds/index.js","./differenceInWeeks/index.js":"node_modules/date-fns/esm/differenceInWeeks/index.js","./differenceInYears/index.js":"node_modules/date-fns/esm/differenceInYears/index.js","./eachDayOfInterval/index.js":"node_modules/date-fns/esm/eachDayOfInterval/index.js","./eachHourOfInterval/index.js":"node_modules/date-fns/esm/eachHourOfInterval/index.js","./eachMonthOfInterval/index.js":"node_modules/date-fns/esm/eachMonthOfInterval/index.js","./eachQuarterOfInterval/index.js":"node_modules/date-fns/esm/eachQuarterOfInterval/index.js","./eachWeekOfInterval/index.js":"node_modules/date-fns/esm/eachWeekOfInterval/index.js","./eachWeekendOfInterval/index.js":"node_modules/date-fns/esm/eachWeekendOfInterval/index.js","./eachWeekendOfMonth/index.js":"node_modules/date-fns/esm/eachWeekendOfMonth/index.js","./eachWeekendOfYear/index.js":"node_modules/date-fns/esm/eachWeekendOfYear/index.js","./eachYearOfInterval/index.js":"node_modules/date-fns/esm/eachYearOfInterval/index.js","./endOfDay/index.js":"node_modules/date-fns/esm/endOfDay/index.js","./endOfDecade/index.js":"node_modules/date-fns/esm/endOfDecade/index.js","./endOfHour/index.js":"node_modules/date-fns/esm/endOfHour/index.js","./endOfISOWeek/index.js":"node_modules/date-fns/esm/endOfISOWeek/index.js","./endOfISOWeekYear/index.js":"node_modules/date-fns/esm/endOfISOWeekYear/index.js","./endOfMinute/index.js":"node_modules/date-fns/esm/endOfMinute/index.js","./endOfMonth/index.js":"node_modules/date-fns/esm/endOfMonth/index.js","./endOfQuarter/index.js":"node_modules/date-fns/esm/endOfQuarter/index.js","./endOfSecond/index.js":"node_modules/date-fns/esm/endOfSecond/index.js","./endOfToday/index.js":"node_modules/date-fns/esm/endOfToday/index.js","./endOfTomorrow/index.js":"node_modules/date-fns/esm/endOfTomorrow/index.js","./endOfWeek/index.js":"node_modules/date-fns/esm/endOfWeek/index.js","./endOfYear/index.js":"node_modules/date-fns/esm/endOfYear/index.js","./endOfYesterday/index.js":"node_modules/date-fns/esm/endOfYesterday/index.js","./format/index.js":"node_modules/date-fns/esm/format/index.js","./formatDistance/index.js":"node_modules/date-fns/esm/formatDistance/index.js","./formatDistanceStrict/index.js":"node_modules/date-fns/esm/formatDistanceStrict/index.js","./formatDistanceToNow/index.js":"node_modules/date-fns/esm/formatDistanceToNow/index.js","./formatDistanceToNowStrict/index.js":"node_modules/date-fns/esm/formatDistanceToNowStrict/index.js","./formatDuration/index.js":"node_modules/date-fns/esm/formatDuration/index.js","./formatISO/index.js":"node_modules/date-fns/esm/formatISO/index.js","./formatISO9075/index.js":"node_modules/date-fns/esm/formatISO9075/index.js","./formatISODuration/index.js":"node_modules/date-fns/esm/formatISODuration/index.js","./formatRFC3339/index.js":"node_modules/date-fns/esm/formatRFC3339/index.js","./formatRFC7231/index.js":"node_modules/date-fns/esm/formatRFC7231/index.js","./formatRelative/index.js":"node_modules/date-fns/esm/formatRelative/index.js","./fromUnixTime/index.js":"node_modules/date-fns/esm/fromUnixTime/index.js","./getDate/index.js":"node_modules/date-fns/esm/getDate/index.js","./getDay/index.js":"node_modules/date-fns/esm/getDay/index.js","./getDayOfYear/index.js":"node_modules/date-fns/esm/getDayOfYear/index.js","./getDaysInMonth/index.js":"node_modules/date-fns/esm/getDaysInMonth/index.js","./getDaysInYear/index.js":"node_modules/date-fns/esm/getDaysInYear/index.js","./getDecade/index.js":"node_modules/date-fns/esm/getDecade/index.js","./getHours/index.js":"node_modules/date-fns/esm/getHours/index.js","./getISODay/index.js":"node_modules/date-fns/esm/getISODay/index.js","./getISOWeek/index.js":"node_modules/date-fns/esm/getISOWeek/index.js","./getISOWeekYear/index.js":"node_modules/date-fns/esm/getISOWeekYear/index.js","./getISOWeeksInYear/index.js":"node_modules/date-fns/esm/getISOWeeksInYear/index.js","./getMilliseconds/index.js":"node_modules/date-fns/esm/getMilliseconds/index.js","./getMinutes/index.js":"node_modules/date-fns/esm/getMinutes/index.js","./getMonth/index.js":"node_modules/date-fns/esm/getMonth/index.js","./getOverlappingDaysInIntervals/index.js":"node_modules/date-fns/esm/getOverlappingDaysInIntervals/index.js","./getQuarter/index.js":"node_modules/date-fns/esm/getQuarter/index.js","./getSeconds/index.js":"node_modules/date-fns/esm/getSeconds/index.js","./getTime/index.js":"node_modules/date-fns/esm/getTime/index.js","./getUnixTime/index.js":"node_modules/date-fns/esm/getUnixTime/index.js","./getWeek/index.js":"node_modules/date-fns/esm/getWeek/index.js","./getWeekOfMonth/index.js":"node_modules/date-fns/esm/getWeekOfMonth/index.js","./getWeekYear/index.js":"node_modules/date-fns/esm/getWeekYear/index.js","./getWeeksInMonth/index.js":"node_modules/date-fns/esm/getWeeksInMonth/index.js","./getYear/index.js":"node_modules/date-fns/esm/getYear/index.js","./intervalToDuration/index.js":"node_modules/date-fns/esm/intervalToDuration/index.js","./isAfter/index.js":"node_modules/date-fns/esm/isAfter/index.js","./isBefore/index.js":"node_modules/date-fns/esm/isBefore/index.js","./isDate/index.js":"node_modules/date-fns/esm/isDate/index.js","./isEqual/index.js":"node_modules/date-fns/esm/isEqual/index.js","./isExists/index.js":"node_modules/date-fns/esm/isExists/index.js","./isFirstDayOfMonth/index.js":"node_modules/date-fns/esm/isFirstDayOfMonth/index.js","./isFriday/index.js":"node_modules/date-fns/esm/isFriday/index.js","./isFuture/index.js":"node_modules/date-fns/esm/isFuture/index.js","./isLastDayOfMonth/index.js":"node_modules/date-fns/esm/isLastDayOfMonth/index.js","./isLeapYear/index.js":"node_modules/date-fns/esm/isLeapYear/index.js","./isMatch/index.js":"node_modules/date-fns/esm/isMatch/index.js","./isMonday/index.js":"node_modules/date-fns/esm/isMonday/index.js","./isPast/index.js":"node_modules/date-fns/esm/isPast/index.js","./isSameDay/index.js":"node_modules/date-fns/esm/isSameDay/index.js","./isSameHour/index.js":"node_modules/date-fns/esm/isSameHour/index.js","./isSameISOWeek/index.js":"node_modules/date-fns/esm/isSameISOWeek/index.js","./isSameISOWeekYear/index.js":"node_modules/date-fns/esm/isSameISOWeekYear/index.js","./isSameMinute/index.js":"node_modules/date-fns/esm/isSameMinute/index.js","./isSameMonth/index.js":"node_modules/date-fns/esm/isSameMonth/index.js","./isSameQuarter/index.js":"node_modules/date-fns/esm/isSameQuarter/index.js","./isSameSecond/index.js":"node_modules/date-fns/esm/isSameSecond/index.js","./isSameWeek/index.js":"node_modules/date-fns/esm/isSameWeek/index.js","./isSameYear/index.js":"node_modules/date-fns/esm/isSameYear/index.js","./isSaturday/index.js":"node_modules/date-fns/esm/isSaturday/index.js","./isSunday/index.js":"node_modules/date-fns/esm/isSunday/index.js","./isThisHour/index.js":"node_modules/date-fns/esm/isThisHour/index.js","./isThisISOWeek/index.js":"node_modules/date-fns/esm/isThisISOWeek/index.js","./isThisMinute/index.js":"node_modules/date-fns/esm/isThisMinute/index.js","./isThisMonth/index.js":"node_modules/date-fns/esm/isThisMonth/index.js","./isThisQuarter/index.js":"node_modules/date-fns/esm/isThisQuarter/index.js","./isThisSecond/index.js":"node_modules/date-fns/esm/isThisSecond/index.js","./isThisWeek/index.js":"node_modules/date-fns/esm/isThisWeek/index.js","./isThisYear/index.js":"node_modules/date-fns/esm/isThisYear/index.js","./isThursday/index.js":"node_modules/date-fns/esm/isThursday/index.js","./isToday/index.js":"node_modules/date-fns/esm/isToday/index.js","./isTomorrow/index.js":"node_modules/date-fns/esm/isTomorrow/index.js","./isTuesday/index.js":"node_modules/date-fns/esm/isTuesday/index.js","./isValid/index.js":"node_modules/date-fns/esm/isValid/index.js","./isWednesday/index.js":"node_modules/date-fns/esm/isWednesday/index.js","./isWeekend/index.js":"node_modules/date-fns/esm/isWeekend/index.js","./isWithinInterval/index.js":"node_modules/date-fns/esm/isWithinInterval/index.js","./isYesterday/index.js":"node_modules/date-fns/esm/isYesterday/index.js","./lastDayOfDecade/index.js":"node_modules/date-fns/esm/lastDayOfDecade/index.js","./lastDayOfISOWeek/index.js":"node_modules/date-fns/esm/lastDayOfISOWeek/index.js","./lastDayOfISOWeekYear/index.js":"node_modules/date-fns/esm/lastDayOfISOWeekYear/index.js","./lastDayOfMonth/index.js":"node_modules/date-fns/esm/lastDayOfMonth/index.js","./lastDayOfQuarter/index.js":"node_modules/date-fns/esm/lastDayOfQuarter/index.js","./lastDayOfWeek/index.js":"node_modules/date-fns/esm/lastDayOfWeek/index.js","./lastDayOfYear/index.js":"node_modules/date-fns/esm/lastDayOfYear/index.js","./lightFormat/index.js":"node_modules/date-fns/esm/lightFormat/index.js","./max/index.js":"node_modules/date-fns/esm/max/index.js","./min/index.js":"node_modules/date-fns/esm/min/index.js","./parse/index.js":"node_modules/date-fns/esm/parse/index.js","./parseISO/index.js":"node_modules/date-fns/esm/parseISO/index.js","./parseJSON/index.js":"node_modules/date-fns/esm/parseJSON/index.js","./roundToNearestMinutes/index.js":"node_modules/date-fns/esm/roundToNearestMinutes/index.js","./set/index.js":"node_modules/date-fns/esm/set/index.js","./setDate/index.js":"node_modules/date-fns/esm/setDate/index.js","./setDay/index.js":"node_modules/date-fns/esm/setDay/index.js","./setDayOfYear/index.js":"node_modules/date-fns/esm/setDayOfYear/index.js","./setHours/index.js":"node_modules/date-fns/esm/setHours/index.js","./setISODay/index.js":"node_modules/date-fns/esm/setISODay/index.js","./setISOWeek/index.js":"node_modules/date-fns/esm/setISOWeek/index.js","./setISOWeekYear/index.js":"node_modules/date-fns/esm/setISOWeekYear/index.js","./setMilliseconds/index.js":"node_modules/date-fns/esm/setMilliseconds/index.js","./setMinutes/index.js":"node_modules/date-fns/esm/setMinutes/index.js","./setMonth/index.js":"node_modules/date-fns/esm/setMonth/index.js","./setQuarter/index.js":"node_modules/date-fns/esm/setQuarter/index.js","./setSeconds/index.js":"node_modules/date-fns/esm/setSeconds/index.js","./setWeek/index.js":"node_modules/date-fns/esm/setWeek/index.js","./setWeekYear/index.js":"node_modules/date-fns/esm/setWeekYear/index.js","./setYear/index.js":"node_modules/date-fns/esm/setYear/index.js","./startOfDay/index.js":"node_modules/date-fns/esm/startOfDay/index.js","./startOfDecade/index.js":"node_modules/date-fns/esm/startOfDecade/index.js","./startOfHour/index.js":"node_modules/date-fns/esm/startOfHour/index.js","./startOfISOWeek/index.js":"node_modules/date-fns/esm/startOfISOWeek/index.js","./startOfISOWeekYear/index.js":"node_modules/date-fns/esm/startOfISOWeekYear/index.js","./startOfMinute/index.js":"node_modules/date-fns/esm/startOfMinute/index.js","./startOfMonth/index.js":"node_modules/date-fns/esm/startOfMonth/index.js","./startOfQuarter/index.js":"node_modules/date-fns/esm/startOfQuarter/index.js","./startOfSecond/index.js":"node_modules/date-fns/esm/startOfSecond/index.js","./startOfToday/index.js":"node_modules/date-fns/esm/startOfToday/index.js","./startOfTomorrow/index.js":"node_modules/date-fns/esm/startOfTomorrow/index.js","./startOfWeek/index.js":"node_modules/date-fns/esm/startOfWeek/index.js","./startOfWeekYear/index.js":"node_modules/date-fns/esm/startOfWeekYear/index.js","./startOfYear/index.js":"node_modules/date-fns/esm/startOfYear/index.js","./startOfYesterday/index.js":"node_modules/date-fns/esm/startOfYesterday/index.js","./sub/index.js":"node_modules/date-fns/esm/sub/index.js","./subBusinessDays/index.js":"node_modules/date-fns/esm/subBusinessDays/index.js","./subDays/index.js":"node_modules/date-fns/esm/subDays/index.js","./subHours/index.js":"node_modules/date-fns/esm/subHours/index.js","./subISOWeekYears/index.js":"node_modules/date-fns/esm/subISOWeekYears/index.js","./subMilliseconds/index.js":"node_modules/date-fns/esm/subMilliseconds/index.js","./subMinutes/index.js":"node_modules/date-fns/esm/subMinutes/index.js","./subMonths/index.js":"node_modules/date-fns/esm/subMonths/index.js","./subQuarters/index.js":"node_modules/date-fns/esm/subQuarters/index.js","./subSeconds/index.js":"node_modules/date-fns/esm/subSeconds/index.js","./subWeeks/index.js":"node_modules/date-fns/esm/subWeeks/index.js","./subYears/index.js":"node_modules/date-fns/esm/subYears/index.js","./toDate/index.js":"node_modules/date-fns/esm/toDate/index.js","./constants/index.js":"node_modules/date-fns/esm/constants/index.js"}],"src/context/GlobalContext.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.GlobalContextProvider = GlobalContextProvider;
-exports.GlobalContext = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-const GlobalContext = (0, _react.createContext)();
-exports.GlobalContext = GlobalContext;
-
-function GlobalContextProvider({
-  children
-}) {
-  const [state, dispatch] = (0, _react.useReducer)((state, action) => {
-    switch (action.type) {
-      case "JOB_TITLE":
-        {
-          return { ...state,
-            loading: false,
-            jobs: action.jobs
-          };
-        }
-
-      case "UPDATE_LIST":
-        {
-          return { ...state,
-            loading: false,
-            jobs: action.newJobList
-          };
-        }
-
-      case "LOCATION":
-        {
-          return { ...state,
-            location: action.value
-          };
-        }
-
-      case "FULL_TIME":
-        {
-          return { ...state,
-            fullTime: action.value
-          };
-        }
-
-      case "DESCRIPTION":
-        {
-          return { ...state,
-            description: action.value
-          };
-        }
-
-      default:
-        {
-          return state;
-        }
-    }
-  }, {
-    jobs: [],
-    loading: true,
-    fullTime: false.valueOf,
-    description: "",
-    location: "New York"
-  });
-  const CORS_URL = "https://cors-anywhere.herokuapp.com/";
-  const {
-    description,
-    location,
-    fullTime
-  } = state;
-
-  async function getJobs() {
-    const API_URL = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}`;
-    const res = await fetch(CORS_URL + API_URL);
-    const data = await res.json();
-    dispatch({
-      type: "JOB_TITLE",
-      jobs: data
-    });
-  }
-
-  (0, _react.useEffect)(() => {
-    getJobs(description, location, fullTime);
-  }, [location, description, fullTime]);
-  return /*#__PURE__*/_react.default.createElement(GlobalContext.Provider, {
-    value: {
-      state,
-      dispatch
-    }
-  }, children);
-}
-},{"react":"node_modules/react/index.js"}],"src/container/jobs.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = JobContainer;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _dateFns = require("date-fns");
-
-var _components = require("../components");
-
-var _GlobalContext = require("../context/GlobalContext");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function JobContainer() {
-  const {
-    state
-  } = (0, _react.useContext)(_GlobalContext.GlobalContext);
-  const {
-    jobs
-  } = state;
-
-  const formattedDate = date => {
-    return (0, _dateFns.formatDistance)(new Date(date), new Date());
-  };
-
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_components.Loading, null, "Loading..."), jobs && /*#__PURE__*/_react.default.createElement(_components.Card, null, jobs.map(job => /*#__PURE__*/_react.default.createElement(_components.Card.Item, {
-    key: job.id,
-    to: `/job/${job.id}`
-  }, job.company_logo === null ? /*#__PURE__*/_react.default.createElement(_components.Card.LogoNotFound, null, "not found") : /*#__PURE__*/_react.default.createElement(_components.Card.Logo, {
-    src: job.company_logo,
-    alt: `${job.title} at ${job.company}`
-  }), /*#__PURE__*/_react.default.createElement(_components.Card.Feature, null, /*#__PURE__*/_react.default.createElement(_components.Card.Subtitile, null, job.company), /*#__PURE__*/_react.default.createElement(_components.Card.Title, null, job.title), job.type && /*#__PURE__*/_react.default.createElement(_components.Card.CustomLabel, null, job.type), /*#__PURE__*/_react.default.createElement(_components.Card.Meta, null, /*#__PURE__*/_react.default.createElement(_components.Card.Location, null, /*#__PURE__*/_react.default.createElement("span", null, job.location)), /*#__PURE__*/_react.default.createElement(_components.Card.Date, {
-    dateTime: job.created_at
-  }, formattedDate(job.created_at))))))));
-}
-},{"react":"node_modules/react/index.js","date-fns":"node_modules/date-fns/esm/index.js","../components":"src/components/index.js","../context/GlobalContext":"src/context/GlobalContext.js"}],"src/context/Context.js":[function(require,module,exports) {
+},{"./add/index.js":"node_modules/date-fns/esm/add/index.js","./addBusinessDays/index.js":"node_modules/date-fns/esm/addBusinessDays/index.js","./addDays/index.js":"node_modules/date-fns/esm/addDays/index.js","./addHours/index.js":"node_modules/date-fns/esm/addHours/index.js","./addISOWeekYears/index.js":"node_modules/date-fns/esm/addISOWeekYears/index.js","./addMilliseconds/index.js":"node_modules/date-fns/esm/addMilliseconds/index.js","./addMinutes/index.js":"node_modules/date-fns/esm/addMinutes/index.js","./addMonths/index.js":"node_modules/date-fns/esm/addMonths/index.js","./addQuarters/index.js":"node_modules/date-fns/esm/addQuarters/index.js","./addSeconds/index.js":"node_modules/date-fns/esm/addSeconds/index.js","./addWeeks/index.js":"node_modules/date-fns/esm/addWeeks/index.js","./addYears/index.js":"node_modules/date-fns/esm/addYears/index.js","./areIntervalsOverlapping/index.js":"node_modules/date-fns/esm/areIntervalsOverlapping/index.js","./closestIndexTo/index.js":"node_modules/date-fns/esm/closestIndexTo/index.js","./closestTo/index.js":"node_modules/date-fns/esm/closestTo/index.js","./compareAsc/index.js":"node_modules/date-fns/esm/compareAsc/index.js","./compareDesc/index.js":"node_modules/date-fns/esm/compareDesc/index.js","./differenceInBusinessDays/index.js":"node_modules/date-fns/esm/differenceInBusinessDays/index.js","./differenceInCalendarDays/index.js":"node_modules/date-fns/esm/differenceInCalendarDays/index.js","./differenceInCalendarISOWeekYears/index.js":"node_modules/date-fns/esm/differenceInCalendarISOWeekYears/index.js","./differenceInCalendarISOWeeks/index.js":"node_modules/date-fns/esm/differenceInCalendarISOWeeks/index.js","./differenceInCalendarMonths/index.js":"node_modules/date-fns/esm/differenceInCalendarMonths/index.js","./differenceInCalendarQuarters/index.js":"node_modules/date-fns/esm/differenceInCalendarQuarters/index.js","./differenceInCalendarWeeks/index.js":"node_modules/date-fns/esm/differenceInCalendarWeeks/index.js","./differenceInCalendarYears/index.js":"node_modules/date-fns/esm/differenceInCalendarYears/index.js","./differenceInDays/index.js":"node_modules/date-fns/esm/differenceInDays/index.js","./differenceInHours/index.js":"node_modules/date-fns/esm/differenceInHours/index.js","./differenceInISOWeekYears/index.js":"node_modules/date-fns/esm/differenceInISOWeekYears/index.js","./differenceInMilliseconds/index.js":"node_modules/date-fns/esm/differenceInMilliseconds/index.js","./differenceInMinutes/index.js":"node_modules/date-fns/esm/differenceInMinutes/index.js","./differenceInMonths/index.js":"node_modules/date-fns/esm/differenceInMonths/index.js","./differenceInQuarters/index.js":"node_modules/date-fns/esm/differenceInQuarters/index.js","./differenceInSeconds/index.js":"node_modules/date-fns/esm/differenceInSeconds/index.js","./differenceInWeeks/index.js":"node_modules/date-fns/esm/differenceInWeeks/index.js","./differenceInYears/index.js":"node_modules/date-fns/esm/differenceInYears/index.js","./eachDayOfInterval/index.js":"node_modules/date-fns/esm/eachDayOfInterval/index.js","./eachHourOfInterval/index.js":"node_modules/date-fns/esm/eachHourOfInterval/index.js","./eachMonthOfInterval/index.js":"node_modules/date-fns/esm/eachMonthOfInterval/index.js","./eachQuarterOfInterval/index.js":"node_modules/date-fns/esm/eachQuarterOfInterval/index.js","./eachWeekOfInterval/index.js":"node_modules/date-fns/esm/eachWeekOfInterval/index.js","./eachWeekendOfInterval/index.js":"node_modules/date-fns/esm/eachWeekendOfInterval/index.js","./eachWeekendOfMonth/index.js":"node_modules/date-fns/esm/eachWeekendOfMonth/index.js","./eachWeekendOfYear/index.js":"node_modules/date-fns/esm/eachWeekendOfYear/index.js","./eachYearOfInterval/index.js":"node_modules/date-fns/esm/eachYearOfInterval/index.js","./endOfDay/index.js":"node_modules/date-fns/esm/endOfDay/index.js","./endOfDecade/index.js":"node_modules/date-fns/esm/endOfDecade/index.js","./endOfHour/index.js":"node_modules/date-fns/esm/endOfHour/index.js","./endOfISOWeek/index.js":"node_modules/date-fns/esm/endOfISOWeek/index.js","./endOfISOWeekYear/index.js":"node_modules/date-fns/esm/endOfISOWeekYear/index.js","./endOfMinute/index.js":"node_modules/date-fns/esm/endOfMinute/index.js","./endOfMonth/index.js":"node_modules/date-fns/esm/endOfMonth/index.js","./endOfQuarter/index.js":"node_modules/date-fns/esm/endOfQuarter/index.js","./endOfSecond/index.js":"node_modules/date-fns/esm/endOfSecond/index.js","./endOfToday/index.js":"node_modules/date-fns/esm/endOfToday/index.js","./endOfTomorrow/index.js":"node_modules/date-fns/esm/endOfTomorrow/index.js","./endOfWeek/index.js":"node_modules/date-fns/esm/endOfWeek/index.js","./endOfYear/index.js":"node_modules/date-fns/esm/endOfYear/index.js","./endOfYesterday/index.js":"node_modules/date-fns/esm/endOfYesterday/index.js","./format/index.js":"node_modules/date-fns/esm/format/index.js","./formatDistance/index.js":"node_modules/date-fns/esm/formatDistance/index.js","./formatDistanceStrict/index.js":"node_modules/date-fns/esm/formatDistanceStrict/index.js","./formatDistanceToNow/index.js":"node_modules/date-fns/esm/formatDistanceToNow/index.js","./formatDistanceToNowStrict/index.js":"node_modules/date-fns/esm/formatDistanceToNowStrict/index.js","./formatDuration/index.js":"node_modules/date-fns/esm/formatDuration/index.js","./formatISO/index.js":"node_modules/date-fns/esm/formatISO/index.js","./formatISO9075/index.js":"node_modules/date-fns/esm/formatISO9075/index.js","./formatISODuration/index.js":"node_modules/date-fns/esm/formatISODuration/index.js","./formatRFC3339/index.js":"node_modules/date-fns/esm/formatRFC3339/index.js","./formatRFC7231/index.js":"node_modules/date-fns/esm/formatRFC7231/index.js","./formatRelative/index.js":"node_modules/date-fns/esm/formatRelative/index.js","./fromUnixTime/index.js":"node_modules/date-fns/esm/fromUnixTime/index.js","./getDate/index.js":"node_modules/date-fns/esm/getDate/index.js","./getDay/index.js":"node_modules/date-fns/esm/getDay/index.js","./getDayOfYear/index.js":"node_modules/date-fns/esm/getDayOfYear/index.js","./getDaysInMonth/index.js":"node_modules/date-fns/esm/getDaysInMonth/index.js","./getDaysInYear/index.js":"node_modules/date-fns/esm/getDaysInYear/index.js","./getDecade/index.js":"node_modules/date-fns/esm/getDecade/index.js","./getHours/index.js":"node_modules/date-fns/esm/getHours/index.js","./getISODay/index.js":"node_modules/date-fns/esm/getISODay/index.js","./getISOWeek/index.js":"node_modules/date-fns/esm/getISOWeek/index.js","./getISOWeekYear/index.js":"node_modules/date-fns/esm/getISOWeekYear/index.js","./getISOWeeksInYear/index.js":"node_modules/date-fns/esm/getISOWeeksInYear/index.js","./getMilliseconds/index.js":"node_modules/date-fns/esm/getMilliseconds/index.js","./getMinutes/index.js":"node_modules/date-fns/esm/getMinutes/index.js","./getMonth/index.js":"node_modules/date-fns/esm/getMonth/index.js","./getOverlappingDaysInIntervals/index.js":"node_modules/date-fns/esm/getOverlappingDaysInIntervals/index.js","./getQuarter/index.js":"node_modules/date-fns/esm/getQuarter/index.js","./getSeconds/index.js":"node_modules/date-fns/esm/getSeconds/index.js","./getTime/index.js":"node_modules/date-fns/esm/getTime/index.js","./getUnixTime/index.js":"node_modules/date-fns/esm/getUnixTime/index.js","./getWeek/index.js":"node_modules/date-fns/esm/getWeek/index.js","./getWeekOfMonth/index.js":"node_modules/date-fns/esm/getWeekOfMonth/index.js","./getWeekYear/index.js":"node_modules/date-fns/esm/getWeekYear/index.js","./getWeeksInMonth/index.js":"node_modules/date-fns/esm/getWeeksInMonth/index.js","./getYear/index.js":"node_modules/date-fns/esm/getYear/index.js","./intervalToDuration/index.js":"node_modules/date-fns/esm/intervalToDuration/index.js","./isAfter/index.js":"node_modules/date-fns/esm/isAfter/index.js","./isBefore/index.js":"node_modules/date-fns/esm/isBefore/index.js","./isDate/index.js":"node_modules/date-fns/esm/isDate/index.js","./isEqual/index.js":"node_modules/date-fns/esm/isEqual/index.js","./isExists/index.js":"node_modules/date-fns/esm/isExists/index.js","./isFirstDayOfMonth/index.js":"node_modules/date-fns/esm/isFirstDayOfMonth/index.js","./isFriday/index.js":"node_modules/date-fns/esm/isFriday/index.js","./isFuture/index.js":"node_modules/date-fns/esm/isFuture/index.js","./isLastDayOfMonth/index.js":"node_modules/date-fns/esm/isLastDayOfMonth/index.js","./isLeapYear/index.js":"node_modules/date-fns/esm/isLeapYear/index.js","./isMatch/index.js":"node_modules/date-fns/esm/isMatch/index.js","./isMonday/index.js":"node_modules/date-fns/esm/isMonday/index.js","./isPast/index.js":"node_modules/date-fns/esm/isPast/index.js","./isSameDay/index.js":"node_modules/date-fns/esm/isSameDay/index.js","./isSameHour/index.js":"node_modules/date-fns/esm/isSameHour/index.js","./isSameISOWeek/index.js":"node_modules/date-fns/esm/isSameISOWeek/index.js","./isSameISOWeekYear/index.js":"node_modules/date-fns/esm/isSameISOWeekYear/index.js","./isSameMinute/index.js":"node_modules/date-fns/esm/isSameMinute/index.js","./isSameMonth/index.js":"node_modules/date-fns/esm/isSameMonth/index.js","./isSameQuarter/index.js":"node_modules/date-fns/esm/isSameQuarter/index.js","./isSameSecond/index.js":"node_modules/date-fns/esm/isSameSecond/index.js","./isSameWeek/index.js":"node_modules/date-fns/esm/isSameWeek/index.js","./isSameYear/index.js":"node_modules/date-fns/esm/isSameYear/index.js","./isSaturday/index.js":"node_modules/date-fns/esm/isSaturday/index.js","./isSunday/index.js":"node_modules/date-fns/esm/isSunday/index.js","./isThisHour/index.js":"node_modules/date-fns/esm/isThisHour/index.js","./isThisISOWeek/index.js":"node_modules/date-fns/esm/isThisISOWeek/index.js","./isThisMinute/index.js":"node_modules/date-fns/esm/isThisMinute/index.js","./isThisMonth/index.js":"node_modules/date-fns/esm/isThisMonth/index.js","./isThisQuarter/index.js":"node_modules/date-fns/esm/isThisQuarter/index.js","./isThisSecond/index.js":"node_modules/date-fns/esm/isThisSecond/index.js","./isThisWeek/index.js":"node_modules/date-fns/esm/isThisWeek/index.js","./isThisYear/index.js":"node_modules/date-fns/esm/isThisYear/index.js","./isThursday/index.js":"node_modules/date-fns/esm/isThursday/index.js","./isToday/index.js":"node_modules/date-fns/esm/isToday/index.js","./isTomorrow/index.js":"node_modules/date-fns/esm/isTomorrow/index.js","./isTuesday/index.js":"node_modules/date-fns/esm/isTuesday/index.js","./isValid/index.js":"node_modules/date-fns/esm/isValid/index.js","./isWednesday/index.js":"node_modules/date-fns/esm/isWednesday/index.js","./isWeekend/index.js":"node_modules/date-fns/esm/isWeekend/index.js","./isWithinInterval/index.js":"node_modules/date-fns/esm/isWithinInterval/index.js","./isYesterday/index.js":"node_modules/date-fns/esm/isYesterday/index.js","./lastDayOfDecade/index.js":"node_modules/date-fns/esm/lastDayOfDecade/index.js","./lastDayOfISOWeek/index.js":"node_modules/date-fns/esm/lastDayOfISOWeek/index.js","./lastDayOfISOWeekYear/index.js":"node_modules/date-fns/esm/lastDayOfISOWeekYear/index.js","./lastDayOfMonth/index.js":"node_modules/date-fns/esm/lastDayOfMonth/index.js","./lastDayOfQuarter/index.js":"node_modules/date-fns/esm/lastDayOfQuarter/index.js","./lastDayOfWeek/index.js":"node_modules/date-fns/esm/lastDayOfWeek/index.js","./lastDayOfYear/index.js":"node_modules/date-fns/esm/lastDayOfYear/index.js","./lightFormat/index.js":"node_modules/date-fns/esm/lightFormat/index.js","./max/index.js":"node_modules/date-fns/esm/max/index.js","./min/index.js":"node_modules/date-fns/esm/min/index.js","./parse/index.js":"node_modules/date-fns/esm/parse/index.js","./parseISO/index.js":"node_modules/date-fns/esm/parseISO/index.js","./parseJSON/index.js":"node_modules/date-fns/esm/parseJSON/index.js","./roundToNearestMinutes/index.js":"node_modules/date-fns/esm/roundToNearestMinutes/index.js","./set/index.js":"node_modules/date-fns/esm/set/index.js","./setDate/index.js":"node_modules/date-fns/esm/setDate/index.js","./setDay/index.js":"node_modules/date-fns/esm/setDay/index.js","./setDayOfYear/index.js":"node_modules/date-fns/esm/setDayOfYear/index.js","./setHours/index.js":"node_modules/date-fns/esm/setHours/index.js","./setISODay/index.js":"node_modules/date-fns/esm/setISODay/index.js","./setISOWeek/index.js":"node_modules/date-fns/esm/setISOWeek/index.js","./setISOWeekYear/index.js":"node_modules/date-fns/esm/setISOWeekYear/index.js","./setMilliseconds/index.js":"node_modules/date-fns/esm/setMilliseconds/index.js","./setMinutes/index.js":"node_modules/date-fns/esm/setMinutes/index.js","./setMonth/index.js":"node_modules/date-fns/esm/setMonth/index.js","./setQuarter/index.js":"node_modules/date-fns/esm/setQuarter/index.js","./setSeconds/index.js":"node_modules/date-fns/esm/setSeconds/index.js","./setWeek/index.js":"node_modules/date-fns/esm/setWeek/index.js","./setWeekYear/index.js":"node_modules/date-fns/esm/setWeekYear/index.js","./setYear/index.js":"node_modules/date-fns/esm/setYear/index.js","./startOfDay/index.js":"node_modules/date-fns/esm/startOfDay/index.js","./startOfDecade/index.js":"node_modules/date-fns/esm/startOfDecade/index.js","./startOfHour/index.js":"node_modules/date-fns/esm/startOfHour/index.js","./startOfISOWeek/index.js":"node_modules/date-fns/esm/startOfISOWeek/index.js","./startOfISOWeekYear/index.js":"node_modules/date-fns/esm/startOfISOWeekYear/index.js","./startOfMinute/index.js":"node_modules/date-fns/esm/startOfMinute/index.js","./startOfMonth/index.js":"node_modules/date-fns/esm/startOfMonth/index.js","./startOfQuarter/index.js":"node_modules/date-fns/esm/startOfQuarter/index.js","./startOfSecond/index.js":"node_modules/date-fns/esm/startOfSecond/index.js","./startOfToday/index.js":"node_modules/date-fns/esm/startOfToday/index.js","./startOfTomorrow/index.js":"node_modules/date-fns/esm/startOfTomorrow/index.js","./startOfWeek/index.js":"node_modules/date-fns/esm/startOfWeek/index.js","./startOfWeekYear/index.js":"node_modules/date-fns/esm/startOfWeekYear/index.js","./startOfYear/index.js":"node_modules/date-fns/esm/startOfYear/index.js","./startOfYesterday/index.js":"node_modules/date-fns/esm/startOfYesterday/index.js","./sub/index.js":"node_modules/date-fns/esm/sub/index.js","./subBusinessDays/index.js":"node_modules/date-fns/esm/subBusinessDays/index.js","./subDays/index.js":"node_modules/date-fns/esm/subDays/index.js","./subHours/index.js":"node_modules/date-fns/esm/subHours/index.js","./subISOWeekYears/index.js":"node_modules/date-fns/esm/subISOWeekYears/index.js","./subMilliseconds/index.js":"node_modules/date-fns/esm/subMilliseconds/index.js","./subMinutes/index.js":"node_modules/date-fns/esm/subMinutes/index.js","./subMonths/index.js":"node_modules/date-fns/esm/subMonths/index.js","./subQuarters/index.js":"node_modules/date-fns/esm/subQuarters/index.js","./subSeconds/index.js":"node_modules/date-fns/esm/subSeconds/index.js","./subWeeks/index.js":"node_modules/date-fns/esm/subWeeks/index.js","./subYears/index.js":"node_modules/date-fns/esm/subYears/index.js","./toDate/index.js":"node_modules/date-fns/esm/toDate/index.js","./constants/index.js":"node_modules/date-fns/esm/constants/index.js"}],"src/context/Context.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54446,6 +54404,8 @@ exports.ContextProvider = ContextProvider;
 exports.Context = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _dateFns = require("date-fns");
 
 var _GlobalContext = require("./GlobalContext");
 
@@ -54505,6 +54465,10 @@ function ContextProvider({
     }
   };
 
+  const formattedDate = date => {
+    return (0, _dateFns.formatDistance)(new Date(date), new Date());
+  };
+
   (0, _react.useEffect)(() => {
     setSelectCity(cities[0]);
   }, []);
@@ -54518,11 +54482,52 @@ function ContextProvider({
       setSelectCity,
       handleCity,
       handleKeyLocation,
+      formattedDate,
       cities
     }
   }, children);
 }
-},{"react":"node_modules/react/index.js","./GlobalContext":"src/context/GlobalContext.js"}],"src/components/jobContent/styles/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","date-fns":"node_modules/date-fns/esm/index.js","./GlobalContext":"src/context/GlobalContext.js"}],"src/container/jobs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = JobContainer;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _components = require("../components");
+
+var _GlobalContext = require("../context/GlobalContext");
+
+var _Context = require("../context/Context");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function JobContainer() {
+  const {
+    state
+  } = (0, _react.useContext)(_GlobalContext.GlobalContext);
+  const {
+    jobs
+  } = state;
+  const {
+    formattedDate
+  } = (0, _react.useContext)(_Context.Context);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_components.Loading, null, "Loading..."), jobs && /*#__PURE__*/_react.default.createElement(_components.Card, null, jobs.map(job => /*#__PURE__*/_react.default.createElement(_components.Card.Item, {
+    key: job.id,
+    to: `/job/${job.id}`
+  }, job.company_logo === null ? /*#__PURE__*/_react.default.createElement(_components.Card.LogoNotFound, null, "not found") : /*#__PURE__*/_react.default.createElement(_components.Card.Logo, {
+    src: job.company_logo,
+    alt: `${job.title} at ${job.company}`
+  }), /*#__PURE__*/_react.default.createElement(_components.Card.Feature, null, /*#__PURE__*/_react.default.createElement(_components.Card.Subtitile, null, job.company), /*#__PURE__*/_react.default.createElement(_components.Card.Title, null, job.title), job.type && /*#__PURE__*/_react.default.createElement(_components.Card.CustomLabel, null, job.type), /*#__PURE__*/_react.default.createElement(_components.Card.Meta, null, /*#__PURE__*/_react.default.createElement(_components.Card.Location, null, /*#__PURE__*/_react.default.createElement("span", null, job.location)), /*#__PURE__*/_react.default.createElement(_components.Card.Date, {
+    dateTime: job.created_at
+  }, formattedDate(job.created_at))))))));
+}
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js","../context/GlobalContext":"src/context/GlobalContext.js","../context/Context":"src/context/Context.js"}],"src/components/jobContent/styles/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54809,7 +54814,7 @@ Filters.FieldsetLocation = function FiltersFieldsetLocation({
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Information = exports.Address = exports.Logo = exports.LogoNotFound = exports.CompanyDetails = exports.ContentHeader = exports.Content = exports.SideBarTitle = exports.Contact = exports.SidebarLink = exports.Sidebar = exports.Title = exports.Header = exports.Container = void 0;
+exports.Time = exports.Information = exports.Address = exports.Logo = exports.LogoNotFound = exports.CompanyDetails = exports.ContentHeader = exports.Content = exports.SideBarTitle = exports.Contact = exports.SidebarLink = exports.Sidebar = exports.Title = exports.Header = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -54845,6 +54850,8 @@ const Address = _styledComponents.default.div``;
 exports.Address = Address;
 const Information = _styledComponents.default.div``;
 exports.Information = Information;
+const Time = _styledComponents.default.time``;
+exports.Time = Time;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"src/components/details/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -54954,6 +54961,13 @@ Details.Information = function DetailsInformation({
 }) {
   return /*#__PURE__*/_react.default.createElement(_details.Information, resProps, children);
 };
+
+Details.Time = function DetailsInformation({
+  children,
+  ...resProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_details.Information, resProps, children);
+};
 },{"react":"node_modules/react/index.js","./styles/details":"src/components/details/styles/details.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -55018,16 +55032,63 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = DetailsContainer;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
 
 var _components = require("../components");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Context = require("../context/Context");
+
+var _GlobalContext = require("../context/GlobalContext");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function DetailsContainer() {
-  return /*#__PURE__*/_react.default.createElement(_components.Details, null, /*#__PURE__*/_react.default.createElement(_components.Details.Header, null, /*#__PURE__*/_react.default.createElement(_components.Details.Title, null, "Github ", /*#__PURE__*/_react.default.createElement("span", null, "Jobs"))));
+  const {
+    state
+  } = (0, _react.useContext)(_GlobalContext.GlobalContext);
+  const {
+    jobs
+  } = state;
+  const {
+    jobId
+  } = (0, _reactRouterDom.useParams)();
+  const {
+    formattedDate
+  } = (0, _react.useContext)(_Context.Context);
+  const jobDetails = jobs.length > 0 && jobs.find(job => job.id === jobId);
+  return /*#__PURE__*/_react.default.createElement(_components.Details, null, /*#__PURE__*/_react.default.createElement(_components.Details.Header, null, /*#__PURE__*/_react.default.createElement(_components.Details.Title, null, "Github ", /*#__PURE__*/_react.default.createElement("span", null, "Jobs")), /*#__PURE__*/_react.default.createElement(_components.Details.Sidebar, null, /*#__PURE__*/_react.default.createElement(_components.Details.SidebarLink, {
+    to: "/"
+  }, "Back to search"), /*#__PURE__*/_react.default.createElement(_components.Details.Contact, null, /*#__PURE__*/_react.default.createElement(_components.Details.SideBarTitle, null), /*#__PURE__*/_react.default.createElement("div", {
+    dangerouslySetInnerHTML: {
+      __html: jobDetails.how_to_apply
+    }
+  })))), /*#__PURE__*/_react.default.createElement(_components.Details.Content, null, /*#__PURE__*/_react.default.createElement(_components.Details.ContentHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, jobDetails.title), /*#__PURE__*/_react.default.createElement("span", null, jobDetails.type)), /*#__PURE__*/_react.default.createElement(_components.Details.Time, {
+    dateTime: jobDetails.created_at
+  }, formattedDate(jobDetails.created_at)), /*#__PURE__*/_react.default.createElement(_components.Details.CompanyDetails, null, jobDetails.company_logo === null ? /*#__PURE__*/_react.default.createElement(_components.Details.LogoNotFound, null, "not found") : /*#__PURE__*/_react.default.createElement(_components.Details.Logo, {
+    src: jobDetails.company_logo,
+    alt: (jobDetails.title, jobDetails.company)
+  }), /*#__PURE__*/_react.default.createElement(_components.Details.Address, null, /*#__PURE__*/_react.default.createElement("h3", null, jobDetails.company), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/_react.default.createElement("path", {
+    fill: "currentColor",
+    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+  })), /*#__PURE__*/_react.default.createElement("span", null, jobDetails.location)))), /*#__PURE__*/_react.default.createElement(_components.Details.Information, {
+    dangerouslySetInnerHTML: {
+      __html: jobDetails.description
+    }
+  })));
 }
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js"}],"src/container/header.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","../context/Context":"src/context/Context.js","../context/GlobalContext":"src/context/GlobalContext.js"}],"src/container/header.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { formatDistance } from 'date-fns';
+
 import { GlobalContext } from './GlobalContext';
 
 const Context = createContext();
@@ -36,6 +38,10 @@ function ContextProvider({ children }) {
       }
   };
 
+  const formattedDate = date => {
+    return formatDistance(new Date(date), new Date());
+  };
+
   useEffect(() => {
       setSelectCity(cities[0]);
   }, []);
@@ -50,6 +56,7 @@ function ContextProvider({ children }) {
           setSelectCity,
           handleCity,
           handleKeyLocation,
+          formattedDate,
           cities
           }} >
             {children}
