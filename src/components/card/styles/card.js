@@ -80,11 +80,17 @@ export const CustomLabel = styled.p`
 export const Meta = styled.footer`
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 5px;
+    justify-content: space-between;
+    padding-top: 26px;
     font-weight: 500;
     font-size: 12px;
     color: #B9BDCF;
+
+    @media (min-width: 1440px) {
+        padding: 0;
+        gap: 5px;
+        justify-content: flex-end;
+    }
 `;
 
 export const Location = styled.address`
