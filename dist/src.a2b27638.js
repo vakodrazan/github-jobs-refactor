@@ -54523,9 +54523,34 @@ function JobContainer() {
   }, job.company_logo === null ? /*#__PURE__*/_react.default.createElement(_components.Card.LogoNotFound, null, "not found") : /*#__PURE__*/_react.default.createElement(_components.Card.Logo, {
     src: job.company_logo,
     alt: `${job.title} at ${job.company}`
-  }), /*#__PURE__*/_react.default.createElement(_components.Card.Feature, null, /*#__PURE__*/_react.default.createElement(_components.Card.Subtitile, null, job.company), /*#__PURE__*/_react.default.createElement(_components.Card.Title, null, job.title), job.type && /*#__PURE__*/_react.default.createElement(_components.Card.CustomLabel, null, job.type), /*#__PURE__*/_react.default.createElement(_components.Card.Meta, null, /*#__PURE__*/_react.default.createElement(_components.Card.Location, null, /*#__PURE__*/_react.default.createElement("span", null, job.location)), /*#__PURE__*/_react.default.createElement(_components.Card.Date, {
+  }), /*#__PURE__*/_react.default.createElement(_components.Card.Feature, null, /*#__PURE__*/_react.default.createElement(_components.Card.Subtitile, null, job.company), /*#__PURE__*/_react.default.createElement(_components.Card.Title, null, job.title), job.type && /*#__PURE__*/_react.default.createElement(_components.Card.CustomLabel, null, job.type), /*#__PURE__*/_react.default.createElement(_components.Card.Meta, null, /*#__PURE__*/_react.default.createElement(_components.Card.Location, null, /*#__PURE__*/_react.default.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/_react.default.createElement("path", {
+    fill: "currentColor",
+    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+  })), /*#__PURE__*/_react.default.createElement("span", null, job.location)), /*#__PURE__*/_react.default.createElement(_components.Card.Date, {
     dateTime: job.created_at
-  }, formattedDate(job.created_at))))))));
+  }, /*#__PURE__*/_react.default.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/_react.default.createElement("path", {
+    fill: "currentColor",
+    d: "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+  }), /*#__PURE__*/_react.default.createElement("path", {
+    fill: "currentColor",
+    d: "M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+  })), /*#__PURE__*/_react.default.createElement("span", null, formattedDate(job.created_at)))))))));
 }
 },{"react":"node_modules/react/index.js","../components":"src/components/index.js","../context/GlobalContext":"src/context/GlobalContext.js","../context/Context":"src/context/Context.js"}],"src/components/jobContent/styles/index.js":[function(require,module,exports) {
 "use strict";
