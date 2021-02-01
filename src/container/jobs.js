@@ -18,7 +18,7 @@ export default function JobContainer() {
             {jobs && 
                 <Card>
                     {jobs.map((job) => (
-                        <Card.Item key={job.id}>
+                        <Card.Item key={job.id} to={`/job/${job.id}`}>
                             {job.company_logo === null 
                                 ? <Card.LogoNotFound>not found</Card.LogoNotFound> 
                                 : <Card.Logo src={job.company_logo} alt={`${job.title} at ${job.company}`} />

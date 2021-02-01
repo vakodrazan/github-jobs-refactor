@@ -1,11 +1,13 @@
 import styled from "styled-components"
+import { Link as ReachRouterLink } from 'react-router-dom';
 
 export const Container = styled.div`
     display: grid;
     gap: 32px;
 `;
 
-export const Item = styled.section`
+
+export const Item = styled(ReachRouterLink)`
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 16px;
@@ -13,6 +15,8 @@ export const Item = styled.section`
     padding: 12px;
     border-radius: 4px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    color: currentColor;
 
     &:hover {
         -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
