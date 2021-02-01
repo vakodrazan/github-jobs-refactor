@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Filters } from '..';
 import JobContainer from '../../container/jobs';
 import { Context } from '../../context/Context';
+import JobPagination from '../pagination';
 import { Container } from "./styles/index";
 
 
@@ -61,7 +62,7 @@ export default function Content({ children, ...restProps}) {
                     </Filters.Frame>
                 ))}
             </Filters>
-            <JobContainer />
+            <JobPagination />
         </Container>
     )
 }

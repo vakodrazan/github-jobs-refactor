@@ -54513,7 +54513,9 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function JobContainer() {
+function JobContainer({
+  job
+}) {
   const {
     state
   } = (0, _react.useContext)(_GlobalContext.GlobalContext);
@@ -54523,7 +54525,7 @@ function JobContainer() {
   const {
     formattedDate
   } = (0, _react.useContext)(_Context.Context);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_components.Loading, null, "Loading..."), jobs.length === 0 ? /*#__PURE__*/_react.default.createElement(_components.NoResult, null, "No result found") : /*#__PURE__*/_react.default.createElement(_components.Card, null, jobs.map(job => /*#__PURE__*/_react.default.createElement(_components.Card.Item, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_components.Loading, null, "Loading..."), jobs.length === 0 ? /*#__PURE__*/_react.default.createElement(_components.NoResult, null, "No result found") : /*#__PURE__*/_react.default.createElement(_components.Card.Item, {
     key: job.id,
     to: `/job/${job.id}`
   }, job.company_logo === null ? /*#__PURE__*/_react.default.createElement(_components.Card.LogoNotFound, null, "not found") : /*#__PURE__*/_react.default.createElement(_components.Card.Logo, {
@@ -54556,9 +54558,81 @@ function JobContainer() {
   }), /*#__PURE__*/_react.default.createElement("path", {
     fill: "currentColor",
     d: "M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
-  })), /*#__PURE__*/_react.default.createElement("span", null, formattedDate(job.created_at)))))))));
+  })), /*#__PURE__*/_react.default.createElement("span", null, formattedDate(job.created_at)))))));
 }
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js","../context/GlobalContext":"src/context/GlobalContext.js","../context/Context":"src/context/Context.js"}],"src/components/jobContent/styles/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js","../context/GlobalContext":"src/context/GlobalContext.js","../context/Context":"src/context/Context.js"}],"node_modules/react-paginate/dist/react-paginate.js":[function(require,module,exports) {
+var define;
+var global = arguments[3];
+!function(e,a){"object"==typeof exports&&"object"==typeof module?module.exports=a(require("react")):"function"==typeof define&&define.amd?define(["react"],a):"object"==typeof exports?exports.ReactPaginate=a(require("react")):e.ReactPaginate=a(e.React)}(global,(function(e){return function(e){var a={};function t(r){if(a[r])return a[r].exports;var n=a[r]={i:r,l:!1,exports:{}};return e[r].call(n.exports,n,n.exports,t),n.l=!0,n.exports}return t.m=e,t.c=a,t.d=function(e,a,r){t.o(e,a)||Object.defineProperty(e,a,{enumerable:!0,get:r})},t.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t.t=function(e,a){if(1&a&&(e=t(e)),8&a)return e;if(4&a&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(t.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&a&&"string"!=typeof e)for(var n in e)t.d(r,n,function(a){return e[a]}.bind(null,n));return r},t.n=function(e){var a=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(a,"a",a),a},t.o=function(e,a){return Object.prototype.hasOwnProperty.call(e,a)},t.p="",t(t.s=4)}([function(e,a,t){e.exports=t(2)()},function(a,t){a.exports=e},function(e,a,t){"use strict";var r=t(3);function n(){}function i(){}i.resetWarningCache=n,e.exports=function(){function e(e,a,t,n,i,o){if(o!==r){var s=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw s.name="Invariant Violation",s}}function a(){return e}e.isRequired=e;var t={array:e,bool:e,func:e,number:e,object:e,string:e,symbol:e,any:e,arrayOf:a,element:e,elementType:e,instanceOf:a,node:e,objectOf:a,oneOf:a,oneOfType:a,shape:a,exact:a,checkPropTypes:i,resetWarningCache:n};return t.PropTypes=t,t}},function(e,a,t){"use strict";e.exports="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED"},function(e,a,t){"use strict";t.r(a);var r=t(1),n=t.n(r),i=t(0),o=t.n(i);function s(){return(s=Object.assign||function(e){for(var a=1;a<arguments.length;a++){var t=arguments[a];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])}return e}).apply(this,arguments)}var l=function(e){var a=e.pageClassName,t=e.pageLinkClassName,r=e.page,i=e.selected,o=e.activeClassName,l=e.activeLinkClassName,c=e.getEventListener,u=e.pageSelectedHandler,p=e.href,f=e.extraAriaContext,d=e.ariaLabel||"Page "+r+(f?" "+f:""),g=null;return i&&(g="page",d=e.ariaLabel||"Page "+r+" is your current page",a=void 0!==a?a+" "+o:o,void 0!==t?void 0!==l&&(t=t+" "+l):t=l),n.a.createElement("li",{className:a},n.a.createElement("a",s({role:"button",className:t,href:p,tabIndex:"0","aria-label":d,"aria-current":g,onKeyPress:u},c(u)),r))};l.propTypes={pageSelectedHandler:o.a.func.isRequired,selected:o.a.bool.isRequired,pageClassName:o.a.string,pageLinkClassName:o.a.string,activeClassName:o.a.string,activeLinkClassName:o.a.string,extraAriaContext:o.a.string,href:o.a.string,ariaLabel:o.a.string,page:o.a.number.isRequired,getEventListener:o.a.func.isRequired};var c=l;function u(){return(u=Object.assign||function(e){for(var a=1;a<arguments.length;a++){var t=arguments[a];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])}return e}).apply(this,arguments)}!function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/PageView.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/PageView.js")}}();var p=function(e){var a=e.breakLabel,t=e.breakClassName,r=e.breakLinkClassName,i=e.breakHandler,o=e.getEventListener,s=t||"break";return n.a.createElement("li",{className:s},n.a.createElement("a",u({className:r,role:"button",tabIndex:"0",onKeyPress:i},o(i)),a))};p.propTypes={breakLabel:o.a.oneOfType([o.a.string,o.a.node]),breakClassName:o.a.string,breakLinkClassName:o.a.string,breakHandler:o.a.func.isRequired,getEventListener:o.a.func.isRequired};var f=p;function d(e){return(d="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function g(){return(g=Object.assign||function(e){for(var a=1;a<arguments.length;a++){var t=arguments[a];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])}return e}).apply(this,arguments)}function b(e,a){for(var t=0;t<a.length;t++){var r=a[t];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}function v(e,a){return(v=Object.setPrototypeOf||function(e,a){return e.__proto__=a,e})(e,a)}function m(e){var a=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var t,r=C(e);if(a){var n=C(this).constructor;t=Reflect.construct(r,arguments,n)}else t=r.apply(this,arguments);return h(this,t)}}function h(e,a){return!a||"object"!==d(a)&&"function"!=typeof a?y(e):a}function y(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function C(e){return(C=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function k(e,a,t){return a in e?Object.defineProperty(e,a,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[a]=t,e}!function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/BreakView.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/BreakView.js")}}();var P=function(e){!function(e,a){if("function"!=typeof a&&null!==a)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(a&&a.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),a&&v(e,a)}(o,e);var a,t,r,i=m(o);function o(e){var a,t;return function(e,a){if(!(e instanceof a))throw new TypeError("Cannot call a class as a function")}(this,o),k(y(a=i.call(this,e)),"handlePreviousPage",(function(e){var t=a.state.selected;e.preventDefault?e.preventDefault():e.returnValue=!1,t>0&&a.handlePageSelected(t-1,e)})),k(y(a),"handleNextPage",(function(e){var t=a.state.selected,r=a.props.pageCount;e.preventDefault?e.preventDefault():e.returnValue=!1,t<r-1&&a.handlePageSelected(t+1,e)})),k(y(a),"handlePageSelected",(function(e,t){t.preventDefault?t.preventDefault():t.returnValue=!1,a.state.selected!==e&&(a.setState({selected:e}),a.callCallback(e))})),k(y(a),"getEventListener",(function(e){return k({},a.props.eventListener,e)})),k(y(a),"handleBreakClick",(function(e,t){t.preventDefault?t.preventDefault():t.returnValue=!1;var r=a.state.selected;a.handlePageSelected(r<e?a.getForwardJump():a.getBackwardJump(),t)})),k(y(a),"callCallback",(function(e){void 0!==a.props.onPageChange&&"function"==typeof a.props.onPageChange&&a.props.onPageChange({selected:e})})),k(y(a),"pagination",(function(){var e=[],t=a.props,r=t.pageRangeDisplayed,i=t.pageCount,o=t.marginPagesDisplayed,s=t.breakLabel,l=t.breakClassName,c=t.breakLinkClassName,u=a.state.selected;if(i<=r)for(var p=0;p<i;p++)e.push(a.getPageElement(p));else{var d,g,b,v=r/2,m=r-v;u>i-r/2?v=r-(m=i-u):u<r/2&&(m=r-(v=u));var h=function(e){return a.getPageElement(e)};for(d=0;d<i;d++)(g=d+1)<=o||g>i-o||d>=u-v&&d<=u+m?e.push(h(d)):s&&e[e.length-1]!==b&&(b=n.a.createElement(f,{key:d,breakLabel:s,breakClassName:l,breakLinkClassName:c,breakHandler:a.handleBreakClick.bind(null,d),getEventListener:a.getEventListener}),e.push(b))}return e})),t=e.initialPage?e.initialPage:e.forcePage?e.forcePage:0,a.state={selected:t},a}return a=o,(t=[{key:"componentDidMount",value:function(){var e=this.props,a=e.initialPage,t=e.disableInitialCallback,r=e.extraAriaContext;void 0===a||t||this.callCallback(a),r&&console.warn("DEPRECATED (react-paginate): The extraAriaContext prop is deprecated. You should now use the ariaLabelBuilder instead.")}},{key:"componentDidUpdate",value:function(e){void 0!==this.props.forcePage&&this.props.forcePage!==e.forcePage&&this.setState({selected:this.props.forcePage})}},{key:"getForwardJump",value:function(){var e=this.state.selected,a=this.props,t=a.pageCount,r=e+a.pageRangeDisplayed;return r>=t?t-1:r}},{key:"getBackwardJump",value:function(){var e=this.state.selected-this.props.pageRangeDisplayed;return e<0?0:e}},{key:"hrefBuilder",value:function(e){var a=this.props,t=a.hrefBuilder,r=a.pageCount;if(t&&e!==this.state.selected&&e>=0&&e<r)return t(e+1)}},{key:"ariaLabelBuilder",value:function(e){var a=e===this.state.selected;if(this.props.ariaLabelBuilder&&e>=0&&e<this.props.pageCount){var t=this.props.ariaLabelBuilder(e+1,a);return this.props.extraAriaContext&&!a&&(t=t+" "+this.props.extraAriaContext),t}}},{key:"getPageElement",value:function(e){var a=this.state.selected,t=this.props,r=t.pageClassName,i=t.pageLinkClassName,o=t.activeClassName,s=t.activeLinkClassName,l=t.extraAriaContext;return n.a.createElement(c,{key:e,pageSelectedHandler:this.handlePageSelected.bind(null,e),selected:a===e,pageClassName:r,pageLinkClassName:i,activeClassName:o,activeLinkClassName:s,extraAriaContext:l,href:this.hrefBuilder(e),ariaLabel:this.ariaLabelBuilder(e),page:e+1,getEventListener:this.getEventListener})}},{key:"render",value:function(){var e=this.props,a=e.disabledClassName,t=e.pageCount,r=e.containerClassName,i=e.previousLabel,o=e.previousClassName,s=e.previousLinkClassName,l=e.previousAriaLabel,c=e.prevRel,u=e.nextLabel,p=e.nextClassName,f=e.nextLinkClassName,d=e.nextAriaLabel,b=e.nextRel,v=this.state.selected,m=o+(0===v?" ".concat(a):""),h=p+(v===t-1?" ".concat(a):""),y=0===v?"true":"false",C=v===t-1?"true":"false";return n.a.createElement("ul",{className:r},n.a.createElement("li",{className:m},n.a.createElement("a",g({className:s,href:this.hrefBuilder(v-1),tabIndex:"0",role:"button",onKeyPress:this.handlePreviousPage,"aria-disabled":y,"aria-label":l,rel:c},this.getEventListener(this.handlePreviousPage)),i)),this.pagination(),n.a.createElement("li",{className:h},n.a.createElement("a",g({className:f,href:this.hrefBuilder(v+1),tabIndex:"0",role:"button",onKeyPress:this.handleNextPage,"aria-disabled":C,"aria-label":d,rel:b},this.getEventListener(this.handleNextPage)),u)))}}])&&b(a.prototype,t),r&&b(a,r),o}(r.Component);k(P,"propTypes",{pageCount:o.a.number.isRequired,pageRangeDisplayed:o.a.number.isRequired,marginPagesDisplayed:o.a.number.isRequired,previousLabel:o.a.node,previousAriaLabel:o.a.string,prevRel:o.a.string,nextLabel:o.a.node,nextAriaLabel:o.a.string,nextRel:o.a.string,breakLabel:o.a.oneOfType([o.a.string,o.a.node]),hrefBuilder:o.a.func,onPageChange:o.a.func,initialPage:o.a.number,forcePage:o.a.number,disableInitialCallback:o.a.bool,containerClassName:o.a.string,pageClassName:o.a.string,pageLinkClassName:o.a.string,activeClassName:o.a.string,activeLinkClassName:o.a.string,previousClassName:o.a.string,nextClassName:o.a.string,previousLinkClassName:o.a.string,nextLinkClassName:o.a.string,disabledClassName:o.a.string,breakClassName:o.a.string,breakLinkClassName:o.a.string,extraAriaContext:o.a.string,ariaLabelBuilder:o.a.func,eventListener:o.a.string}),k(P,"defaultProps",{pageCount:10,pageRangeDisplayed:2,marginPagesDisplayed:3,activeClassName:"selected",previousLabel:"Previous",previousClassName:"previous",previousAriaLabel:"Previous page",prevRel:"prev",nextLabel:"Next",nextClassName:"next",nextAriaLabel:"Next page",nextRel:"next",breakLabel:"...",disabledClassName:"disabled",disableInitialCallback:!1,eventListener:"onClick"}),function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/PaginationBoxView.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/PaginationBoxView.js")}}();a.default=P;!function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/index.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/index.js")}}()}])}));
+
+},{"react":"node_modules/react/index.js"}],"src/components/pagination/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactPaginate = _interopRequireDefault(require("react-paginate"));
+
+var _index = require("../index");
+
+var _jobs = _interopRequireDefault(require("../../container/jobs"));
+
+var _GlobalContext = require("../../context/GlobalContext");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// import Job from "./Job";
+const JobPagination = () => {
+  const {
+    state,
+    dispatch
+  } = (0, _react.useContext)(_GlobalContext.GlobalContext);
+  const {
+    jobs
+  } = state;
+  const [offset, setOffset] = (0, _react.useState)(0);
+  const PER_PAGE = 5;
+  (0, _react.useEffect)(() => {
+    dispatch({
+      type: "JOB_TITLE",
+      jobs
+    });
+  }, [jobs]);
+
+  const handlePageClick = data => {
+    setOffset(data.selected * PER_PAGE);
+    window.scrollTo(0, 0);
+  };
+
+  return /*#__PURE__*/_react.default.createElement(_index.Card, null, jobs.slice(offset, offset + PER_PAGE).map(item => /*#__PURE__*/_react.default.createElement(_jobs.default, {
+    job: item,
+    key: item.id
+  })), /*#__PURE__*/_react.default.createElement(_reactPaginate.default, {
+    previousLabel: "<",
+    nextLabel: ">",
+    breakLabel: "...",
+    breakClassName: "break-me",
+    pageCount: Math.ceil(jobs.length / PER_PAGE),
+    marginPagesDisplayed: 1,
+    pageRangeDisplayed: 1,
+    onPageChange: handlePageClick,
+    containerClassName: "pagination",
+    subContainerClassName: "pages pagination",
+    activeClassName: "active"
+  }));
+};
+
+var _default = JobPagination;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-paginate":"node_modules/react-paginate/dist/react-paginate.js","../index":"src/components/index.js","../../container/jobs":"src/container/jobs.js","../../context/GlobalContext":"src/context/GlobalContext.js"}],"src/components/jobContent/styles/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54598,6 +54672,8 @@ var _ = require("..");
 var _jobs = _interopRequireDefault(require("../../container/jobs"));
 
 var _Context = require("../../context/Context");
+
+var _pagination = _interopRequireDefault(require("../pagination"));
 
 var _index = require("./styles/index");
 
@@ -54657,9 +54733,9 @@ function Content({
     onChange: () => handleCity(city)
   }), /*#__PURE__*/_react.default.createElement(_.Filters.Label, {
     htmlFor: city.id
-  }, city.name)))), /*#__PURE__*/_react.default.createElement(_jobs.default, null));
+  }, city.name)))), /*#__PURE__*/_react.default.createElement(_pagination.default, null));
 }
-},{"react":"node_modules/react/index.js","..":"src/components/index.js","../../container/jobs":"src/container/jobs.js","../../context/Context":"src/context/Context.js","./styles/index":"src/components/jobContent/styles/index.js"}],"src/components/loading/styles/loading.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","..":"src/components/index.js","../../container/jobs":"src/container/jobs.js","../../context/Context":"src/context/Context.js","../pagination":"src/components/pagination/index.js","./styles/index":"src/components/jobContent/styles/index.js"}],"src/components/loading/styles/loading.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
