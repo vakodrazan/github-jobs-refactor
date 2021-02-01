@@ -22,19 +22,19 @@ function GlobalContextProvider({ children }) {
             case "LOCATION": {
                 return {
                     ...state,
-                    location: value,
+                    location: action.value,
                 }
             }
             case "FULL_TIME": {
                 return {
                     ...state,
-                    fullTime: value,
+                    fullTime: action.value,
                 }
             }
             case "DESCRIPTION": {
                 return {
                     ...state,
-                    description: value,
+                    description: action.value,
                 }
             }
             default: {

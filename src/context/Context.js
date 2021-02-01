@@ -24,7 +24,7 @@ function ContextProvider({ children }) {
       setSelectCity(null);
       dispatch({ type: "LOCATION", value: "" })
     } else {
-      setSelectCity(city);
+      setSelectCity(city);  
       dispatch({ type: "LOCATION", value: city.name })
     }
   };
