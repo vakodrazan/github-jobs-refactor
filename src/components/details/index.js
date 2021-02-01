@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
     Container,
-    Header,
     Title,
     Sidebar,
     SidebarLink,
@@ -20,10 +19,6 @@ import {
 
 export default function Details({ children, ...resProps}) {
     return <Container {...resProps}>{children}</Container>
-}
-
-Details.Header = function DetailsHeader({ children, ...resProps}) {
-    return <Header {...resProps}>{children}</Header>
 }
 
 Details.Title = function DetailsTitle({ children, ...resProps}) {
@@ -73,6 +68,6 @@ Details.Information = function DetailsInformation({ children, ...resProps}) {
     return <Information {...resProps}>{children}</Information>
 }
 
-Details.Time = function DetailsInformation({ children, ...resProps}) {
-    return <Information {...resProps}>{children}</Information>
+Details.Time = function DetailsTime({ children, ...resProps}) {
+    return <Time {...resProps}>{children}</Time>
 }

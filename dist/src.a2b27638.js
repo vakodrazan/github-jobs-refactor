@@ -54814,7 +54814,7 @@ Filters.FieldsetLocation = function FiltersFieldsetLocation({
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Time = exports.Information = exports.Address = exports.Logo = exports.LogoNotFound = exports.CompanyDetails = exports.ContentHeader = exports.Content = exports.SideBarTitle = exports.Contact = exports.SidebarLink = exports.Sidebar = exports.Title = exports.Header = exports.Container = void 0;
+exports.Time = exports.Information = exports.Address = exports.Logo = exports.LogoNotFound = exports.CompanyDetails = exports.ContentHeader = exports.Content = exports.SideBarTitle = exports.Contact = exports.SidebarLink = exports.Sidebar = exports.Title = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -54822,35 +54822,170 @@ var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const Container = _styledComponents.default.article``;
+const Container = _styledComponents.default.article`
+    padding: 12px;
+    display: grid;
+    gap: 36px;
+
+    @media (min-width: 1440px) {
+        max-width: 1440px;
+        margin: auto;
+        grid-template-columns: 1fr 2fr;
+        gap: 77px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+`;
 exports.Container = Container;
-const Header = _styledComponents.default.header``;
-exports.Header = Header;
-const Title = _styledComponents.default.h1``;
+const Title = _styledComponents.default.h1`
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 36px;
+    color: #282538;
+    padding-left: 12px;
+    padding-bottom: 20px;
+
+    span {
+        font-weight: normal;
+    }
+
+    @media (min-width: 1440px) {
+        max-width: 1440px;
+        margin: auto;
+    }
+`;
 exports.Title = Title;
-const Sidebar = _styledComponents.default.div``;
+const Sidebar = _styledComponents.default.div`
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+`;
 exports.Sidebar = Sidebar;
-const SidebarLink = (0, _styledComponents.default)(_reactRouterDom.Link)``;
+const SidebarLink = (0, _styledComponents.default)(_reactRouterDom.Link)`
+    color: #1E86FF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+`;
 exports.SidebarLink = SidebarLink;
-const Contact = _styledComponents.default.div``;
+const Contact = _styledComponents.default.div`
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+
+    a {
+        color: #1E86FF;
+    }
+`;
 exports.Contact = Contact;
-const SideBarTitle = _styledComponents.default.h3``;
+const SideBarTitle = _styledComponents.default.h3`
+    color: #B9BDCF;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+`;
 exports.SideBarTitle = SideBarTitle;
-const Content = _styledComponents.default.section``;
+const Content = _styledComponents.default.section`
+    a {
+        text-decoration: none;
+    }
+
+    img {
+        max-width: 100px;
+    }
+`;
 exports.Content = Content;
-const ContentHeader = _styledComponents.default.header``;
+const ContentHeader = _styledComponents.default.header`
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #334680;
+
+    h2 {
+        margin: 0;
+    }
+
+    p {
+        border: 1px solid #334680;
+        box-sizing: border-box;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 6px 8px;
+        height: 26px;
+        margin: 0;
+    }
+
+    @media (min-width: 1440px) {
+        flex-direction: row;
+        gap: 17px;
+        align-items: center;
+    }
+`;
 exports.ContentHeader = ContentHeader;
-const CompanyDetails = _styledComponents.default.div``;
+const CompanyDetails = _styledComponents.default.div`
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding-top: 32px;
+`;
 exports.CompanyDetails = CompanyDetails;
-const LogoNotFound = _styledComponents.default.div``;
+const LogoNotFound = _styledComponents.default.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F2F2F2;
+    border-radius: 4px;
+    width: 42px;
+    height: 42px;
+    font-weight: 500;
+    font-size: 12px;
+    color: #BDBDBD;
+`;
 exports.LogoNotFound = LogoNotFound;
-const Logo = _styledComponents.default.img``;
+const Logo = _styledComponents.default.img`
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
+    background: #F2F2F2;
+`;
 exports.Logo = Logo;
-const Address = _styledComponents.default.div``;
+const Address = _styledComponents.default.div`
+
+    p {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: #B9BDCF;
+    }
+`;
 exports.Address = Address;
-const Information = _styledComponents.default.div``;
+const Information = _styledComponents.default.div`
+    padding-bottom: 40px
+    a {
+        text-decoration: none;
+    }
+`;
 exports.Information = Information;
-const Time = _styledComponents.default.time``;
+const Time = _styledComponents.default.time`
+    color: #B7BCCE;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding-top: 10px;
+`;
 exports.Time = Time;
 },{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"src/components/details/index.js":[function(require,module,exports) {
 "use strict";
@@ -54872,13 +55007,6 @@ function Details({
 }) {
   return /*#__PURE__*/_react.default.createElement(_details.Container, resProps, children);
 }
-
-Details.Header = function DetailsHeader({
-  children,
-  ...resProps
-}) {
-  return /*#__PURE__*/_react.default.createElement(_details.Header, resProps, children);
-};
 
 Details.Title = function DetailsTitle({
   children,
@@ -54962,11 +55090,11 @@ Details.Information = function DetailsInformation({
   return /*#__PURE__*/_react.default.createElement(_details.Information, resProps, children);
 };
 
-Details.Time = function DetailsInformation({
+Details.Time = function DetailsTime({
   children,
   ...resProps
 }) {
-  return /*#__PURE__*/_react.default.createElement(_details.Information, resProps, children);
+  return /*#__PURE__*/_react.default.createElement(_details.Time, resProps, children);
 };
 },{"react":"node_modules/react/index.js","./styles/details":"src/components/details/styles/details.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
@@ -55060,18 +55188,43 @@ function DetailsContainer() {
     formattedDate
   } = (0, _react.useContext)(_Context.Context);
   const jobDetails = jobs.length > 0 && jobs.find(job => job.id === jobId);
-  return /*#__PURE__*/_react.default.createElement(_components.Details, null, /*#__PURE__*/_react.default.createElement(_components.Details.Header, null, /*#__PURE__*/_react.default.createElement(_components.Details.Title, null, "Github ", /*#__PURE__*/_react.default.createElement("span", null, "Jobs")), /*#__PURE__*/_react.default.createElement(_components.Details.Sidebar, null, /*#__PURE__*/_react.default.createElement(_components.Details.SidebarLink, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_components.Details.Title, null, "Github ", /*#__PURE__*/_react.default.createElement("span", null, "Jobs")), /*#__PURE__*/_react.default.createElement(_components.Details, null, /*#__PURE__*/_react.default.createElement(_components.Details.Sidebar, null, /*#__PURE__*/_react.default.createElement(_components.Details.SidebarLink, {
     to: "/"
-  }, "Back to search"), /*#__PURE__*/_react.default.createElement(_components.Details.Contact, null, /*#__PURE__*/_react.default.createElement(_components.Details.SideBarTitle, null), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/_react.default.createElement("path", {
+    fill: "currentColor",
+    d: "M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"
+  })), /*#__PURE__*/_react.default.createElement("span", null, "Back to search")), /*#__PURE__*/_react.default.createElement(_components.Details.Contact, null, /*#__PURE__*/_react.default.createElement(_components.Details.SideBarTitle, null, "How to Apply"), /*#__PURE__*/_react.default.createElement("div", {
     dangerouslySetInnerHTML: {
       __html: jobDetails.how_to_apply
     }
-  })))), /*#__PURE__*/_react.default.createElement(_components.Details.Content, null, /*#__PURE__*/_react.default.createElement(_components.Details.ContentHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, jobDetails.title), /*#__PURE__*/_react.default.createElement("span", null, jobDetails.type)), /*#__PURE__*/_react.default.createElement(_components.Details.Time, {
+  }))), /*#__PURE__*/_react.default.createElement(_components.Details.Content, null, /*#__PURE__*/_react.default.createElement(_components.Details.ContentHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, jobDetails.title), /*#__PURE__*/_react.default.createElement("p", null, jobDetails.type)), /*#__PURE__*/_react.default.createElement(_components.Details.Time, {
     dateTime: jobDetails.created_at
-  }, formattedDate(jobDetails.created_at)), /*#__PURE__*/_react.default.createElement(_components.Details.CompanyDetails, null, jobDetails.company_logo === null ? /*#__PURE__*/_react.default.createElement(_components.Details.LogoNotFound, null, "not found") : /*#__PURE__*/_react.default.createElement(_components.Details.Logo, {
+  }, /*#__PURE__*/_react.default.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/_react.default.createElement("path", {
+    fill: "currentColor",
+    d: "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+  }), /*#__PURE__*/_react.default.createElement("path", {
+    fill: "currentColor",
+    d: "M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+  })), /*#__PURE__*/_react.default.createElement("span", null, formattedDate(jobDetails.created_at))), /*#__PURE__*/_react.default.createElement(_components.Details.CompanyDetails, null, jobDetails.company_logo === null ? /*#__PURE__*/_react.default.createElement(_components.Details.LogoNotFound, null, "not found") : /*#__PURE__*/_react.default.createElement(_components.Details.Logo, {
     src: jobDetails.company_logo,
     alt: (jobDetails.title, jobDetails.company)
-  }), /*#__PURE__*/_react.default.createElement(_components.Details.Address, null, /*#__PURE__*/_react.default.createElement("h3", null, jobDetails.company), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("svg", {
+  }), /*#__PURE__*/_react.default.createElement(_components.Details.Address, null, /*#__PURE__*/_react.default.createElement("h3", null, jobDetails.company), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "24",
     viewBox: "0 0 24 24",
@@ -55086,7 +55239,7 @@ function DetailsContainer() {
     dangerouslySetInnerHTML: {
       __html: jobDetails.description
     }
-  })));
+  }))));
 }
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../components":"src/components/index.js","../context/Context":"src/context/Context.js","../context/GlobalContext":"src/context/GlobalContext.js"}],"src/container/header.js":[function(require,module,exports) {
 "use strict";
