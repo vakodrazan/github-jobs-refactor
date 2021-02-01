@@ -54523,7 +54523,7 @@ function JobContainer() {
   const {
     formattedDate
   } = (0, _react.useContext)(_Context.Context);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_components.Loading, null, "Loading..."), jobs && /*#__PURE__*/_react.default.createElement(_components.Card, null, jobs.map(job => /*#__PURE__*/_react.default.createElement(_components.Card.Item, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_components.Loading, null, "Loading..."), jobs.length === 0 ? /*#__PURE__*/_react.default.createElement(_components.NoResult, null, "No result found") : /*#__PURE__*/_react.default.createElement(_components.Card, null, jobs.map(job => /*#__PURE__*/_react.default.createElement(_components.Card.Item, {
     key: job.id,
     to: `/job/${job.id}`
   }, job.company_logo === null ? /*#__PURE__*/_react.default.createElement(_components.Card.LogoNotFound, null, "not found") : /*#__PURE__*/_react.default.createElement(_components.Card.Logo, {
@@ -55127,7 +55127,48 @@ Details.Time = function DetailsTime({
 }) {
   return /*#__PURE__*/_react.default.createElement(_details.Time, resProps, children);
 };
-},{"react":"node_modules/react/index.js","./styles/details":"src/components/details/styles/details.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./styles/details":"src/components/details/styles/details.js"}],"src/components/no-result/styles/no-result.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Container = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Container = _styledComponents.default.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1;
+    font-size: 2rem;
+    color: #334680;
+`;
+exports.Container = Container;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/no-result/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = NoResult;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _noResult = require("./styles/no-result");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function NoResult({
+  children,
+  ...resProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_noResult.Container, resProps, children);
+}
+},{"react":"node_modules/react/index.js","./styles/no-result":"src/components/no-result/styles/no-result.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55169,6 +55210,12 @@ Object.defineProperty(exports, "Details", {
     return _details.default;
   }
 });
+Object.defineProperty(exports, "NoResult", {
+  enumerable: true,
+  get: function () {
+    return _noResult.default;
+  }
+});
 
 var _header = _interopRequireDefault(require("./header"));
 
@@ -55182,8 +55229,10 @@ var _filters = _interopRequireDefault(require("./filters"));
 
 var _details = _interopRequireDefault(require("./details"));
 
+var _noResult = _interopRequireDefault(require("./no-result"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./header":"src/components/header/index.js","./card":"src/components/card/index.js","./jobContent":"src/components/jobContent/index.js","./loading":"src/components/loading/index.js","./filters":"src/components/filters/index.js","./details":"src/components/details/index.js"}],"src/pages/details.js":[function(require,module,exports) {
+},{"./header":"src/components/header/index.js","./card":"src/components/card/index.js","./jobContent":"src/components/jobContent/index.js","./loading":"src/components/loading/index.js","./filters":"src/components/filters/index.js","./details":"src/components/details/index.js","./no-result":"src/components/no-result/index.js"}],"src/pages/details.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55284,7 +55333,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _components = require("../components");
 
-var _Context = require("../context/Context");
+var _GlobalContext = require("../context/GlobalContext");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -55293,12 +55342,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function HeaderContainer() {
   const [query, setQuery] = (0, _react.useState)('');
   const {
-    filterJob
-  } = (0, _react.useContext)(_Context.Context);
+    dispatch
+  } = (0, _react.useContext)(_GlobalContext.GlobalContext);
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    filterJob({
+    dispatch({
       type: "DESCRIPTION",
       value: query
     });
@@ -55314,7 +55363,7 @@ function HeaderContainer() {
     }) => setQuery(target.value)
   }), /*#__PURE__*/_react.default.createElement(_components.Header.Button, null, "Search"))));
 }
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js","../context/Context":"src/context/Context.js"}],"src/pages/home.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js","../context/GlobalContext":"src/context/GlobalContext.js"}],"src/pages/home.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55428,7 +55477,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50361" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50075" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

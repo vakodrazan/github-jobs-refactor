@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { Card, Loading } from '../components'
+import { Card, Loading, NoResult } from '../components'
 import { GlobalContext } from '../context/GlobalContext'
 import { Context } from '../context/Context';
 
@@ -12,8 +12,9 @@ export default function JobContainer() {
     return (
         <>
             <Loading>Loading...</Loading>
-            {jobs && 
-                <Card>
+            {jobs.length === 0 
+                ? <NoResult>No result found</NoResult>
+                : <Card>
                     {jobs.map((job) => (
                         <Card.Item key={job.id} to={`/job/${job.id}`}>
                             {job.company_logo === null 
