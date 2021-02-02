@@ -55260,6 +55260,7 @@ const Container = _styledComponents.default.article`
         gap: 12px;
         margin: 0;
         padding: 0;
+        padding-bottom: 67px;
 
 
         li {
