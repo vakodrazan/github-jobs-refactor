@@ -23,22 +23,24 @@ const JobPagination = () => {
 
   return (
     <Card>
-      {jobs.slice(offset, offset + PER_PAGE).map((item) => (
+      {jobs && jobs.slice(offset, offset + PER_PAGE).map((item) => (
         <JobContainer job={item} key={item.id} />
       ))}
-      <ReactPaginate
-        previousLabel={"<"}
-        nextLabel={">"}
-        breakLabel={"..."}
-        breakClassName={"break-me"}
-        pageCount={Math.ceil(jobs.length / PER_PAGE)}
-        marginPagesDisplayed={1}
-        pageRangeDisplayed={1}
-        onPageChange={handlePageClick}
-        containerClassName={"pagination"}
-        subContainerClassName={"pages pagination"}
-        activeClassName={"active"}
-      />
+        {jobs &&
+            <ReactPaginate
+                previousLabel={"<"}
+                nextLabel={">"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={Math.ceil(jobs.length / PER_PAGE)}
+                marginPagesDisplayed={1}
+                pageRangeDisplayed={1}
+                onPageChange={handlePageClick}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+            />
+        }
     </Card>
   );
 };

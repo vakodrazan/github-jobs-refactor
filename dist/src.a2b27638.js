@@ -35865,6 +35865,7 @@ const Button = _styledComponents.default.button`
     padding: 0 12px;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
 
     &:hover {
         opacity: .8;
@@ -54612,10 +54613,10 @@ const JobPagination = () => {
     window.scrollTo(0, 0);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_index.Card, null, jobs.slice(offset, offset + PER_PAGE).map(item => /*#__PURE__*/_react.default.createElement(_jobs.default, {
+  return /*#__PURE__*/_react.default.createElement(_index.Card, null, jobs && jobs.slice(offset, offset + PER_PAGE).map(item => /*#__PURE__*/_react.default.createElement(_jobs.default, {
     job: item,
     key: item.id
-  })), /*#__PURE__*/_react.default.createElement(_reactPaginate.default, {
+  })), jobs && /*#__PURE__*/_react.default.createElement(_reactPaginate.default, {
     previousLabel: "<",
     nextLabel: ">",
     breakLabel: "...",
@@ -54811,11 +54812,17 @@ exports.Frame = Frame;
 const Input = _styledComponents.default.input`
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
+
+    &[type="checkbox"],
+    &[type="radio"] {
+        cursor: pointer;
+    }
 `;
 exports.Input = Input;
 const Label = _styledComponents.default.label`
     font-size: 14px;
     font-weight: 500;
+    cursor: pointer;
 `;
 exports.Label = Label;
 const FieldsetLocation = _styledComponents.default.fieldset`
@@ -55553,7 +55560,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50075" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50097" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

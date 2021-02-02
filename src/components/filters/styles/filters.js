@@ -15,10 +15,16 @@ export const Frame = styled.fieldset`
 export const Input = styled.input`
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
+
+    &[type="checkbox"],
+    &[type="radio"] {
+        cursor: pointer;
+    }
 `;
 export const Label = styled.label`
     font-size: 14px;
     font-weight: 500;
+    cursor: pointer;
 `;
 
 export const FieldsetLocation = styled.fieldset`
