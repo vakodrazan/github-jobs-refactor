@@ -5,3 +5,4 @@ export { default as Loading } from "./loading";
 export { default as Filters } from "./filters";
 export { default as Details } from "./details";
 export { default as NoResult } from "./no-result";
+export { default as Pagination } from "./pagination";

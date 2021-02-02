@@ -35935,7 +35935,7 @@ Header.Button = function HeaderButton({
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Date = exports.Location = exports.Meta = exports.CustomLabel = exports.Subtitile = exports.Title = exports.Feature = exports.LogoNotFound = exports.Logo = exports.Item = exports.Container = void 0;
+exports.Date = exports.Location = exports.Meta = exports.CustomLabel = exports.Subtitile = exports.Title = exports.Feature = exports.LogoNotFound = exports.Logo = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -35943,12 +35943,7 @@ var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const Container = _styledComponents.default.div`
-    display: grid;
-    gap: 32px;
-`;
-exports.Container = Container;
-const Item = (0, _styledComponents.default)(_reactRouterDom.Link)`
+const Container = (0, _styledComponents.default)(_reactRouterDom.Link)`
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 16px;
@@ -35964,7 +35959,7 @@ const Item = (0, _styledComponents.default)(_reactRouterDom.Link)`
         box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
     }
 `;
-exports.Item = Item;
+exports.Container = Container;
 const Logo = _styledComponents.default.img`
     width: 90px;
     height: 90px;
@@ -36068,13 +36063,6 @@ function Card({
   return /*#__PURE__*/_react.default.createElement(_card.Container, restProps, children);
 }
 
-Card.Item = function CardItem({
-  children,
-  ...restProps
-}) {
-  return /*#__PURE__*/_react.default.createElement(_card.Item, restProps, children);
-};
-
 Card.Logo = function CardLogo({ ...restProps
 }) {
   return /*#__PURE__*/_react.default.createElement(_card.Logo, restProps);
@@ -36133,106 +36121,7 @@ Card.Date = function CardDate({
 }) {
   return /*#__PURE__*/_react.default.createElement(_card.Date, restProps, children);
 };
-},{"react":"node_modules/react/index.js","./styles/card":"src/components/card/styles/card.js"}],"src/context/GlobalContext.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.GlobalContextProvider = GlobalContextProvider;
-exports.GlobalContext = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-const GlobalContext = (0, _react.createContext)();
-exports.GlobalContext = GlobalContext;
-
-function GlobalContextProvider({
-  children
-}) {
-  const [state, dispatch] = (0, _react.useReducer)((state, action) => {
-    switch (action.type) {
-      case "JOB_TITLE":
-        {
-          return { ...state,
-            loading: false,
-            jobs: action.jobs
-          };
-        }
-
-      case "UPDATE_LIST":
-        {
-          return { ...state,
-            loading: false,
-            jobs: action.newJobList
-          };
-        }
-
-      case "LOCATION":
-        {
-          return { ...state,
-            location: action.value
-          };
-        }
-
-      case "FULL_TIME":
-        {
-          return { ...state,
-            fullTime: action.value
-          };
-        }
-
-      case "DESCRIPTION":
-        {
-          return { ...state,
-            description: action.value
-          };
-        }
-
-      default:
-        {
-          return state;
-        }
-    }
-  }, {
-    jobs: [],
-    loading: true,
-    fullTime: false.valueOf,
-    description: "",
-    location: "New York"
-  });
-  const CORS_URL = "https://cors-anywhere.herokuapp.com/";
-  const {
-    description,
-    location,
-    fullTime
-  } = state;
-
-  async function getJobs() {
-    const API_URL = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}`;
-    const res = await fetch(CORS_URL + API_URL);
-    const data = await res.json();
-    dispatch({
-      type: "JOB_TITLE",
-      jobs: data
-    });
-  }
-
-  (0, _react.useEffect)(() => {
-    getJobs(description, location, fullTime);
-  }, [location, description, fullTime]);
-  return /*#__PURE__*/_react.default.createElement(GlobalContext.Provider, {
-    value: {
-      state,
-      dispatch
-    }
-  }, children);
-}
-},{"react":"node_modules/react/index.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./styles/card":"src/components/card/styles/card.js"}],"node_modules/date-fns/esm/_lib/toInteger/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54401,7 +54290,106 @@ Object.keys(_index197).forEach(function (key) {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./add/index.js":"node_modules/date-fns/esm/add/index.js","./addBusinessDays/index.js":"node_modules/date-fns/esm/addBusinessDays/index.js","./addDays/index.js":"node_modules/date-fns/esm/addDays/index.js","./addHours/index.js":"node_modules/date-fns/esm/addHours/index.js","./addISOWeekYears/index.js":"node_modules/date-fns/esm/addISOWeekYears/index.js","./addMilliseconds/index.js":"node_modules/date-fns/esm/addMilliseconds/index.js","./addMinutes/index.js":"node_modules/date-fns/esm/addMinutes/index.js","./addMonths/index.js":"node_modules/date-fns/esm/addMonths/index.js","./addQuarters/index.js":"node_modules/date-fns/esm/addQuarters/index.js","./addSeconds/index.js":"node_modules/date-fns/esm/addSeconds/index.js","./addWeeks/index.js":"node_modules/date-fns/esm/addWeeks/index.js","./addYears/index.js":"node_modules/date-fns/esm/addYears/index.js","./areIntervalsOverlapping/index.js":"node_modules/date-fns/esm/areIntervalsOverlapping/index.js","./closestIndexTo/index.js":"node_modules/date-fns/esm/closestIndexTo/index.js","./closestTo/index.js":"node_modules/date-fns/esm/closestTo/index.js","./compareAsc/index.js":"node_modules/date-fns/esm/compareAsc/index.js","./compareDesc/index.js":"node_modules/date-fns/esm/compareDesc/index.js","./differenceInBusinessDays/index.js":"node_modules/date-fns/esm/differenceInBusinessDays/index.js","./differenceInCalendarDays/index.js":"node_modules/date-fns/esm/differenceInCalendarDays/index.js","./differenceInCalendarISOWeekYears/index.js":"node_modules/date-fns/esm/differenceInCalendarISOWeekYears/index.js","./differenceInCalendarISOWeeks/index.js":"node_modules/date-fns/esm/differenceInCalendarISOWeeks/index.js","./differenceInCalendarMonths/index.js":"node_modules/date-fns/esm/differenceInCalendarMonths/index.js","./differenceInCalendarQuarters/index.js":"node_modules/date-fns/esm/differenceInCalendarQuarters/index.js","./differenceInCalendarWeeks/index.js":"node_modules/date-fns/esm/differenceInCalendarWeeks/index.js","./differenceInCalendarYears/index.js":"node_modules/date-fns/esm/differenceInCalendarYears/index.js","./differenceInDays/index.js":"node_modules/date-fns/esm/differenceInDays/index.js","./differenceInHours/index.js":"node_modules/date-fns/esm/differenceInHours/index.js","./differenceInISOWeekYears/index.js":"node_modules/date-fns/esm/differenceInISOWeekYears/index.js","./differenceInMilliseconds/index.js":"node_modules/date-fns/esm/differenceInMilliseconds/index.js","./differenceInMinutes/index.js":"node_modules/date-fns/esm/differenceInMinutes/index.js","./differenceInMonths/index.js":"node_modules/date-fns/esm/differenceInMonths/index.js","./differenceInQuarters/index.js":"node_modules/date-fns/esm/differenceInQuarters/index.js","./differenceInSeconds/index.js":"node_modules/date-fns/esm/differenceInSeconds/index.js","./differenceInWeeks/index.js":"node_modules/date-fns/esm/differenceInWeeks/index.js","./differenceInYears/index.js":"node_modules/date-fns/esm/differenceInYears/index.js","./eachDayOfInterval/index.js":"node_modules/date-fns/esm/eachDayOfInterval/index.js","./eachHourOfInterval/index.js":"node_modules/date-fns/esm/eachHourOfInterval/index.js","./eachMonthOfInterval/index.js":"node_modules/date-fns/esm/eachMonthOfInterval/index.js","./eachQuarterOfInterval/index.js":"node_modules/date-fns/esm/eachQuarterOfInterval/index.js","./eachWeekOfInterval/index.js":"node_modules/date-fns/esm/eachWeekOfInterval/index.js","./eachWeekendOfInterval/index.js":"node_modules/date-fns/esm/eachWeekendOfInterval/index.js","./eachWeekendOfMonth/index.js":"node_modules/date-fns/esm/eachWeekendOfMonth/index.js","./eachWeekendOfYear/index.js":"node_modules/date-fns/esm/eachWeekendOfYear/index.js","./eachYearOfInterval/index.js":"node_modules/date-fns/esm/eachYearOfInterval/index.js","./endOfDay/index.js":"node_modules/date-fns/esm/endOfDay/index.js","./endOfDecade/index.js":"node_modules/date-fns/esm/endOfDecade/index.js","./endOfHour/index.js":"node_modules/date-fns/esm/endOfHour/index.js","./endOfISOWeek/index.js":"node_modules/date-fns/esm/endOfISOWeek/index.js","./endOfISOWeekYear/index.js":"node_modules/date-fns/esm/endOfISOWeekYear/index.js","./endOfMinute/index.js":"node_modules/date-fns/esm/endOfMinute/index.js","./endOfMonth/index.js":"node_modules/date-fns/esm/endOfMonth/index.js","./endOfQuarter/index.js":"node_modules/date-fns/esm/endOfQuarter/index.js","./endOfSecond/index.js":"node_modules/date-fns/esm/endOfSecond/index.js","./endOfToday/index.js":"node_modules/date-fns/esm/endOfToday/index.js","./endOfTomorrow/index.js":"node_modules/date-fns/esm/endOfTomorrow/index.js","./endOfWeek/index.js":"node_modules/date-fns/esm/endOfWeek/index.js","./endOfYear/index.js":"node_modules/date-fns/esm/endOfYear/index.js","./endOfYesterday/index.js":"node_modules/date-fns/esm/endOfYesterday/index.js","./format/index.js":"node_modules/date-fns/esm/format/index.js","./formatDistance/index.js":"node_modules/date-fns/esm/formatDistance/index.js","./formatDistanceStrict/index.js":"node_modules/date-fns/esm/formatDistanceStrict/index.js","./formatDistanceToNow/index.js":"node_modules/date-fns/esm/formatDistanceToNow/index.js","./formatDistanceToNowStrict/index.js":"node_modules/date-fns/esm/formatDistanceToNowStrict/index.js","./formatDuration/index.js":"node_modules/date-fns/esm/formatDuration/index.js","./formatISO/index.js":"node_modules/date-fns/esm/formatISO/index.js","./formatISO9075/index.js":"node_modules/date-fns/esm/formatISO9075/index.js","./formatISODuration/index.js":"node_modules/date-fns/esm/formatISODuration/index.js","./formatRFC3339/index.js":"node_modules/date-fns/esm/formatRFC3339/index.js","./formatRFC7231/index.js":"node_modules/date-fns/esm/formatRFC7231/index.js","./formatRelative/index.js":"node_modules/date-fns/esm/formatRelative/index.js","./fromUnixTime/index.js":"node_modules/date-fns/esm/fromUnixTime/index.js","./getDate/index.js":"node_modules/date-fns/esm/getDate/index.js","./getDay/index.js":"node_modules/date-fns/esm/getDay/index.js","./getDayOfYear/index.js":"node_modules/date-fns/esm/getDayOfYear/index.js","./getDaysInMonth/index.js":"node_modules/date-fns/esm/getDaysInMonth/index.js","./getDaysInYear/index.js":"node_modules/date-fns/esm/getDaysInYear/index.js","./getDecade/index.js":"node_modules/date-fns/esm/getDecade/index.js","./getHours/index.js":"node_modules/date-fns/esm/getHours/index.js","./getISODay/index.js":"node_modules/date-fns/esm/getISODay/index.js","./getISOWeek/index.js":"node_modules/date-fns/esm/getISOWeek/index.js","./getISOWeekYear/index.js":"node_modules/date-fns/esm/getISOWeekYear/index.js","./getISOWeeksInYear/index.js":"node_modules/date-fns/esm/getISOWeeksInYear/index.js","./getMilliseconds/index.js":"node_modules/date-fns/esm/getMilliseconds/index.js","./getMinutes/index.js":"node_modules/date-fns/esm/getMinutes/index.js","./getMonth/index.js":"node_modules/date-fns/esm/getMonth/index.js","./getOverlappingDaysInIntervals/index.js":"node_modules/date-fns/esm/getOverlappingDaysInIntervals/index.js","./getQuarter/index.js":"node_modules/date-fns/esm/getQuarter/index.js","./getSeconds/index.js":"node_modules/date-fns/esm/getSeconds/index.js","./getTime/index.js":"node_modules/date-fns/esm/getTime/index.js","./getUnixTime/index.js":"node_modules/date-fns/esm/getUnixTime/index.js","./getWeek/index.js":"node_modules/date-fns/esm/getWeek/index.js","./getWeekOfMonth/index.js":"node_modules/date-fns/esm/getWeekOfMonth/index.js","./getWeekYear/index.js":"node_modules/date-fns/esm/getWeekYear/index.js","./getWeeksInMonth/index.js":"node_modules/date-fns/esm/getWeeksInMonth/index.js","./getYear/index.js":"node_modules/date-fns/esm/getYear/index.js","./intervalToDuration/index.js":"node_modules/date-fns/esm/intervalToDuration/index.js","./isAfter/index.js":"node_modules/date-fns/esm/isAfter/index.js","./isBefore/index.js":"node_modules/date-fns/esm/isBefore/index.js","./isDate/index.js":"node_modules/date-fns/esm/isDate/index.js","./isEqual/index.js":"node_modules/date-fns/esm/isEqual/index.js","./isExists/index.js":"node_modules/date-fns/esm/isExists/index.js","./isFirstDayOfMonth/index.js":"node_modules/date-fns/esm/isFirstDayOfMonth/index.js","./isFriday/index.js":"node_modules/date-fns/esm/isFriday/index.js","./isFuture/index.js":"node_modules/date-fns/esm/isFuture/index.js","./isLastDayOfMonth/index.js":"node_modules/date-fns/esm/isLastDayOfMonth/index.js","./isLeapYear/index.js":"node_modules/date-fns/esm/isLeapYear/index.js","./isMatch/index.js":"node_modules/date-fns/esm/isMatch/index.js","./isMonday/index.js":"node_modules/date-fns/esm/isMonday/index.js","./isPast/index.js":"node_modules/date-fns/esm/isPast/index.js","./isSameDay/index.js":"node_modules/date-fns/esm/isSameDay/index.js","./isSameHour/index.js":"node_modules/date-fns/esm/isSameHour/index.js","./isSameISOWeek/index.js":"node_modules/date-fns/esm/isSameISOWeek/index.js","./isSameISOWeekYear/index.js":"node_modules/date-fns/esm/isSameISOWeekYear/index.js","./isSameMinute/index.js":"node_modules/date-fns/esm/isSameMinute/index.js","./isSameMonth/index.js":"node_modules/date-fns/esm/isSameMonth/index.js","./isSameQuarter/index.js":"node_modules/date-fns/esm/isSameQuarter/index.js","./isSameSecond/index.js":"node_modules/date-fns/esm/isSameSecond/index.js","./isSameWeek/index.js":"node_modules/date-fns/esm/isSameWeek/index.js","./isSameYear/index.js":"node_modules/date-fns/esm/isSameYear/index.js","./isSaturday/index.js":"node_modules/date-fns/esm/isSaturday/index.js","./isSunday/index.js":"node_modules/date-fns/esm/isSunday/index.js","./isThisHour/index.js":"node_modules/date-fns/esm/isThisHour/index.js","./isThisISOWeek/index.js":"node_modules/date-fns/esm/isThisISOWeek/index.js","./isThisMinute/index.js":"node_modules/date-fns/esm/isThisMinute/index.js","./isThisMonth/index.js":"node_modules/date-fns/esm/isThisMonth/index.js","./isThisQuarter/index.js":"node_modules/date-fns/esm/isThisQuarter/index.js","./isThisSecond/index.js":"node_modules/date-fns/esm/isThisSecond/index.js","./isThisWeek/index.js":"node_modules/date-fns/esm/isThisWeek/index.js","./isThisYear/index.js":"node_modules/date-fns/esm/isThisYear/index.js","./isThursday/index.js":"node_modules/date-fns/esm/isThursday/index.js","./isToday/index.js":"node_modules/date-fns/esm/isToday/index.js","./isTomorrow/index.js":"node_modules/date-fns/esm/isTomorrow/index.js","./isTuesday/index.js":"node_modules/date-fns/esm/isTuesday/index.js","./isValid/index.js":"node_modules/date-fns/esm/isValid/index.js","./isWednesday/index.js":"node_modules/date-fns/esm/isWednesday/index.js","./isWeekend/index.js":"node_modules/date-fns/esm/isWeekend/index.js","./isWithinInterval/index.js":"node_modules/date-fns/esm/isWithinInterval/index.js","./isYesterday/index.js":"node_modules/date-fns/esm/isYesterday/index.js","./lastDayOfDecade/index.js":"node_modules/date-fns/esm/lastDayOfDecade/index.js","./lastDayOfISOWeek/index.js":"node_modules/date-fns/esm/lastDayOfISOWeek/index.js","./lastDayOfISOWeekYear/index.js":"node_modules/date-fns/esm/lastDayOfISOWeekYear/index.js","./lastDayOfMonth/index.js":"node_modules/date-fns/esm/lastDayOfMonth/index.js","./lastDayOfQuarter/index.js":"node_modules/date-fns/esm/lastDayOfQuarter/index.js","./lastDayOfWeek/index.js":"node_modules/date-fns/esm/lastDayOfWeek/index.js","./lastDayOfYear/index.js":"node_modules/date-fns/esm/lastDayOfYear/index.js","./lightFormat/index.js":"node_modules/date-fns/esm/lightFormat/index.js","./max/index.js":"node_modules/date-fns/esm/max/index.js","./min/index.js":"node_modules/date-fns/esm/min/index.js","./parse/index.js":"node_modules/date-fns/esm/parse/index.js","./parseISO/index.js":"node_modules/date-fns/esm/parseISO/index.js","./parseJSON/index.js":"node_modules/date-fns/esm/parseJSON/index.js","./roundToNearestMinutes/index.js":"node_modules/date-fns/esm/roundToNearestMinutes/index.js","./set/index.js":"node_modules/date-fns/esm/set/index.js","./setDate/index.js":"node_modules/date-fns/esm/setDate/index.js","./setDay/index.js":"node_modules/date-fns/esm/setDay/index.js","./setDayOfYear/index.js":"node_modules/date-fns/esm/setDayOfYear/index.js","./setHours/index.js":"node_modules/date-fns/esm/setHours/index.js","./setISODay/index.js":"node_modules/date-fns/esm/setISODay/index.js","./setISOWeek/index.js":"node_modules/date-fns/esm/setISOWeek/index.js","./setISOWeekYear/index.js":"node_modules/date-fns/esm/setISOWeekYear/index.js","./setMilliseconds/index.js":"node_modules/date-fns/esm/setMilliseconds/index.js","./setMinutes/index.js":"node_modules/date-fns/esm/setMinutes/index.js","./setMonth/index.js":"node_modules/date-fns/esm/setMonth/index.js","./setQuarter/index.js":"node_modules/date-fns/esm/setQuarter/index.js","./setSeconds/index.js":"node_modules/date-fns/esm/setSeconds/index.js","./setWeek/index.js":"node_modules/date-fns/esm/setWeek/index.js","./setWeekYear/index.js":"node_modules/date-fns/esm/setWeekYear/index.js","./setYear/index.js":"node_modules/date-fns/esm/setYear/index.js","./startOfDay/index.js":"node_modules/date-fns/esm/startOfDay/index.js","./startOfDecade/index.js":"node_modules/date-fns/esm/startOfDecade/index.js","./startOfHour/index.js":"node_modules/date-fns/esm/startOfHour/index.js","./startOfISOWeek/index.js":"node_modules/date-fns/esm/startOfISOWeek/index.js","./startOfISOWeekYear/index.js":"node_modules/date-fns/esm/startOfISOWeekYear/index.js","./startOfMinute/index.js":"node_modules/date-fns/esm/startOfMinute/index.js","./startOfMonth/index.js":"node_modules/date-fns/esm/startOfMonth/index.js","./startOfQuarter/index.js":"node_modules/date-fns/esm/startOfQuarter/index.js","./startOfSecond/index.js":"node_modules/date-fns/esm/startOfSecond/index.js","./startOfToday/index.js":"node_modules/date-fns/esm/startOfToday/index.js","./startOfTomorrow/index.js":"node_modules/date-fns/esm/startOfTomorrow/index.js","./startOfWeek/index.js":"node_modules/date-fns/esm/startOfWeek/index.js","./startOfWeekYear/index.js":"node_modules/date-fns/esm/startOfWeekYear/index.js","./startOfYear/index.js":"node_modules/date-fns/esm/startOfYear/index.js","./startOfYesterday/index.js":"node_modules/date-fns/esm/startOfYesterday/index.js","./sub/index.js":"node_modules/date-fns/esm/sub/index.js","./subBusinessDays/index.js":"node_modules/date-fns/esm/subBusinessDays/index.js","./subDays/index.js":"node_modules/date-fns/esm/subDays/index.js","./subHours/index.js":"node_modules/date-fns/esm/subHours/index.js","./subISOWeekYears/index.js":"node_modules/date-fns/esm/subISOWeekYears/index.js","./subMilliseconds/index.js":"node_modules/date-fns/esm/subMilliseconds/index.js","./subMinutes/index.js":"node_modules/date-fns/esm/subMinutes/index.js","./subMonths/index.js":"node_modules/date-fns/esm/subMonths/index.js","./subQuarters/index.js":"node_modules/date-fns/esm/subQuarters/index.js","./subSeconds/index.js":"node_modules/date-fns/esm/subSeconds/index.js","./subWeeks/index.js":"node_modules/date-fns/esm/subWeeks/index.js","./subYears/index.js":"node_modules/date-fns/esm/subYears/index.js","./toDate/index.js":"node_modules/date-fns/esm/toDate/index.js","./constants/index.js":"node_modules/date-fns/esm/constants/index.js"}],"src/context/Context.js":[function(require,module,exports) {
+},{"./add/index.js":"node_modules/date-fns/esm/add/index.js","./addBusinessDays/index.js":"node_modules/date-fns/esm/addBusinessDays/index.js","./addDays/index.js":"node_modules/date-fns/esm/addDays/index.js","./addHours/index.js":"node_modules/date-fns/esm/addHours/index.js","./addISOWeekYears/index.js":"node_modules/date-fns/esm/addISOWeekYears/index.js","./addMilliseconds/index.js":"node_modules/date-fns/esm/addMilliseconds/index.js","./addMinutes/index.js":"node_modules/date-fns/esm/addMinutes/index.js","./addMonths/index.js":"node_modules/date-fns/esm/addMonths/index.js","./addQuarters/index.js":"node_modules/date-fns/esm/addQuarters/index.js","./addSeconds/index.js":"node_modules/date-fns/esm/addSeconds/index.js","./addWeeks/index.js":"node_modules/date-fns/esm/addWeeks/index.js","./addYears/index.js":"node_modules/date-fns/esm/addYears/index.js","./areIntervalsOverlapping/index.js":"node_modules/date-fns/esm/areIntervalsOverlapping/index.js","./closestIndexTo/index.js":"node_modules/date-fns/esm/closestIndexTo/index.js","./closestTo/index.js":"node_modules/date-fns/esm/closestTo/index.js","./compareAsc/index.js":"node_modules/date-fns/esm/compareAsc/index.js","./compareDesc/index.js":"node_modules/date-fns/esm/compareDesc/index.js","./differenceInBusinessDays/index.js":"node_modules/date-fns/esm/differenceInBusinessDays/index.js","./differenceInCalendarDays/index.js":"node_modules/date-fns/esm/differenceInCalendarDays/index.js","./differenceInCalendarISOWeekYears/index.js":"node_modules/date-fns/esm/differenceInCalendarISOWeekYears/index.js","./differenceInCalendarISOWeeks/index.js":"node_modules/date-fns/esm/differenceInCalendarISOWeeks/index.js","./differenceInCalendarMonths/index.js":"node_modules/date-fns/esm/differenceInCalendarMonths/index.js","./differenceInCalendarQuarters/index.js":"node_modules/date-fns/esm/differenceInCalendarQuarters/index.js","./differenceInCalendarWeeks/index.js":"node_modules/date-fns/esm/differenceInCalendarWeeks/index.js","./differenceInCalendarYears/index.js":"node_modules/date-fns/esm/differenceInCalendarYears/index.js","./differenceInDays/index.js":"node_modules/date-fns/esm/differenceInDays/index.js","./differenceInHours/index.js":"node_modules/date-fns/esm/differenceInHours/index.js","./differenceInISOWeekYears/index.js":"node_modules/date-fns/esm/differenceInISOWeekYears/index.js","./differenceInMilliseconds/index.js":"node_modules/date-fns/esm/differenceInMilliseconds/index.js","./differenceInMinutes/index.js":"node_modules/date-fns/esm/differenceInMinutes/index.js","./differenceInMonths/index.js":"node_modules/date-fns/esm/differenceInMonths/index.js","./differenceInQuarters/index.js":"node_modules/date-fns/esm/differenceInQuarters/index.js","./differenceInSeconds/index.js":"node_modules/date-fns/esm/differenceInSeconds/index.js","./differenceInWeeks/index.js":"node_modules/date-fns/esm/differenceInWeeks/index.js","./differenceInYears/index.js":"node_modules/date-fns/esm/differenceInYears/index.js","./eachDayOfInterval/index.js":"node_modules/date-fns/esm/eachDayOfInterval/index.js","./eachHourOfInterval/index.js":"node_modules/date-fns/esm/eachHourOfInterval/index.js","./eachMonthOfInterval/index.js":"node_modules/date-fns/esm/eachMonthOfInterval/index.js","./eachQuarterOfInterval/index.js":"node_modules/date-fns/esm/eachQuarterOfInterval/index.js","./eachWeekOfInterval/index.js":"node_modules/date-fns/esm/eachWeekOfInterval/index.js","./eachWeekendOfInterval/index.js":"node_modules/date-fns/esm/eachWeekendOfInterval/index.js","./eachWeekendOfMonth/index.js":"node_modules/date-fns/esm/eachWeekendOfMonth/index.js","./eachWeekendOfYear/index.js":"node_modules/date-fns/esm/eachWeekendOfYear/index.js","./eachYearOfInterval/index.js":"node_modules/date-fns/esm/eachYearOfInterval/index.js","./endOfDay/index.js":"node_modules/date-fns/esm/endOfDay/index.js","./endOfDecade/index.js":"node_modules/date-fns/esm/endOfDecade/index.js","./endOfHour/index.js":"node_modules/date-fns/esm/endOfHour/index.js","./endOfISOWeek/index.js":"node_modules/date-fns/esm/endOfISOWeek/index.js","./endOfISOWeekYear/index.js":"node_modules/date-fns/esm/endOfISOWeekYear/index.js","./endOfMinute/index.js":"node_modules/date-fns/esm/endOfMinute/index.js","./endOfMonth/index.js":"node_modules/date-fns/esm/endOfMonth/index.js","./endOfQuarter/index.js":"node_modules/date-fns/esm/endOfQuarter/index.js","./endOfSecond/index.js":"node_modules/date-fns/esm/endOfSecond/index.js","./endOfToday/index.js":"node_modules/date-fns/esm/endOfToday/index.js","./endOfTomorrow/index.js":"node_modules/date-fns/esm/endOfTomorrow/index.js","./endOfWeek/index.js":"node_modules/date-fns/esm/endOfWeek/index.js","./endOfYear/index.js":"node_modules/date-fns/esm/endOfYear/index.js","./endOfYesterday/index.js":"node_modules/date-fns/esm/endOfYesterday/index.js","./format/index.js":"node_modules/date-fns/esm/format/index.js","./formatDistance/index.js":"node_modules/date-fns/esm/formatDistance/index.js","./formatDistanceStrict/index.js":"node_modules/date-fns/esm/formatDistanceStrict/index.js","./formatDistanceToNow/index.js":"node_modules/date-fns/esm/formatDistanceToNow/index.js","./formatDistanceToNowStrict/index.js":"node_modules/date-fns/esm/formatDistanceToNowStrict/index.js","./formatDuration/index.js":"node_modules/date-fns/esm/formatDuration/index.js","./formatISO/index.js":"node_modules/date-fns/esm/formatISO/index.js","./formatISO9075/index.js":"node_modules/date-fns/esm/formatISO9075/index.js","./formatISODuration/index.js":"node_modules/date-fns/esm/formatISODuration/index.js","./formatRFC3339/index.js":"node_modules/date-fns/esm/formatRFC3339/index.js","./formatRFC7231/index.js":"node_modules/date-fns/esm/formatRFC7231/index.js","./formatRelative/index.js":"node_modules/date-fns/esm/formatRelative/index.js","./fromUnixTime/index.js":"node_modules/date-fns/esm/fromUnixTime/index.js","./getDate/index.js":"node_modules/date-fns/esm/getDate/index.js","./getDay/index.js":"node_modules/date-fns/esm/getDay/index.js","./getDayOfYear/index.js":"node_modules/date-fns/esm/getDayOfYear/index.js","./getDaysInMonth/index.js":"node_modules/date-fns/esm/getDaysInMonth/index.js","./getDaysInYear/index.js":"node_modules/date-fns/esm/getDaysInYear/index.js","./getDecade/index.js":"node_modules/date-fns/esm/getDecade/index.js","./getHours/index.js":"node_modules/date-fns/esm/getHours/index.js","./getISODay/index.js":"node_modules/date-fns/esm/getISODay/index.js","./getISOWeek/index.js":"node_modules/date-fns/esm/getISOWeek/index.js","./getISOWeekYear/index.js":"node_modules/date-fns/esm/getISOWeekYear/index.js","./getISOWeeksInYear/index.js":"node_modules/date-fns/esm/getISOWeeksInYear/index.js","./getMilliseconds/index.js":"node_modules/date-fns/esm/getMilliseconds/index.js","./getMinutes/index.js":"node_modules/date-fns/esm/getMinutes/index.js","./getMonth/index.js":"node_modules/date-fns/esm/getMonth/index.js","./getOverlappingDaysInIntervals/index.js":"node_modules/date-fns/esm/getOverlappingDaysInIntervals/index.js","./getQuarter/index.js":"node_modules/date-fns/esm/getQuarter/index.js","./getSeconds/index.js":"node_modules/date-fns/esm/getSeconds/index.js","./getTime/index.js":"node_modules/date-fns/esm/getTime/index.js","./getUnixTime/index.js":"node_modules/date-fns/esm/getUnixTime/index.js","./getWeek/index.js":"node_modules/date-fns/esm/getWeek/index.js","./getWeekOfMonth/index.js":"node_modules/date-fns/esm/getWeekOfMonth/index.js","./getWeekYear/index.js":"node_modules/date-fns/esm/getWeekYear/index.js","./getWeeksInMonth/index.js":"node_modules/date-fns/esm/getWeeksInMonth/index.js","./getYear/index.js":"node_modules/date-fns/esm/getYear/index.js","./intervalToDuration/index.js":"node_modules/date-fns/esm/intervalToDuration/index.js","./isAfter/index.js":"node_modules/date-fns/esm/isAfter/index.js","./isBefore/index.js":"node_modules/date-fns/esm/isBefore/index.js","./isDate/index.js":"node_modules/date-fns/esm/isDate/index.js","./isEqual/index.js":"node_modules/date-fns/esm/isEqual/index.js","./isExists/index.js":"node_modules/date-fns/esm/isExists/index.js","./isFirstDayOfMonth/index.js":"node_modules/date-fns/esm/isFirstDayOfMonth/index.js","./isFriday/index.js":"node_modules/date-fns/esm/isFriday/index.js","./isFuture/index.js":"node_modules/date-fns/esm/isFuture/index.js","./isLastDayOfMonth/index.js":"node_modules/date-fns/esm/isLastDayOfMonth/index.js","./isLeapYear/index.js":"node_modules/date-fns/esm/isLeapYear/index.js","./isMatch/index.js":"node_modules/date-fns/esm/isMatch/index.js","./isMonday/index.js":"node_modules/date-fns/esm/isMonday/index.js","./isPast/index.js":"node_modules/date-fns/esm/isPast/index.js","./isSameDay/index.js":"node_modules/date-fns/esm/isSameDay/index.js","./isSameHour/index.js":"node_modules/date-fns/esm/isSameHour/index.js","./isSameISOWeek/index.js":"node_modules/date-fns/esm/isSameISOWeek/index.js","./isSameISOWeekYear/index.js":"node_modules/date-fns/esm/isSameISOWeekYear/index.js","./isSameMinute/index.js":"node_modules/date-fns/esm/isSameMinute/index.js","./isSameMonth/index.js":"node_modules/date-fns/esm/isSameMonth/index.js","./isSameQuarter/index.js":"node_modules/date-fns/esm/isSameQuarter/index.js","./isSameSecond/index.js":"node_modules/date-fns/esm/isSameSecond/index.js","./isSameWeek/index.js":"node_modules/date-fns/esm/isSameWeek/index.js","./isSameYear/index.js":"node_modules/date-fns/esm/isSameYear/index.js","./isSaturday/index.js":"node_modules/date-fns/esm/isSaturday/index.js","./isSunday/index.js":"node_modules/date-fns/esm/isSunday/index.js","./isThisHour/index.js":"node_modules/date-fns/esm/isThisHour/index.js","./isThisISOWeek/index.js":"node_modules/date-fns/esm/isThisISOWeek/index.js","./isThisMinute/index.js":"node_modules/date-fns/esm/isThisMinute/index.js","./isThisMonth/index.js":"node_modules/date-fns/esm/isThisMonth/index.js","./isThisQuarter/index.js":"node_modules/date-fns/esm/isThisQuarter/index.js","./isThisSecond/index.js":"node_modules/date-fns/esm/isThisSecond/index.js","./isThisWeek/index.js":"node_modules/date-fns/esm/isThisWeek/index.js","./isThisYear/index.js":"node_modules/date-fns/esm/isThisYear/index.js","./isThursday/index.js":"node_modules/date-fns/esm/isThursday/index.js","./isToday/index.js":"node_modules/date-fns/esm/isToday/index.js","./isTomorrow/index.js":"node_modules/date-fns/esm/isTomorrow/index.js","./isTuesday/index.js":"node_modules/date-fns/esm/isTuesday/index.js","./isValid/index.js":"node_modules/date-fns/esm/isValid/index.js","./isWednesday/index.js":"node_modules/date-fns/esm/isWednesday/index.js","./isWeekend/index.js":"node_modules/date-fns/esm/isWeekend/index.js","./isWithinInterval/index.js":"node_modules/date-fns/esm/isWithinInterval/index.js","./isYesterday/index.js":"node_modules/date-fns/esm/isYesterday/index.js","./lastDayOfDecade/index.js":"node_modules/date-fns/esm/lastDayOfDecade/index.js","./lastDayOfISOWeek/index.js":"node_modules/date-fns/esm/lastDayOfISOWeek/index.js","./lastDayOfISOWeekYear/index.js":"node_modules/date-fns/esm/lastDayOfISOWeekYear/index.js","./lastDayOfMonth/index.js":"node_modules/date-fns/esm/lastDayOfMonth/index.js","./lastDayOfQuarter/index.js":"node_modules/date-fns/esm/lastDayOfQuarter/index.js","./lastDayOfWeek/index.js":"node_modules/date-fns/esm/lastDayOfWeek/index.js","./lastDayOfYear/index.js":"node_modules/date-fns/esm/lastDayOfYear/index.js","./lightFormat/index.js":"node_modules/date-fns/esm/lightFormat/index.js","./max/index.js":"node_modules/date-fns/esm/max/index.js","./min/index.js":"node_modules/date-fns/esm/min/index.js","./parse/index.js":"node_modules/date-fns/esm/parse/index.js","./parseISO/index.js":"node_modules/date-fns/esm/parseISO/index.js","./parseJSON/index.js":"node_modules/date-fns/esm/parseJSON/index.js","./roundToNearestMinutes/index.js":"node_modules/date-fns/esm/roundToNearestMinutes/index.js","./set/index.js":"node_modules/date-fns/esm/set/index.js","./setDate/index.js":"node_modules/date-fns/esm/setDate/index.js","./setDay/index.js":"node_modules/date-fns/esm/setDay/index.js","./setDayOfYear/index.js":"node_modules/date-fns/esm/setDayOfYear/index.js","./setHours/index.js":"node_modules/date-fns/esm/setHours/index.js","./setISODay/index.js":"node_modules/date-fns/esm/setISODay/index.js","./setISOWeek/index.js":"node_modules/date-fns/esm/setISOWeek/index.js","./setISOWeekYear/index.js":"node_modules/date-fns/esm/setISOWeekYear/index.js","./setMilliseconds/index.js":"node_modules/date-fns/esm/setMilliseconds/index.js","./setMinutes/index.js":"node_modules/date-fns/esm/setMinutes/index.js","./setMonth/index.js":"node_modules/date-fns/esm/setMonth/index.js","./setQuarter/index.js":"node_modules/date-fns/esm/setQuarter/index.js","./setSeconds/index.js":"node_modules/date-fns/esm/setSeconds/index.js","./setWeek/index.js":"node_modules/date-fns/esm/setWeek/index.js","./setWeekYear/index.js":"node_modules/date-fns/esm/setWeekYear/index.js","./setYear/index.js":"node_modules/date-fns/esm/setYear/index.js","./startOfDay/index.js":"node_modules/date-fns/esm/startOfDay/index.js","./startOfDecade/index.js":"node_modules/date-fns/esm/startOfDecade/index.js","./startOfHour/index.js":"node_modules/date-fns/esm/startOfHour/index.js","./startOfISOWeek/index.js":"node_modules/date-fns/esm/startOfISOWeek/index.js","./startOfISOWeekYear/index.js":"node_modules/date-fns/esm/startOfISOWeekYear/index.js","./startOfMinute/index.js":"node_modules/date-fns/esm/startOfMinute/index.js","./startOfMonth/index.js":"node_modules/date-fns/esm/startOfMonth/index.js","./startOfQuarter/index.js":"node_modules/date-fns/esm/startOfQuarter/index.js","./startOfSecond/index.js":"node_modules/date-fns/esm/startOfSecond/index.js","./startOfToday/index.js":"node_modules/date-fns/esm/startOfToday/index.js","./startOfTomorrow/index.js":"node_modules/date-fns/esm/startOfTomorrow/index.js","./startOfWeek/index.js":"node_modules/date-fns/esm/startOfWeek/index.js","./startOfWeekYear/index.js":"node_modules/date-fns/esm/startOfWeekYear/index.js","./startOfYear/index.js":"node_modules/date-fns/esm/startOfYear/index.js","./startOfYesterday/index.js":"node_modules/date-fns/esm/startOfYesterday/index.js","./sub/index.js":"node_modules/date-fns/esm/sub/index.js","./subBusinessDays/index.js":"node_modules/date-fns/esm/subBusinessDays/index.js","./subDays/index.js":"node_modules/date-fns/esm/subDays/index.js","./subHours/index.js":"node_modules/date-fns/esm/subHours/index.js","./subISOWeekYears/index.js":"node_modules/date-fns/esm/subISOWeekYears/index.js","./subMilliseconds/index.js":"node_modules/date-fns/esm/subMilliseconds/index.js","./subMinutes/index.js":"node_modules/date-fns/esm/subMinutes/index.js","./subMonths/index.js":"node_modules/date-fns/esm/subMonths/index.js","./subQuarters/index.js":"node_modules/date-fns/esm/subQuarters/index.js","./subSeconds/index.js":"node_modules/date-fns/esm/subSeconds/index.js","./subWeeks/index.js":"node_modules/date-fns/esm/subWeeks/index.js","./subYears/index.js":"node_modules/date-fns/esm/subYears/index.js","./toDate/index.js":"node_modules/date-fns/esm/toDate/index.js","./constants/index.js":"node_modules/date-fns/esm/constants/index.js"}],"src/context/GlobalContext.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GlobalContextProvider = GlobalContextProvider;
+exports.GlobalContext = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const GlobalContext = (0, _react.createContext)();
+exports.GlobalContext = GlobalContext;
+
+function GlobalContextProvider({
+  children
+}) {
+  const [state, dispatch] = (0, _react.useReducer)((state, action) => {
+    switch (action.type) {
+      case "JOB_TITLE":
+        {
+          return { ...state,
+            loading: false,
+            jobs: action.jobs
+          };
+        }
+
+      case "UPDATE_LIST":
+        {
+          return { ...state,
+            loading: false,
+            jobs: action.newJobList
+          };
+        }
+
+      case "LOCATION":
+        {
+          return { ...state,
+            location: action.value
+          };
+        }
+
+      case "FULL_TIME":
+        {
+          return { ...state,
+            fullTime: action.value
+          };
+        }
+
+      case "DESCRIPTION":
+        {
+          return { ...state,
+            description: action.value
+          };
+        }
+
+      default:
+        {
+          return state;
+        }
+    }
+  }, {
+    jobs: [],
+    loading: true,
+    fullTime: false.valueOf,
+    description: "",
+    location: "New York"
+  });
+  const CORS_URL = "https://cors-anywhere.herokuapp.com/";
+  const {
+    description,
+    location,
+    fullTime
+  } = state;
+
+  async function getJobs() {
+    const API_URL = `https://jobs.github.com/positions.json?description=${description}&location=${location}&full_time=${fullTime}`;
+    const res = await fetch(CORS_URL + API_URL);
+    const data = await res.json();
+    dispatch({
+      type: "JOB_TITLE",
+      jobs: data
+    });
+  }
+
+  (0, _react.useEffect)(() => {
+    getJobs(description, location, fullTime);
+  }, [location, description, fullTime]);
+  return /*#__PURE__*/_react.default.createElement(GlobalContext.Provider, {
+    value: {
+      state,
+      dispatch
+    }
+  }, children);
+}
+},{"react":"node_modules/react/index.js"}],"src/context/Context.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54526,7 +54514,7 @@ function JobContainer({
   const {
     formattedDate
   } = (0, _react.useContext)(_Context.Context);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_components.Loading, null, "Loading..."), jobs.length === 0 ? /*#__PURE__*/_react.default.createElement(_components.NoResult, null, "No result found") : /*#__PURE__*/_react.default.createElement(_components.Card.Item, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_components.Loading, null, "Loading..."), jobs.length === 0 ? /*#__PURE__*/_react.default.createElement(_components.NoResult, null, "No result found") : /*#__PURE__*/_react.default.createElement(_components.Card, {
     key: job.id,
     to: `/job/${job.id}`
   }, job.company_logo === null ? /*#__PURE__*/_react.default.createElement(_components.Card.LogoNotFound, null, "not found") : /*#__PURE__*/_react.default.createElement(_components.Card.Logo, {
@@ -54561,12 +54549,7 @@ function JobContainer({
     d: "M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
   })), /*#__PURE__*/_react.default.createElement("span", null, formattedDate(job.created_at)))))));
 }
-},{"react":"node_modules/react/index.js","../components":"src/components/index.js","../context/GlobalContext":"src/context/GlobalContext.js","../context/Context":"src/context/Context.js"}],"node_modules/react-paginate/dist/react-paginate.js":[function(require,module,exports) {
-var define;
-var global = arguments[3];
-!function(e,a){"object"==typeof exports&&"object"==typeof module?module.exports=a(require("react")):"function"==typeof define&&define.amd?define(["react"],a):"object"==typeof exports?exports.ReactPaginate=a(require("react")):e.ReactPaginate=a(e.React)}(global,(function(e){return function(e){var a={};function t(r){if(a[r])return a[r].exports;var n=a[r]={i:r,l:!1,exports:{}};return e[r].call(n.exports,n,n.exports,t),n.l=!0,n.exports}return t.m=e,t.c=a,t.d=function(e,a,r){t.o(e,a)||Object.defineProperty(e,a,{enumerable:!0,get:r})},t.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t.t=function(e,a){if(1&a&&(e=t(e)),8&a)return e;if(4&a&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(t.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&a&&"string"!=typeof e)for(var n in e)t.d(r,n,function(a){return e[a]}.bind(null,n));return r},t.n=function(e){var a=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(a,"a",a),a},t.o=function(e,a){return Object.prototype.hasOwnProperty.call(e,a)},t.p="",t(t.s=4)}([function(e,a,t){e.exports=t(2)()},function(a,t){a.exports=e},function(e,a,t){"use strict";var r=t(3);function n(){}function i(){}i.resetWarningCache=n,e.exports=function(){function e(e,a,t,n,i,o){if(o!==r){var s=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw s.name="Invariant Violation",s}}function a(){return e}e.isRequired=e;var t={array:e,bool:e,func:e,number:e,object:e,string:e,symbol:e,any:e,arrayOf:a,element:e,elementType:e,instanceOf:a,node:e,objectOf:a,oneOf:a,oneOfType:a,shape:a,exact:a,checkPropTypes:i,resetWarningCache:n};return t.PropTypes=t,t}},function(e,a,t){"use strict";e.exports="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED"},function(e,a,t){"use strict";t.r(a);var r=t(1),n=t.n(r),i=t(0),o=t.n(i);function s(){return(s=Object.assign||function(e){for(var a=1;a<arguments.length;a++){var t=arguments[a];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])}return e}).apply(this,arguments)}var l=function(e){var a=e.pageClassName,t=e.pageLinkClassName,r=e.page,i=e.selected,o=e.activeClassName,l=e.activeLinkClassName,c=e.getEventListener,u=e.pageSelectedHandler,p=e.href,f=e.extraAriaContext,d=e.ariaLabel||"Page "+r+(f?" "+f:""),g=null;return i&&(g="page",d=e.ariaLabel||"Page "+r+" is your current page",a=void 0!==a?a+" "+o:o,void 0!==t?void 0!==l&&(t=t+" "+l):t=l),n.a.createElement("li",{className:a},n.a.createElement("a",s({role:"button",className:t,href:p,tabIndex:"0","aria-label":d,"aria-current":g,onKeyPress:u},c(u)),r))};l.propTypes={pageSelectedHandler:o.a.func.isRequired,selected:o.a.bool.isRequired,pageClassName:o.a.string,pageLinkClassName:o.a.string,activeClassName:o.a.string,activeLinkClassName:o.a.string,extraAriaContext:o.a.string,href:o.a.string,ariaLabel:o.a.string,page:o.a.number.isRequired,getEventListener:o.a.func.isRequired};var c=l;function u(){return(u=Object.assign||function(e){for(var a=1;a<arguments.length;a++){var t=arguments[a];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])}return e}).apply(this,arguments)}!function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/PageView.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/PageView.js")}}();var p=function(e){var a=e.breakLabel,t=e.breakClassName,r=e.breakLinkClassName,i=e.breakHandler,o=e.getEventListener,s=t||"break";return n.a.createElement("li",{className:s},n.a.createElement("a",u({className:r,role:"button",tabIndex:"0",onKeyPress:i},o(i)),a))};p.propTypes={breakLabel:o.a.oneOfType([o.a.string,o.a.node]),breakClassName:o.a.string,breakLinkClassName:o.a.string,breakHandler:o.a.func.isRequired,getEventListener:o.a.func.isRequired};var f=p;function d(e){return(d="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function g(){return(g=Object.assign||function(e){for(var a=1;a<arguments.length;a++){var t=arguments[a];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])}return e}).apply(this,arguments)}function b(e,a){for(var t=0;t<a.length;t++){var r=a[t];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}function v(e,a){return(v=Object.setPrototypeOf||function(e,a){return e.__proto__=a,e})(e,a)}function m(e){var a=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var t,r=C(e);if(a){var n=C(this).constructor;t=Reflect.construct(r,arguments,n)}else t=r.apply(this,arguments);return h(this,t)}}function h(e,a){return!a||"object"!==d(a)&&"function"!=typeof a?y(e):a}function y(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function C(e){return(C=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function k(e,a,t){return a in e?Object.defineProperty(e,a,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[a]=t,e}!function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/BreakView.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/BreakView.js")}}();var P=function(e){!function(e,a){if("function"!=typeof a&&null!==a)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(a&&a.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),a&&v(e,a)}(o,e);var a,t,r,i=m(o);function o(e){var a,t;return function(e,a){if(!(e instanceof a))throw new TypeError("Cannot call a class as a function")}(this,o),k(y(a=i.call(this,e)),"handlePreviousPage",(function(e){var t=a.state.selected;e.preventDefault?e.preventDefault():e.returnValue=!1,t>0&&a.handlePageSelected(t-1,e)})),k(y(a),"handleNextPage",(function(e){var t=a.state.selected,r=a.props.pageCount;e.preventDefault?e.preventDefault():e.returnValue=!1,t<r-1&&a.handlePageSelected(t+1,e)})),k(y(a),"handlePageSelected",(function(e,t){t.preventDefault?t.preventDefault():t.returnValue=!1,a.state.selected!==e&&(a.setState({selected:e}),a.callCallback(e))})),k(y(a),"getEventListener",(function(e){return k({},a.props.eventListener,e)})),k(y(a),"handleBreakClick",(function(e,t){t.preventDefault?t.preventDefault():t.returnValue=!1;var r=a.state.selected;a.handlePageSelected(r<e?a.getForwardJump():a.getBackwardJump(),t)})),k(y(a),"callCallback",(function(e){void 0!==a.props.onPageChange&&"function"==typeof a.props.onPageChange&&a.props.onPageChange({selected:e})})),k(y(a),"pagination",(function(){var e=[],t=a.props,r=t.pageRangeDisplayed,i=t.pageCount,o=t.marginPagesDisplayed,s=t.breakLabel,l=t.breakClassName,c=t.breakLinkClassName,u=a.state.selected;if(i<=r)for(var p=0;p<i;p++)e.push(a.getPageElement(p));else{var d,g,b,v=r/2,m=r-v;u>i-r/2?v=r-(m=i-u):u<r/2&&(m=r-(v=u));var h=function(e){return a.getPageElement(e)};for(d=0;d<i;d++)(g=d+1)<=o||g>i-o||d>=u-v&&d<=u+m?e.push(h(d)):s&&e[e.length-1]!==b&&(b=n.a.createElement(f,{key:d,breakLabel:s,breakClassName:l,breakLinkClassName:c,breakHandler:a.handleBreakClick.bind(null,d),getEventListener:a.getEventListener}),e.push(b))}return e})),t=e.initialPage?e.initialPage:e.forcePage?e.forcePage:0,a.state={selected:t},a}return a=o,(t=[{key:"componentDidMount",value:function(){var e=this.props,a=e.initialPage,t=e.disableInitialCallback,r=e.extraAriaContext;void 0===a||t||this.callCallback(a),r&&console.warn("DEPRECATED (react-paginate): The extraAriaContext prop is deprecated. You should now use the ariaLabelBuilder instead.")}},{key:"componentDidUpdate",value:function(e){void 0!==this.props.forcePage&&this.props.forcePage!==e.forcePage&&this.setState({selected:this.props.forcePage})}},{key:"getForwardJump",value:function(){var e=this.state.selected,a=this.props,t=a.pageCount,r=e+a.pageRangeDisplayed;return r>=t?t-1:r}},{key:"getBackwardJump",value:function(){var e=this.state.selected-this.props.pageRangeDisplayed;return e<0?0:e}},{key:"hrefBuilder",value:function(e){var a=this.props,t=a.hrefBuilder,r=a.pageCount;if(t&&e!==this.state.selected&&e>=0&&e<r)return t(e+1)}},{key:"ariaLabelBuilder",value:function(e){var a=e===this.state.selected;if(this.props.ariaLabelBuilder&&e>=0&&e<this.props.pageCount){var t=this.props.ariaLabelBuilder(e+1,a);return this.props.extraAriaContext&&!a&&(t=t+" "+this.props.extraAriaContext),t}}},{key:"getPageElement",value:function(e){var a=this.state.selected,t=this.props,r=t.pageClassName,i=t.pageLinkClassName,o=t.activeClassName,s=t.activeLinkClassName,l=t.extraAriaContext;return n.a.createElement(c,{key:e,pageSelectedHandler:this.handlePageSelected.bind(null,e),selected:a===e,pageClassName:r,pageLinkClassName:i,activeClassName:o,activeLinkClassName:s,extraAriaContext:l,href:this.hrefBuilder(e),ariaLabel:this.ariaLabelBuilder(e),page:e+1,getEventListener:this.getEventListener})}},{key:"render",value:function(){var e=this.props,a=e.disabledClassName,t=e.pageCount,r=e.containerClassName,i=e.previousLabel,o=e.previousClassName,s=e.previousLinkClassName,l=e.previousAriaLabel,c=e.prevRel,u=e.nextLabel,p=e.nextClassName,f=e.nextLinkClassName,d=e.nextAriaLabel,b=e.nextRel,v=this.state.selected,m=o+(0===v?" ".concat(a):""),h=p+(v===t-1?" ".concat(a):""),y=0===v?"true":"false",C=v===t-1?"true":"false";return n.a.createElement("ul",{className:r},n.a.createElement("li",{className:m},n.a.createElement("a",g({className:s,href:this.hrefBuilder(v-1),tabIndex:"0",role:"button",onKeyPress:this.handlePreviousPage,"aria-disabled":y,"aria-label":l,rel:c},this.getEventListener(this.handlePreviousPage)),i)),this.pagination(),n.a.createElement("li",{className:h},n.a.createElement("a",g({className:f,href:this.hrefBuilder(v+1),tabIndex:"0",role:"button",onKeyPress:this.handleNextPage,"aria-disabled":C,"aria-label":d,rel:b},this.getEventListener(this.handleNextPage)),u)))}}])&&b(a.prototype,t),r&&b(a,r),o}(r.Component);k(P,"propTypes",{pageCount:o.a.number.isRequired,pageRangeDisplayed:o.a.number.isRequired,marginPagesDisplayed:o.a.number.isRequired,previousLabel:o.a.node,previousAriaLabel:o.a.string,prevRel:o.a.string,nextLabel:o.a.node,nextAriaLabel:o.a.string,nextRel:o.a.string,breakLabel:o.a.oneOfType([o.a.string,o.a.node]),hrefBuilder:o.a.func,onPageChange:o.a.func,initialPage:o.a.number,forcePage:o.a.number,disableInitialCallback:o.a.bool,containerClassName:o.a.string,pageClassName:o.a.string,pageLinkClassName:o.a.string,activeClassName:o.a.string,activeLinkClassName:o.a.string,previousClassName:o.a.string,nextClassName:o.a.string,previousLinkClassName:o.a.string,nextLinkClassName:o.a.string,disabledClassName:o.a.string,breakClassName:o.a.string,breakLinkClassName:o.a.string,extraAriaContext:o.a.string,ariaLabelBuilder:o.a.func,eventListener:o.a.string}),k(P,"defaultProps",{pageCount:10,pageRangeDisplayed:2,marginPagesDisplayed:3,activeClassName:"selected",previousLabel:"Previous",previousClassName:"previous",previousAriaLabel:"Previous page",prevRel:"prev",nextLabel:"Next",nextClassName:"next",nextAriaLabel:"Next page",nextRel:"next",breakLabel:"...",disabledClassName:"disabled",disableInitialCallback:!1,eventListener:"onClick"}),function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/PaginationBoxView.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/PaginationBoxView.js")}}();a.default=P;!function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/index.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/index.js")}}()}])}));
-
-},{"react":"node_modules/react/index.js"}],"src/components/pagination/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components":"src/components/index.js","../context/GlobalContext":"src/context/GlobalContext.js","../context/Context":"src/context/Context.js"}],"src/container/pagination.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54576,13 +54559,11 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactPaginate = _interopRequireDefault(require("react-paginate"));
+var _jobs = _interopRequireDefault(require("./jobs"));
 
-var _index = require("../index");
+var _components = require("../components");
 
-var _jobs = _interopRequireDefault(require("../../container/jobs"));
-
-var _GlobalContext = require("../../context/GlobalContext");
+var _GlobalContext = require("../context/GlobalContext");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54590,8 +54571,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-// import Job from "./Job";
-const JobPagination = () => {
+const PaginationContainer = () => {
   const {
     state,
     dispatch
@@ -54613,10 +54593,10 @@ const JobPagination = () => {
     window.scrollTo(0, 0);
   };
 
-  return /*#__PURE__*/_react.default.createElement(_index.Card, null, jobs && jobs.slice(offset, offset + PER_PAGE).map(item => /*#__PURE__*/_react.default.createElement(_jobs.default, {
+  return /*#__PURE__*/_react.default.createElement(_components.Pagination, null, jobs && jobs.slice(offset, offset + PER_PAGE).map(item => /*#__PURE__*/_react.default.createElement(_jobs.default, {
     job: item,
     key: item.id
-  })), jobs && /*#__PURE__*/_react.default.createElement(_reactPaginate.default, {
+  })), jobs.length > 0 && /*#__PURE__*/_react.default.createElement(_components.Pagination.List, {
     previousLabel: "<",
     nextLabel: ">",
     breakLabel: "...",
@@ -54631,9 +54611,9 @@ const JobPagination = () => {
   }));
 };
 
-var _default = JobPagination;
+var _default = PaginationContainer;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-paginate":"node_modules/react-paginate/dist/react-paginate.js","../index":"src/components/index.js","../../container/jobs":"src/container/jobs.js","../../context/GlobalContext":"src/context/GlobalContext.js"}],"src/components/jobContent/styles/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./jobs":"src/container/jobs.js","../components":"src/components/index.js","../context/GlobalContext":"src/context/GlobalContext.js"}],"src/components/jobContent/styles/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54668,15 +54648,13 @@ exports.default = Content;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _ = require("..");
-
-var _jobs = _interopRequireDefault(require("../../container/jobs"));
+var _index = require("../index");
 
 var _Context = require("../../context/Context");
 
-var _pagination = _interopRequireDefault(require("../pagination"));
+var _pagination = _interopRequireDefault(require("../../container/pagination"));
 
-var _index = require("./styles/index");
+var _index2 = require("./styles/index");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54698,16 +54676,16 @@ function Content({
     handleKeyLocation,
     cities
   } = (0, _react.useContext)(_Context.Context);
-  return /*#__PURE__*/_react.default.createElement(_index.Container, restProps, /*#__PURE__*/_react.default.createElement(_.Filters, null, /*#__PURE__*/_react.default.createElement(_.Filters.Frame, null, /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
+  return /*#__PURE__*/_react.default.createElement(_index2.Container, restProps, /*#__PURE__*/_react.default.createElement(_index.Filters, null, /*#__PURE__*/_react.default.createElement(_index.Filters.Frame, null, /*#__PURE__*/_react.default.createElement(_index.Filters.Input, {
     type: "checkbox",
     id: "full-time",
     checked: fullTime,
     onChange: () => setFullTime(!fullTime)
-  }), /*#__PURE__*/_react.default.createElement(_.Filters.Label, {
+  }), /*#__PURE__*/_react.default.createElement(_index.Filters.Label, {
     htmlFor: "full-time"
-  }, "Full time")), /*#__PURE__*/_react.default.createElement(_.Filters.LocationSearch, null, /*#__PURE__*/_react.default.createElement(_.Filters.Label, {
+  }, "Full time")), /*#__PURE__*/_react.default.createElement(_index.Filters.LocationSearch, null, /*#__PURE__*/_react.default.createElement(_index.Filters.Label, {
     htmlFor: "description"
-  }, "Location"), /*#__PURE__*/_react.default.createElement(_.Filters.FieldsetLocation, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("svg", {
+  }, "Location"), /*#__PURE__*/_react.default.createElement(_index.Filters.FieldsetLocation, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "24",
     viewBox: "0 0 24 24",
@@ -54718,25 +54696,25 @@ function Content({
   }), /*#__PURE__*/_react.default.createElement("path", {
     fill: "currentColor",
     d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
-  }))), /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
+  }))), /*#__PURE__*/_react.default.createElement(_index.Filters.Input, {
     id: "description",
     type: "text",
     value: location,
     onChange: e => setLocation(e.target.value),
     onKeyDown: handleKeyLocation,
     placeholder: "City, state, zip code or country"
-  }))), cities.map(city => /*#__PURE__*/_react.default.createElement(_.Filters.Frame, {
+  }))), cities.map(city => /*#__PURE__*/_react.default.createElement(_index.Filters.Frame, {
     key: city.id
-  }, /*#__PURE__*/_react.default.createElement(_.Filters.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_index.Filters.Input, {
     type: "radio",
     checked: selectCity ? city.id === selectCity.id : false,
     id: city.id,
     onChange: () => handleCity(city)
-  }), /*#__PURE__*/_react.default.createElement(_.Filters.Label, {
+  }), /*#__PURE__*/_react.default.createElement(_index.Filters.Label, {
     htmlFor: city.id
   }, city.name)))), /*#__PURE__*/_react.default.createElement(_pagination.default, null));
 }
-},{"react":"node_modules/react/index.js","..":"src/components/index.js","../../container/jobs":"src/container/jobs.js","../../context/Context":"src/context/Context.js","../pagination":"src/components/pagination/index.js","./styles/index":"src/components/jobContent/styles/index.js"}],"src/components/loading/styles/loading.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../index":"src/components/index.js","../../context/Context":"src/context/Context.js","../../container/pagination":"src/container/pagination.js","./styles/index":"src/components/jobContent/styles/index.js"}],"src/components/loading/styles/loading.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55251,7 +55229,103 @@ function NoResult({
 }) {
   return /*#__PURE__*/_react.default.createElement(_noResult.Container, resProps, children);
 }
-},{"react":"node_modules/react/index.js","./styles/no-result":"src/components/no-result/styles/no-result.js"}],"src/components/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./styles/no-result":"src/components/no-result/styles/no-result.js"}],"node_modules/react-paginate/dist/react-paginate.js":[function(require,module,exports) {
+var define;
+var global = arguments[3];
+!function(e,a){"object"==typeof exports&&"object"==typeof module?module.exports=a(require("react")):"function"==typeof define&&define.amd?define(["react"],a):"object"==typeof exports?exports.ReactPaginate=a(require("react")):e.ReactPaginate=a(e.React)}(global,(function(e){return function(e){var a={};function t(r){if(a[r])return a[r].exports;var n=a[r]={i:r,l:!1,exports:{}};return e[r].call(n.exports,n,n.exports,t),n.l=!0,n.exports}return t.m=e,t.c=a,t.d=function(e,a,r){t.o(e,a)||Object.defineProperty(e,a,{enumerable:!0,get:r})},t.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t.t=function(e,a){if(1&a&&(e=t(e)),8&a)return e;if(4&a&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(t.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&a&&"string"!=typeof e)for(var n in e)t.d(r,n,function(a){return e[a]}.bind(null,n));return r},t.n=function(e){var a=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(a,"a",a),a},t.o=function(e,a){return Object.prototype.hasOwnProperty.call(e,a)},t.p="",t(t.s=4)}([function(e,a,t){e.exports=t(2)()},function(a,t){a.exports=e},function(e,a,t){"use strict";var r=t(3);function n(){}function i(){}i.resetWarningCache=n,e.exports=function(){function e(e,a,t,n,i,o){if(o!==r){var s=new Error("Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types");throw s.name="Invariant Violation",s}}function a(){return e}e.isRequired=e;var t={array:e,bool:e,func:e,number:e,object:e,string:e,symbol:e,any:e,arrayOf:a,element:e,elementType:e,instanceOf:a,node:e,objectOf:a,oneOf:a,oneOfType:a,shape:a,exact:a,checkPropTypes:i,resetWarningCache:n};return t.PropTypes=t,t}},function(e,a,t){"use strict";e.exports="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED"},function(e,a,t){"use strict";t.r(a);var r=t(1),n=t.n(r),i=t(0),o=t.n(i);function s(){return(s=Object.assign||function(e){for(var a=1;a<arguments.length;a++){var t=arguments[a];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])}return e}).apply(this,arguments)}var l=function(e){var a=e.pageClassName,t=e.pageLinkClassName,r=e.page,i=e.selected,o=e.activeClassName,l=e.activeLinkClassName,c=e.getEventListener,u=e.pageSelectedHandler,p=e.href,f=e.extraAriaContext,d=e.ariaLabel||"Page "+r+(f?" "+f:""),g=null;return i&&(g="page",d=e.ariaLabel||"Page "+r+" is your current page",a=void 0!==a?a+" "+o:o,void 0!==t?void 0!==l&&(t=t+" "+l):t=l),n.a.createElement("li",{className:a},n.a.createElement("a",s({role:"button",className:t,href:p,tabIndex:"0","aria-label":d,"aria-current":g,onKeyPress:u},c(u)),r))};l.propTypes={pageSelectedHandler:o.a.func.isRequired,selected:o.a.bool.isRequired,pageClassName:o.a.string,pageLinkClassName:o.a.string,activeClassName:o.a.string,activeLinkClassName:o.a.string,extraAriaContext:o.a.string,href:o.a.string,ariaLabel:o.a.string,page:o.a.number.isRequired,getEventListener:o.a.func.isRequired};var c=l;function u(){return(u=Object.assign||function(e){for(var a=1;a<arguments.length;a++){var t=arguments[a];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])}return e}).apply(this,arguments)}!function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/PageView.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/PageView.js")}}();var p=function(e){var a=e.breakLabel,t=e.breakClassName,r=e.breakLinkClassName,i=e.breakHandler,o=e.getEventListener,s=t||"break";return n.a.createElement("li",{className:s},n.a.createElement("a",u({className:r,role:"button",tabIndex:"0",onKeyPress:i},o(i)),a))};p.propTypes={breakLabel:o.a.oneOfType([o.a.string,o.a.node]),breakClassName:o.a.string,breakLinkClassName:o.a.string,breakHandler:o.a.func.isRequired,getEventListener:o.a.func.isRequired};var f=p;function d(e){return(d="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function g(){return(g=Object.assign||function(e){for(var a=1;a<arguments.length;a++){var t=arguments[a];for(var r in t)Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r])}return e}).apply(this,arguments)}function b(e,a){for(var t=0;t<a.length;t++){var r=a[t];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}function v(e,a){return(v=Object.setPrototypeOf||function(e,a){return e.__proto__=a,e})(e,a)}function m(e){var a=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1;if(Reflect.construct.sham)return!1;if("function"==typeof Proxy)return!0;try{return Date.prototype.toString.call(Reflect.construct(Date,[],(function(){}))),!0}catch(e){return!1}}();return function(){var t,r=C(e);if(a){var n=C(this).constructor;t=Reflect.construct(r,arguments,n)}else t=r.apply(this,arguments);return h(this,t)}}function h(e,a){return!a||"object"!==d(a)&&"function"!=typeof a?y(e):a}function y(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e}function C(e){return(C=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function k(e,a,t){return a in e?Object.defineProperty(e,a,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[a]=t,e}!function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/BreakView.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/BreakView.js")}}();var P=function(e){!function(e,a){if("function"!=typeof a&&null!==a)throw new TypeError("Super expression must either be null or a function");e.prototype=Object.create(a&&a.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),a&&v(e,a)}(o,e);var a,t,r,i=m(o);function o(e){var a,t;return function(e,a){if(!(e instanceof a))throw new TypeError("Cannot call a class as a function")}(this,o),k(y(a=i.call(this,e)),"handlePreviousPage",(function(e){var t=a.state.selected;e.preventDefault?e.preventDefault():e.returnValue=!1,t>0&&a.handlePageSelected(t-1,e)})),k(y(a),"handleNextPage",(function(e){var t=a.state.selected,r=a.props.pageCount;e.preventDefault?e.preventDefault():e.returnValue=!1,t<r-1&&a.handlePageSelected(t+1,e)})),k(y(a),"handlePageSelected",(function(e,t){t.preventDefault?t.preventDefault():t.returnValue=!1,a.state.selected!==e&&(a.setState({selected:e}),a.callCallback(e))})),k(y(a),"getEventListener",(function(e){return k({},a.props.eventListener,e)})),k(y(a),"handleBreakClick",(function(e,t){t.preventDefault?t.preventDefault():t.returnValue=!1;var r=a.state.selected;a.handlePageSelected(r<e?a.getForwardJump():a.getBackwardJump(),t)})),k(y(a),"callCallback",(function(e){void 0!==a.props.onPageChange&&"function"==typeof a.props.onPageChange&&a.props.onPageChange({selected:e})})),k(y(a),"pagination",(function(){var e=[],t=a.props,r=t.pageRangeDisplayed,i=t.pageCount,o=t.marginPagesDisplayed,s=t.breakLabel,l=t.breakClassName,c=t.breakLinkClassName,u=a.state.selected;if(i<=r)for(var p=0;p<i;p++)e.push(a.getPageElement(p));else{var d,g,b,v=r/2,m=r-v;u>i-r/2?v=r-(m=i-u):u<r/2&&(m=r-(v=u));var h=function(e){return a.getPageElement(e)};for(d=0;d<i;d++)(g=d+1)<=o||g>i-o||d>=u-v&&d<=u+m?e.push(h(d)):s&&e[e.length-1]!==b&&(b=n.a.createElement(f,{key:d,breakLabel:s,breakClassName:l,breakLinkClassName:c,breakHandler:a.handleBreakClick.bind(null,d),getEventListener:a.getEventListener}),e.push(b))}return e})),t=e.initialPage?e.initialPage:e.forcePage?e.forcePage:0,a.state={selected:t},a}return a=o,(t=[{key:"componentDidMount",value:function(){var e=this.props,a=e.initialPage,t=e.disableInitialCallback,r=e.extraAriaContext;void 0===a||t||this.callCallback(a),r&&console.warn("DEPRECATED (react-paginate): The extraAriaContext prop is deprecated. You should now use the ariaLabelBuilder instead.")}},{key:"componentDidUpdate",value:function(e){void 0!==this.props.forcePage&&this.props.forcePage!==e.forcePage&&this.setState({selected:this.props.forcePage})}},{key:"getForwardJump",value:function(){var e=this.state.selected,a=this.props,t=a.pageCount,r=e+a.pageRangeDisplayed;return r>=t?t-1:r}},{key:"getBackwardJump",value:function(){var e=this.state.selected-this.props.pageRangeDisplayed;return e<0?0:e}},{key:"hrefBuilder",value:function(e){var a=this.props,t=a.hrefBuilder,r=a.pageCount;if(t&&e!==this.state.selected&&e>=0&&e<r)return t(e+1)}},{key:"ariaLabelBuilder",value:function(e){var a=e===this.state.selected;if(this.props.ariaLabelBuilder&&e>=0&&e<this.props.pageCount){var t=this.props.ariaLabelBuilder(e+1,a);return this.props.extraAriaContext&&!a&&(t=t+" "+this.props.extraAriaContext),t}}},{key:"getPageElement",value:function(e){var a=this.state.selected,t=this.props,r=t.pageClassName,i=t.pageLinkClassName,o=t.activeClassName,s=t.activeLinkClassName,l=t.extraAriaContext;return n.a.createElement(c,{key:e,pageSelectedHandler:this.handlePageSelected.bind(null,e),selected:a===e,pageClassName:r,pageLinkClassName:i,activeClassName:o,activeLinkClassName:s,extraAriaContext:l,href:this.hrefBuilder(e),ariaLabel:this.ariaLabelBuilder(e),page:e+1,getEventListener:this.getEventListener})}},{key:"render",value:function(){var e=this.props,a=e.disabledClassName,t=e.pageCount,r=e.containerClassName,i=e.previousLabel,o=e.previousClassName,s=e.previousLinkClassName,l=e.previousAriaLabel,c=e.prevRel,u=e.nextLabel,p=e.nextClassName,f=e.nextLinkClassName,d=e.nextAriaLabel,b=e.nextRel,v=this.state.selected,m=o+(0===v?" ".concat(a):""),h=p+(v===t-1?" ".concat(a):""),y=0===v?"true":"false",C=v===t-1?"true":"false";return n.a.createElement("ul",{className:r},n.a.createElement("li",{className:m},n.a.createElement("a",g({className:s,href:this.hrefBuilder(v-1),tabIndex:"0",role:"button",onKeyPress:this.handlePreviousPage,"aria-disabled":y,"aria-label":l,rel:c},this.getEventListener(this.handlePreviousPage)),i)),this.pagination(),n.a.createElement("li",{className:h},n.a.createElement("a",g({className:f,href:this.hrefBuilder(v+1),tabIndex:"0",role:"button",onKeyPress:this.handleNextPage,"aria-disabled":C,"aria-label":d,rel:b},this.getEventListener(this.handleNextPage)),u)))}}])&&b(a.prototype,t),r&&b(a,r),o}(r.Component);k(P,"propTypes",{pageCount:o.a.number.isRequired,pageRangeDisplayed:o.a.number.isRequired,marginPagesDisplayed:o.a.number.isRequired,previousLabel:o.a.node,previousAriaLabel:o.a.string,prevRel:o.a.string,nextLabel:o.a.node,nextAriaLabel:o.a.string,nextRel:o.a.string,breakLabel:o.a.oneOfType([o.a.string,o.a.node]),hrefBuilder:o.a.func,onPageChange:o.a.func,initialPage:o.a.number,forcePage:o.a.number,disableInitialCallback:o.a.bool,containerClassName:o.a.string,pageClassName:o.a.string,pageLinkClassName:o.a.string,activeClassName:o.a.string,activeLinkClassName:o.a.string,previousClassName:o.a.string,nextClassName:o.a.string,previousLinkClassName:o.a.string,nextLinkClassName:o.a.string,disabledClassName:o.a.string,breakClassName:o.a.string,breakLinkClassName:o.a.string,extraAriaContext:o.a.string,ariaLabelBuilder:o.a.func,eventListener:o.a.string}),k(P,"defaultProps",{pageCount:10,pageRangeDisplayed:2,marginPagesDisplayed:3,activeClassName:"selected",previousLabel:"Previous",previousClassName:"previous",previousAriaLabel:"Previous page",prevRel:"prev",nextLabel:"Next",nextClassName:"next",nextAriaLabel:"Next page",nextRel:"next",breakLabel:"...",disabledClassName:"disabled",disableInitialCallback:!1,eventListener:"onClick"}),function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/PaginationBoxView.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/PaginationBoxView.js")}}();a.default=P;!function(){var e="undefined"!=typeof reactHotLoaderGlobal?reactHotLoaderGlobal.default:void 0;if(e){var t=void 0!==a?a:exports;if(t)if("function"!=typeof t){for(var r in t)if(Object.prototype.hasOwnProperty.call(t,r)){var n=void 0;try{n=t[r]}catch(e){continue}e.register(n,r,"/home/adele/workspace/react-paginate/react_components/index.js")}}else e.register(t,"module.exports","/home/adele/workspace/react-paginate/react_components/index.js")}}()}])}));
+
+},{"react":"node_modules/react/index.js"}],"src/components/pagination/styles/pagination.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.List = exports.Container = void 0;
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _reactPaginate = _interopRequireDefault(require("react-paginate"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Container = _styledComponents.default.article`
+    display: grid;
+    gap: 32px;
+
+    .pagination {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+
+
+        li {
+            border: 1px solid #B7BCCE;
+            color: #B7BCCE;
+            box-sizing: border-box;
+            border-radius: 4px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+
+            &:hover {
+                border: 1px solid #1E86FF;
+                color: #1E86FF;
+            }
+
+            &.active {
+                background-color: #1E86FF;
+                border: 1px solid #1E86FF;
+                color: #fff;
+            }
+
+            &.disabled {
+                &:hover {
+                    border: 1px solid #B7BCCE;
+                    color: #B7BCCE;
+                }
+            }
+        }
+    }
+`;
+exports.Container = Container;
+const List = (0, _styledComponents.default)(_reactPaginate.default)``;
+exports.List = List;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","react-paginate":"node_modules/react-paginate/dist/react-paginate.js"}],"src/components/pagination/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Pagination;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _pagination = require("./styles/pagination");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Pagination({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_pagination.Container, restProps, children);
+}
+
+Pagination.List = function PaginationList({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_pagination.List, restProps, children);
+};
+},{"react":"node_modules/react/index.js","./styles/pagination":"src/components/pagination/styles/pagination.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55299,6 +55373,12 @@ Object.defineProperty(exports, "NoResult", {
     return _noResult.default;
   }
 });
+Object.defineProperty(exports, "Pagination", {
+  enumerable: true,
+  get: function () {
+    return _pagination.default;
+  }
+});
 
 var _header = _interopRequireDefault(require("./header"));
 
@@ -55314,8 +55394,10 @@ var _details = _interopRequireDefault(require("./details"));
 
 var _noResult = _interopRequireDefault(require("./no-result"));
 
+var _pagination = _interopRequireDefault(require("./pagination"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./header":"src/components/header/index.js","./card":"src/components/card/index.js","./jobContent":"src/components/jobContent/index.js","./loading":"src/components/loading/index.js","./filters":"src/components/filters/index.js","./details":"src/components/details/index.js","./no-result":"src/components/no-result/index.js"}],"src/pages/details.js":[function(require,module,exports) {
+},{"./header":"src/components/header/index.js","./card":"src/components/card/index.js","./jobContent":"src/components/jobContent/index.js","./loading":"src/components/loading/index.js","./filters":"src/components/filters/index.js","./details":"src/components/details/index.js","./no-result":"src/components/no-result/index.js","./pagination":"src/components/pagination/index.js"}],"src/pages/details.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

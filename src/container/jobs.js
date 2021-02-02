@@ -14,7 +14,7 @@ export default function JobContainer({ job }) {
             <Loading>Loading...</Loading>
             {jobs.length === 0 
                 ? <NoResult>No result found</NoResult>
-                : <Card.Item key={job.id} to={`/job/${job.id}`}>
+                : <Card key={job.id} to={`/job/${job.id}`}>
                     {job.company_logo === null 
                         ? <Card.LogoNotFound>not found</Card.LogoNotFound> 
                         : <Card.Logo src={job.company_logo} alt={`${job.title} at ${job.company}`} />
@@ -34,7 +34,7 @@ export default function JobContainer({ job }) {
                             </Card.Date>
                         </Card.Meta>
                     </Card.Feature>
-                </Card.Item>
+                </Card>
             }
         </>
     )

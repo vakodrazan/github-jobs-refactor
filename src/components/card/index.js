@@ -1,7 +1,6 @@
 import React from 'react'
 
 import {
-    Item,
     Logo,
     Feature,
     Title,
@@ -20,10 +19,6 @@ export default function Card({ children, ...restProps}) {
             {children}
         </Container>
     )
-}
-
-Card.Item = function CardItem({ children, ...restProps }) {
-    return <Item {...restProps}>{children}</Item>
 }
 
 Card.Logo = function CardLogo({ ...restProps }) {

@@ -1,13 +1,7 @@
 import styled from "styled-components"
 import { Link as ReachRouterLink } from 'react-router-dom';
 
-export const Container = styled.div`
-    display: grid;
-    gap: 32px;
-`;
-
-
-export const Item = styled(ReachRouterLink)`
+export const Container = styled(ReachRouterLink)`
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 16px;
