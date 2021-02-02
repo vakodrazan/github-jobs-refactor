@@ -82,7 +82,7 @@ export const Meta = styled.footer`
 
     @media (min-width: 1440px) {
         padding: 0;
-        gap: 5px;
+        gap: 28px;
         justify-content: flex-end;
     }
 `;
