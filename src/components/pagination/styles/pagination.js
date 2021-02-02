@@ -34,6 +34,19 @@ export const Container = styled.article`
                 color: #1E86FF;
             }
 
+            &:focus {
+                outline: none;
+                border: none;
+            } 
+
+            a {
+                border: none;
+                &:focus {
+                    outline: none;
+                    border: none;
+                } 
+            }
+
             &.active {
                 background-color: #1E86FF;
                 border: 1px solid #1E86FF;
